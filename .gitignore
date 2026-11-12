@@ -15,3 +15,6 @@ SeolDamHwa/
 mockups/src/img/
 # 참고 사진이 들어간 작업용 빌드. 공유용 mockups/main-share.html만 올린다.
 mockups/main.html
+
+# 참고 사진 (Next.js 앱)
+web/public/img/

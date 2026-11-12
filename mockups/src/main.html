@@ -9,9 +9,10 @@
 <title>설담화 · 메인</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;600&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <style>
 :root{
+  --ease-out:cubic-bezier(.23,1,.32,1);
   --paper:#F1EEE8;      /* 한지 */
   --sheet:#FBFAF7;      /* 흰 종이 */
   --ink:#141413;        /* 먹 */
@@ -30,8 +31,8 @@
 html{scroll-behavior:smooth;scroll-padding-top:88px}
 .skip{position:absolute;left:12px;top:-60px;z-index:50;padding:10px 16px;background:var(--ink);color:var(--sheet);font-size:13px;border-radius:6px;transition:top .2s}
 .skip:focus{top:12px}
-.toast{position:fixed;left:50%;bottom:28px;z-index:60;transform:translate(-50%,16px);opacity:0;pointer-events:none;padding:12px 20px;border-radius:999px;background:var(--ink);color:var(--sheet);font-size:13px;letter-spacing:.04em;transition:opacity .3s,transform .3s}
-.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast{position:fixed;left:50%;bottom:28px;z-index:60;transform:translate(-50%,16px);opacity:0;pointer-events:none;padding:12px 20px;border-radius:999px;background:var(--ink);color:var(--sheet);font-size:13px;letter-spacing:.04em;transition:opacity 180ms ease-out,transform 180ms ease-out}
+.toast.on{opacity:1;transform:translate(-50%,0);transition:opacity 260ms var(--ease-out),transform 260ms var(--ease-out)}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
@@ -43,58 +44,58 @@ img{display:block;max-width:100%}
 
 /* ---------- 헤더 ---------- */
 .hd{position:fixed;inset:0 0 auto 0;z-index:20;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
-  padding:18px var(--gutter);font-size:12px;letter-spacing:.08em;border-bottom:1px solid transparent;transition:background-color .4s,border-color .4s}
+  padding:18px var(--gutter);font-size:13.33px;font-weight:600;letter-spacing:.08em;border-bottom:1px solid transparent;transition:background-color .4s ease,border-color .4s ease,color .4s ease}
 .hd.solid{background-color:rgba(241,238,232,.92);backdrop-filter:blur(8px);border-bottom-color:var(--hair)}
 .hd nav ul{display:flex;gap:28px;list-style:none}
 .hd nav a{position:relative;padding-bottom:3px;color:var(--graphite);transition:color .3s}
 .hd nav a:hover,.hd nav a[aria-current]{color:var(--ink)}
 .hd nav a[aria-current]::after{content:"";position:absolute;left:50%;bottom:-6px;width:3px;height:3px;border-radius:50%;background:var(--ink);transform:translateX(-50%)}
-.hd .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif-ko);font-size:15px;letter-spacing:.32em}
+.hd .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif-ko);font-size:16.33px;font-weight:600;letter-spacing:.32em}
 .hd .brand svg{width:22px;height:22px}
 .hd .util{display:flex;justify-content:flex-end;align-items:center;gap:18px;color:var(--graphite)}
 .hd .util a:hover{color:var(--ink)}
 .hd .ico{position:relative;display:grid;place-items:center;width:32px;height:32px}
 .hd .ico svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
-.hd .ico .cnt{position:absolute;right:-1px;top:1px;min-width:15px;height:15px;padding:0 4px;border-radius:8px;background:var(--ink);color:var(--sheet);font-family:var(--serif-en);font-size:10px;line-height:15px;text-align:center;letter-spacing:0}
+.hd .ico .cnt{position:absolute;right:-4px;top:-2px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--ink);color:var(--sheet);font-family:var(--serif-en);font-size:12px;line-height:18px;text-align:center;letter-spacing:0}
 .menu-btn{display:none;background:none;border:none;font:inherit;letter-spacing:.12em;color:var(--ink);cursor:pointer}
 
-/* ---------- 1. 히어로 (terra nua) ---------- */
-.hero{min-height:100vh;display:grid;place-items:center;padding:110px var(--gutter) 64px;background:#E9E6E0}
-.hero .pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:min(1080px,100%);aspect-ratio:2/1.32}
-.hero .ph{position:relative;overflow:hidden;background:#EAE8E3;border:10px solid var(--sheet)}
-.hero .ph .img{position:absolute;inset:-30px;background:var(--img-ikebana-larch) center 30%/cover;filter:grayscale(1) blur(7px) contrast(.9) brightness(1.12)}
-.hero .ph .veil{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,rgba(251,250,247,.0),rgba(251,250,247,.45))}
-.hero .ph .mark{position:absolute;left:50%;top:50%;width:38px;height:38px;transform:translate(-50%,-50%)}
-.hero .sheet{position:relative;background:var(--sheet);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:52px 58px 44px;text-align:center}
-.hero .word{font-family:var(--serif-en);font-weight:400;font-size:clamp(40px,5.6vw,72px);letter-spacing:-.01em;line-height:1}
-.hero .tag{font-size:11px;letter-spacing:.14em;line-height:1.9;text-transform:uppercase}
-.hero .tag b{display:block;font-family:var(--serif-ko);font-weight:300;font-size:15px;letter-spacing:.2em;text-transform:none;margin-bottom:14px}
-.hero .site{font-size:12px;letter-spacing:.14em}
-.hero .vt{position:absolute;right:18px;top:52px;writing-mode:vertical-rl;font-family:var(--serif-ko);font-size:12px;letter-spacing:.6em;color:var(--mist)}
-.hero .scroll{margin-top:34px;font-size:10px;letter-spacing:.3em;color:var(--mist);text-align:center}
-.hero .scroll i{display:block;width:1px;height:38px;background:var(--mist);margin:12px auto 0;animation:drip 2.4s ease-in-out infinite;transform-origin:top}
-@keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
-
-/* 히어로 뉴모피즘: 바탕과 같은 색의 면을 빛과 그늘로만 올리고 누른다 */
-.hero{--nm:#E9E6E0;--nm-hi:#FBFAF7;--nm-lo:#CBC6BC;
-  --raise:14px 14px 30px var(--nm-lo),-14px -14px 30px var(--nm-hi);
-  --raise-sm:5px 5px 12px var(--nm-lo),-5px -5px 12px var(--nm-hi);
-  --inset:inset 6px 6px 14px var(--nm-lo),inset -6px -6px 14px var(--nm-hi);
-  background:var(--nm)}
-.hero .pair{gap:34px}
-.hero .ph,.hero .sheet{background:var(--nm);border:none;border-radius:28px;box-shadow:var(--raise)}
-.hero .ph{overflow:visible;padding:16px}
-.hero .well{position:absolute;inset:16px;border-radius:18px;overflow:hidden}
-.hero .well::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--inset);pointer-events:none}
-.hero .ph .mark{z-index:2;width:66px;height:66px;padding:15px;border-radius:50%;background:rgba(233,230,224,.72);backdrop-filter:blur(6px);box-shadow:var(--raise-sm)}
-.hero .cta{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:14px 26px;border:none;border-radius:999px;background:var(--nm);box-shadow:var(--raise-sm);
-  font:inherit;font-size:12px;letter-spacing:.16em;color:var(--ink);cursor:pointer;position:relative}
-.hero .cta::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:7px 7px 16px var(--nm-lo),-7px -7px 16px var(--nm-hi);opacity:0;transition:opacity .25s ease;pointer-events:none}
-.hero .cta:hover::after,.hero .cta:focus-visible::after{opacity:1}
-.hero .cta:active::after{opacity:0}
-.hero .cta:active{box-shadow:var(--inset)}
-.hero .cta:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
-.hero .cta i{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+/* ---------- 1. 히어로: 큰 이미지 슬라이더 ---------- */
+.hs{position:relative;height:100svh;min-height:560px;max-height:1000px;overflow:hidden;background:var(--stone);color:var(--sheet)}
+.hs-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 1.2s ease,visibility 0s linear 1.2s}
+.hs-slide.on{opacity:1;visibility:visible;transition:opacity 1.2s ease,visibility 0s}
+.hs-slide .bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.06);transition:transform 7s cubic-bezier(.2,.7,.2,1)}
+.hs-slide.on .bg{transform:scale(1)}
+.hs.manual .hs-slide{transition:opacity .6s ease,visibility 0s linear .6s}
+.hs.manual .hs-slide.on{transition:opacity .6s ease,visibility 0s}
+/* 사진 위 글자가 읽히도록 위아래만 옅게 가라앉힌다 */
+.hs-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,19,.32) 0%,rgba(20,20,19,0) 26%,rgba(20,20,19,0) 46%,rgba(20,20,19,.58) 100%)}
+.hs-copy{position:absolute;z-index:2;left:var(--gutter);right:var(--gutter);bottom:112px;max-width:640px}
+.hs-copy .eyebrow{display:block;font-size:12px;letter-spacing:.3em;opacity:.85}
+.hs-copy h2{font-family:var(--serif-ko);font-weight:300;font-size:clamp(32px,4.4vw,58px);line-height:1.3;letter-spacing:.02em;margin:16px 0 14px;text-wrap:balance}
+.hs-copy p{font-size:15px;line-height:1.9;max-width:34em;opacity:.92}
+.hs-cta{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 24px;margin-top:26px;border:1px solid rgba(251,250,247,.75);border-radius:999px;font-size:13px;letter-spacing:.14em;color:var(--sheet);transition:background-color .25s,color .25s}
+.hs-cta:hover,.hs-cta:focus-visible{background:var(--sheet);color:var(--ink)}
+.hs-cta:focus-visible{outline:1px solid var(--sheet);outline-offset:4px}
+.hs-cta i{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+.hs-ui{position:absolute;z-index:3;left:var(--gutter);right:var(--gutter);bottom:40px;display:flex;align-items:center;gap:18px}
+.hs-dots{display:flex;gap:8px;flex:1;max-width:320px}
+.hs-dots button{flex:1;height:24px;padding:0;border:none;background:none;cursor:pointer;position:relative}
+.hs-dots button::before{content:"";position:absolute;left:0;right:0;top:11px;height:2px;background:rgba(251,250,247,.35)}
+.hs-dots button::after{content:"";position:absolute;left:0;right:0;top:11px;height:2px;background:var(--sheet);transform:scaleX(0);transform-origin:left}
+.hs-dots button[aria-current="true"]::after{transform:scaleX(1)}
+.hs.playing .hs-dots button[aria-current="true"]::after{transform:scaleX(0);animation:hs-fill var(--hs-delay,6s) linear forwards}
+@keyframes hs-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hs-dots button:focus-visible{outline:1px solid var(--sheet);outline-offset:2px}
+.hs-count{font-family:var(--serif-en);font-size:15px;font-variant-numeric:tabular-nums;letter-spacing:.06em;margin-left:auto}
+.hs-btn{display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(251,250,247,.6);border-radius:50%;background:none;color:var(--sheet);cursor:pointer;transition:background-color .25s,color .25s}
+.hs-btn:hover,.hs-btn:focus-visible{background:var(--sheet);color:var(--ink)}
+.hs-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* 홈 맨 위에서는 헤더 글자를 사진 위에서 읽히게 밝게 */
+body[data-view="home"] .hd:not(.solid):not(.open){color:var(--sheet)}
+body[data-view="home"] .hd:not(.solid):not(.open) nav a,body[data-view="home"] .hd:not(.solid):not(.open) .util{color:rgba(251,250,247,.82)}
+body[data-view="home"] .hd:not(.solid):not(.open) nav a:hover,body[data-view="home"] .hd:not(.solid):not(.open) .util a:hover{color:var(--sheet)}
+body[data-view="home"] .hd:not(.solid):not(.open) .menu-btn{color:var(--sheet)}
 
 /* ---------- 2. 브랜드 문장 (ESAKU) ---------- */
 .statement{min-height:92vh;display:grid;place-items:center;text-align:center;padding:120px var(--gutter)}
@@ -103,12 +104,12 @@ img{display:block;max-width:100%}
 .statement .it{font-family:var(--serif-en);font-size:17px;line-height:1.5;color:#3a3936}
 .statement .it em{display:block}
 .statement .ko{margin-top:56px;font-family:var(--serif-ko);font-size:15px;line-height:2.3;color:#3a3936}
-.statement .ko small{display:block;margin-top:10px;font-size:11px;letter-spacing:.5em;color:var(--mist)}
+.statement .ko small{display:block;margin-top:10px;font-size:12px;letter-spacing:.5em;color:var(--mist)}
 
 /* ---------- 공통 섹션 머리 ---------- */
 .sec{padding:120px var(--gutter)}
 .sec-hd{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid #b9bab9;padding-bottom:18px;margin-bottom:40px}
-.sec-hd .eyebrow{font-size:11px;letter-spacing:.3em;color:var(--mist);display:block;margin-bottom:12px}
+.sec-hd .eyebrow{font-size:12px;letter-spacing:.3em;color:var(--mist);display:block;margin-bottom:12px}
 .sec-hd h2{font-family:var(--serif-ko);font-weight:300;font-size:28px;letter-spacing:.04em}
 .sec-hd .ttl{display:flex;align-items:flex-end;gap:20px}
 .sec-hd .sec-ill{width:76px;height:76px;flex:none;margin-bottom:-4px}
@@ -117,13 +118,13 @@ img{display:block;max-width:100%}
 
 /* ---------- 3. 제품 ---------- */
 .products{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
-.prod .frame{position:relative;aspect-ratio:3/4;overflow:hidden;background:#E4E1DA;border-radius:10px;isolation:isolate}
-.prod .frame .ph{position:absolute;inset:0;background-size:cover;background-position:center;filter:saturate(.8) contrast(.96);transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .8s}
-.prod:hover .frame .ph,.prod:focus-visible .frame .ph{transform:scale(1.035);filter:saturate(1)}
-.prod:focus-visible{outline:1px solid var(--ink);outline-offset:6px;border-radius:12px}
-.prod .no{position:absolute;top:12px;left:14px;font-family:var(--serif-en);font-size:13px;color:var(--sheet);mix-blend-mode:difference}
+.prod .frame{position:relative;aspect-ratio:3/4;overflow:hidden;background:#E4E1DA;border-radius:6px;isolation:isolate;box-shadow:0 1px 2px rgba(60,52,40,.08),0 14px 28px -18px rgba(60,52,40,.38)}
+.prod .frame .ph{position:absolute;inset:0;background-size:cover;background-position:center;filter:saturate(.8) contrast(.96);transition:transform .4s var(--ease-out),filter .4s ease}
+.prod:focus-visible .frame .ph{transform:scale(1.035);filter:saturate(1);transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .8s ease}
+@media (hover:hover) and (pointer:fine){.prod:hover .frame .ph{transform:scale(1.035);filter:saturate(1);transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .8s ease}}
+.prod:focus-visible{outline:1px solid var(--ink);outline-offset:6px;border-radius:8px}
 .prod h3{font-family:var(--serif-ko);font-weight:400;font-size:15px;margin-top:16px}
-.prod p{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.06em;color:var(--graphite);margin-top:6px}
+.prod p{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.06em;color:var(--graphite);margin-top:6px}
 .prod p b{font-variant-numeric:tabular-nums;font-family:var(--serif-en);font-weight:400;font-size:14px;color:var(--ink);letter-spacing:.02em}
 
 /* ---------- 4. 보자기 (封丘 포스터) ---------- */
@@ -136,7 +137,7 @@ img{display:block;max-width:100%}
 .bojagi .roman{writing-mode:vertical-rl;font-family:var(--serif-en);font-style:italic;font-size:13px;letter-spacing:.2em;color:var(--graphite)}
 .bojagi .col{position:relative;writing-mode:vertical-rl;font-family:var(--serif-ko);font-size:13px;line-height:2.1;letter-spacing:.18em;color:#3a3936;padding-right:16px;border-right:1px solid var(--hair)}
 .bojagi .col::before{content:"";position:absolute;right:-3px;top:var(--dot,40%);width:5px;height:5px;border-radius:50%;background:var(--blue)}
-.bojagi .col.sm{font-size:11px;color:var(--graphite)}
+.bojagi .col.sm{font-size:12px;color:var(--graphite)}
 .bojagi .col strong{font-weight:400;color:var(--ink)}
 .bojagi .cta{writing-mode:vertical-rl;align-self:flex-end;font-size:12px;letter-spacing:.3em;color:var(--ink);border-left:1px solid var(--ink);padding-left:8px}
 
@@ -144,7 +145,7 @@ img{display:block;max-width:100%}
 .works{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;align-items:start;background:var(--c-works);padding:120px var(--gutter)}
 .poster{background:#fff;aspect-ratio:3/4;padding:12% 11% 10%;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 30px 60px -40px rgba(0,0,0,.35)}
 .poster svg{width:100%;height:auto}
-.poster .hand{font-family:var(--hand);font-size:44px;color:#3a3936;margin-top:-10px;margin-left:8%}
+.poster .hand{font-family:var(--hand);font-size:34px;line-height:1.3;color:#3a3936;margin-top:-10px;margin-left:8%}
 .poster .cap{font-family:var(--serif-en);font-size:15px;line-height:1.45}
 .poster .cap em{display:block}
 .poster .cap span{display:block;margin-top:18px}
@@ -152,8 +153,8 @@ img{display:block;max-width:100%}
 .wlist li{display:grid;grid-template-columns:90px 1fr auto;gap:18px;align-items:baseline;padding:22px 0;border-bottom:1px solid #C3BDB2}
 .wlist time{font-variant-numeric:tabular-nums;font-family:var(--serif-en);font-size:14px;color:var(--graphite)}
 .wlist b{font-family:var(--serif-ko);font-weight:400;font-size:17px}
-.wlist small{display:block;font-size:11px;color:var(--graphite);margin-top:6px;letter-spacing:.04em}
-.wlist i{font-style:normal;font-size:11px;letter-spacing:.14em;color:var(--graphite)}
+.wlist small{display:block;font-size:12px;color:var(--graphite);margin-top:6px;letter-spacing:.04em}
+.wlist i{font-style:normal;font-size:12px;letter-spacing:.14em;color:var(--graphite)}
 .works .sec-hd{border-color:#A9A296}
 
 /* ---------- 6. 커뮤니티 (FLEUR) ---------- */
@@ -164,14 +165,14 @@ img{display:block;max-width:100%}
 .card.tall{grid-row:span 2;aspect-ratio:auto;min-height:620px;display:flex;flex-direction:column}
 .card.tall .body{flex:1;position:relative}
 .card.tall .vword{position:absolute;right:30px;top:40px;writing-mode:vertical-rl;font-family:var(--serif-ko);font-size:24px;letter-spacing:.7em}
-.card.tall svg{position:absolute;left:30%;top:46%;width:34%;height:auto}
+.card.tall svg{position:absolute;left:26%;top:38%;width:44%;height:auto}
 .card.tall .foot{border-top:1px solid #cfccc5;padding:26px 30px;font-size:12px;letter-spacing:.1em;line-height:1.9;text-align:center}
 .card.wide{min-height:300px}
 .card.wide svg{position:absolute;inset:0;width:100%;height:100%}
 .card.info{min-height:300px;padding:34px 30px;display:flex;flex-direction:column;justify-content:space-between}
 .card.info .vword{position:absolute;right:30px;top:30px;writing-mode:vertical-rl;font-family:var(--serif-ko);font-size:16px;letter-spacing:.6em}
 .card.info dl{font-size:12px;line-height:2;letter-spacing:.06em}
-.card.info dt{color:var(--graphite);font-size:10px;letter-spacing:.24em;margin-top:10px}
+.card.info dt{color:var(--graphite);font-size:12px;letter-spacing:.24em;margin-top:10px}
 .card.info a{align-self:flex-start;font-size:12px;letter-spacing:.14em;border-bottom:1px solid var(--ink);padding-bottom:3px}
 
 /* ---------- 푸터 ---------- */
@@ -189,7 +190,6 @@ img{display:block;max-width:100%}
 
 /* 섹션 사이 색 전환: 각 섹션의 아래쪽이 다음 섹션 색으로 서서히 넘어간다 */
 :root{--blend:200px;--c-works:#DCD8CF}
-.hero{background:linear-gradient(180deg,var(--nm) calc(100% - var(--blend)),var(--paper) 100%)}
 #season{background:linear-gradient(180deg,var(--paper) calc(100% - var(--blend)),var(--sheet) 100%)}
 .bojagi{background:linear-gradient(180deg,var(--sheet) calc(100% - var(--blend)),var(--c-works) 100%)}
 .works{background:linear-gradient(180deg,var(--c-works) calc(100% - var(--blend)),var(--stone) 100%)}
@@ -214,9 +214,25 @@ img{display:block;max-width:100%}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js .rv{opacity:1;transform:none;transition:none}
-  .hero .scroll i{animation:none}
-  .prod .frame .ph,.toast,.skip,.hero .cta::after{transition:none}
+  .hs-slide,.hs-slide .bg{transition:none}
+  .hs-slide .bg,.hs-slide.on .bg{transform:none}
+  .prod .frame .ph,.toast,.skip{transition:none}
   .prod:hover .frame .ph,.prod:focus-visible .frame .ph{transform:none}
+}
+
+/* 누르는 반응: 눌린 순간 살짝 들어간다 */
+.btn,.pill,.hs-btn,.hs-cta{transition:background-color .25s ease,color .25s ease,border-color .25s ease,transform 140ms var(--ease-out)}
+.cats button{transition:color .3s ease,border-color .3s ease,transform 140ms var(--ease-out)}
+.qty button{transition:transform 140ms var(--ease-out)}
+.sizes span{transition:border-color .15s ease,transform 140ms var(--ease-out)}
+.btn:active,.pill:active,.hs-btn:active,.hs-cta:active,.qty button:active,.cats button:active{transform:scale(.97)}
+.sizes label:active span{transform:scale(.98)}
+@media (prefers-reduced-motion:reduce){
+  .hs.manual .hs-slide,.hs.manual .hs-slide.on{transition:none}
+  .btn,.pill,.hs-btn,.hs-cta,.cats button,.qty button,.sizes span{transition-property:background-color,color,border-color}
+  .btn:active,.pill:active,.hs-btn:active,.hs-cta:active,.qty button:active,.cats button:active,.sizes label:active span{transform:none}
+  .hd.open nav{transition:none}
+  .prod .frame>span,.prod .frame.ill svg{transition:none!important;transform:none!important}
 }
 
 /* ---------- 반응형 ---------- */
@@ -230,17 +246,18 @@ img{display:block;max-width:100%}
   .hd{grid-template-columns:auto 1fr auto}
   .hd nav{display:none}
   .hd.open nav{display:block;position:absolute;top:100%;left:0;right:0;background:var(--paper);border-bottom:1px solid #b9bab9;padding:18px var(--gutter)}
+  .hd.open nav{opacity:1;transform:none;transition:opacity 180ms var(--ease-out),transform 180ms var(--ease-out)}
+  @starting-style{.hd.open nav{opacity:0;transform:translateY(-4px)}}
   .hd.open nav ul{flex-direction:column;gap:16px}
   .menu-btn{display:block}
   .hd .brand{justify-content:center}
   .hd .util{gap:14px}
-  .hero{padding-top:90px}
-  .hero .pair{grid-template-columns:1fr;aspect-ratio:auto}
-  .hero .ph{aspect-ratio:4/5}
-  .hero .sheet{min-height:400px}
-  .hero{--raise:8px 8px 18px var(--nm-lo),-8px -8px 18px var(--nm-hi)}
-  .hero .pair{gap:24px}
-  .hero .ph,.hero .sheet{border-radius:22px}
+  .hs{min-height:600px}
+  .hs-copy{bottom:104px}
+  .hs-copy p{font-size:14px}
+  .hs-ui{bottom:28px;gap:10px}
+  .hs-count{display:none}
+  .hs-dots{max-width:none}
   .sec,.bojagi,.works,.community{padding-top:84px;padding-bottom:84px}
   .sec-hd{flex-wrap:wrap;gap:14px}
   .sec-hd a{white-space:nowrap}
@@ -280,7 +297,7 @@ img{display:block;max-width:100%}
     </ul>
   </nav>
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="gnb">메뉴</button>
-  <a class="brand" href="#home" aria-label="설담화 메인페이지" translate="no"><svg aria-hidden="true" style="color:var(--ink)"><use href="#blossom"/></svg>설담화</a>
+  <a class="brand" href="#home" aria-label="설담화 메인페이지" translate="no"><svg aria-hidden="true"><use href="#blossom"/></svg>설담화</a>
   <div class="util">
     <a class="ico" href="#cart" aria-label="장바구니, 담긴 상품 0개">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1.2 11a1.5 1.5 0 0 1-1.5 1.3H8.2a1.5 1.5 0 0 1-1.5-1.3z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg>
@@ -294,30 +311,47 @@ img{display:block;max-width:100%}
 
 <main id="main">
 <div id="home-view">
-  <!-- 1. 히어로 -->
-  <section class="hero paper">
-    <div>
-      <div class="pair">
-        <div class="ph"><div class="well"><div class="img"></div><div class="veil"></div></div><svg class="mark" aria-hidden="true" style="color:var(--ink)"><use href="#blossom"/></svg></div>
-        <div class="sheet">
-          <h1 class="word" lang="en" translate="no">seoldamhwa</h1>
-          <div class="tag"><b>꽃으로 건네는 말</b>slowly arranged flowers<br>wrapped in reusable bojagi<br><a class="cta" href="#season"><i></i>이번 계절의 꽃</a></div>
-          <p class="site" translate="no">SEOLDAMHWA.STUDIO</p>
-          <span class="vt">說談話</span>
-        </div>
-      </div>
-      <p class="scroll" aria-hidden="true">SCROLL<i></i></p>
+  <!-- 1. 히어로: 큰 이미지 슬라이더 -->
+  <section class="hs" id="hero" aria-roledescription="carousel" aria-label="설담화 소개">
+    <h1 class="sr-only">설담화 · 꽃으로 건네는 말</h1>
+    <div class="hs-slide on" role="group" aria-roledescription="slide" aria-label="1 / 5">
+      <div class="bg" style="background-image:var(--img-ikebana-larch);background-position:center 35%" role="img" aria-label="꽃으로 건네는 말 사진"></div>
+      <div class="hs-copy"><span class="eyebrow">입동 · 立冬</span><h2>꽃으로 건네는 말</h2><p>절기마다 고른 꽃 한 줄기를, 다시 쓰는 보자기에 싸서 건넵니다.</p><a class="hs-cta" href="#season"><i aria-hidden="true"></i>이번 계절의 꽃</a></div>
     </div>
+    <div class="hs-slide" role="group" aria-roledescription="slide" aria-label="2 / 5" aria-hidden="true" inert>
+      <div class="bg" style="background-image:var(--img-bojagi);background-position:center 45%" role="img" aria-label="포장도 두 번째 선물 사진"></div>
+      <div class="hs-copy"><span class="eyebrow">BOJAGI · 보자기</span><h2>포장도 두 번째 선물</h2><p>풀고 나면 스카프가 되고, 주머니가 되고, 다음 선물의 포장이 되는 천.</p><a class="hs-cta" href="#bojagi">보자기 보기</a></div>
+    </div>
+    <div class="hs-slide" role="group" aria-roledescription="slide" aria-label="3 / 5" aria-hidden="true" inert>
+      <div class="bg" style="background-image:var(--img-ikebana-bamboo);background-position:center 30%" role="img" aria-label="한 사람의 손으로 사진"></div>
+      <div class="hs-copy"><span class="eyebrow">STUDIO · 설담화</span><h2>한 사람의 손으로</h2><p>상담부터 꽂기, 포장까지 한 사람이 맡는 1인 꽃 스튜디오입니다.</p><a class="hs-cta" href="#about">브랜드 소개</a></div>
+    </div>
+    <div class="hs-slide" role="group" aria-roledescription="slide" aria-label="4 / 5" aria-hidden="true" inert>
+      <div class="bg" style="background-image:var(--img-field);background-position:center 60%" role="img" aria-label="꽃을 사이에 두고 사진"></div>
+      <div class="hs-copy"><span class="eyebrow">COMMUNITY · 꽃 모임</span><h2>꽃을 사이에 두고</h2><p>한 달에 한 번, 열 명 남짓 둘러앉아 꽃을 꽂고 차를 마십니다.</p><a class="hs-cta" href="#community">모임 둘러보기</a></div>
+    </div>
+    <div class="hs-slide" role="group" aria-roledescription="slide" aria-label="5 / 5" aria-hidden="true" inert>
+      <div class="bg" style="background-image:var(--img-ikebana-daffodil);background-position:center 30%" role="img" aria-label="계절마다 남긴 꽃 사진"></div>
+      <div class="hs-copy"><span class="eyebrow">WORKS · 작업</span><h2>계절마다 남긴 꽃</h2><p>공간과 모임과 구독에서 남긴 꽃의 기록.</p><a class="hs-cta" href="#works">작업 기록 보기</a></div>
+    </div>
+    <div class="hs-ui">
+      <div class="hs-dots" role="group" aria-label="슬라이드 선택"><button type="button" aria-label="1번째 장 보기" aria-current="true"></button><button type="button" aria-label="2번째 장 보기"></button><button type="button" aria-label="3번째 장 보기"></button><button type="button" aria-label="4번째 장 보기"></button><button type="button" aria-label="5번째 장 보기"></button></div>
+      <span class="hs-count" aria-hidden="true"><b>01</b> / 05</span>
+      <button type="button" class="hs-btn" data-hs="prev" aria-label="이전 장"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" class="hs-btn" data-hs="toggle" aria-label="자동 넘김 멈추기"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="ic-pause" d="M9 6v12M15 6v12"/><path class="ic-play" d="M8 5l11 7-11 7z" style="display:none"/></svg></button>
+      <button type="button" class="hs-btn" data-hs="next" aria-label="다음 장"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <p class="sr-only" id="hs-live" aria-live="polite"></p>
   </section>
 
   <!-- 3. 제품 -->
   <section class="sec paper" id="season">
     <div class="sec-hd rv"><div class="ttl"><svg class="sec-ill" viewBox="0 0 320 320" aria-hidden="true" style="color:var(--ink)"><!--@svginner illust/statement.svg--></svg><div><span class="eyebrow">PRODUCTS · 제품</span><h2>입동의 꽃</h2></div></div><a href="#all">모든 제품 보기</a></div>
     <div class="products">
-      <a class="prod rv" href="#larch"><div class="frame"><span class="ph" role="img" aria-label="굽 높은 회색 수반에 S자로 선 낙엽송 가지와 연잎 한 장" style="background-image:var(--img-ikebana-larch)"></span><i class="no">01</i></div><h3>낙엽송과 연잎</h3><p>꽃꽂이 · 중품<b data-price="larch"></b></p></a>
-      <a class="prod rv" href="#bamboo"><div class="frame"><span class="ph" role="img" aria-label="대나무 줄기 옆에 부채처럼 접은 잎과 흰 들꽃을 꽂은 꽃꽂이" style="background-image:var(--img-ikebana-bamboo)"></span><i class="no">02</i></div><h3>대나무와 부채 잎</h3><p>꽃꽂이 · 중품<b data-price="bamboo"></b></p></a>
-      <a class="prod rv" href="#daffodil"><div class="frame"><span class="ph" role="img" aria-label="깔때기 모양 화기에 꽂은 노란 수선 한 송이" style="background-image:var(--img-ikebana-daffodil)"></span><i class="no">03</i></div><h3>수선 한 줄기</h3><p>꽃꽂이 · 소품<b data-price="daffodil"></b></p></a>
-      <a class="prod rv" href="#gift"><div class="frame"><span class="ph" role="img" aria-label="아이보리 보자기로 싼 선물과 백자 화병" style="background-image:var(--img-bojagi)"></span><i class="no">04</i></div><h3>백자와 보자기 선물</h3><p>보자기 포함<b data-price="baekja"></b></p></a>
+      <a class="prod rv" href="#larch"><div class="frame"><span class="ph" role="img" aria-label="굽 높은 회색 수반에 S자로 선 낙엽송 가지와 연잎 한 장" style="background-image:var(--img-ikebana-larch)"></span></div><h3>낙엽송과 연잎</h3><p>꽃꽂이 · 중품<b data-price="larch"></b></p></a>
+      <a class="prod rv" href="#bamboo"><div class="frame"><span class="ph" role="img" aria-label="대나무 줄기 옆에 부채처럼 접은 잎과 흰 들꽃을 꽂은 꽃꽂이" style="background-image:var(--img-ikebana-bamboo)"></span></div><h3>대나무와 부채 잎</h3><p>꽃꽂이 · 중품<b data-price="bamboo"></b></p></a>
+      <a class="prod rv" href="#daffodil"><div class="frame"><span class="ph" role="img" aria-label="깔때기 모양 화기에 꽂은 노란 수선 한 송이" style="background-image:var(--img-ikebana-daffodil)"></span></div><h3>수선 한 줄기</h3><p>꽃꽂이 · 소품<b data-price="daffodil"></b></p></a>
+      <a class="prod rv" href="#gift"><div class="frame"><span class="ph" role="img" aria-label="아이보리 보자기로 싼 선물과 백자 화병" style="background-image:var(--img-bojagi)"></span></div><h3>백자와 보자기 선물</h3><p>보자기 포함<b data-price="baekja"></b></p></a>
     </div>
   </section>
 
@@ -327,10 +361,10 @@ img{display:block;max-width:100%}
       <svg viewBox="0 0 520 560" role="img" aria-label="보자기로 싼 꽃 선물 연필 그림">
         <g fill="none" stroke="#3b3a37" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
           <!-- 꽃줄기들 -->
-          <path d="M262 300 C258 230 246 170 214 112"/>
-          <path d="M268 300 C272 236 292 176 330 128"/>
-          <path d="M265 300 C266 240 262 196 270 150"/>
-          <path d="M258 300 C238 250 206 222 168 206"/>
+          <path d="M262 309.5 C258 236 246 170 214 112"/>
+          <path d="M268 309 C272 240 292 176 330 128"/>
+          <path d="M265 309 C266 244 262 196 270 150"/>
+          <path d="M258 310.5 C238 254 206 222 168 206"/>
           <!-- 잎 -->
           <path d="M240 196 C222 186 206 186 192 196 C206 204 224 204 240 196 Z"/>
           <path d="M300 190 C318 176 336 174 352 182 C338 194 318 196 300 190 Z"/>
@@ -391,7 +425,7 @@ img{display:block;max-width:100%}
     <div class="poster rv">
       <div>
         <svg viewBox="0 0 360 230" role="img" aria-label="수반과 가위 선화" style="color:#2c2b29"><!--@svginner illust/works.svg--></svg>
-        <p class="hand">꽃과,</p>
+        <p class="hand">꽃과, 계절과,<br>그날의 마음을<br>한 줄기에 남겨 둡니다.</p>
       </div>
       <p class="cap"><em>Through the Seasons</em>Seoldamhwa works<span>2026 — Seoul</span></p>
     </div>
@@ -418,7 +452,7 @@ img{display:block;max-width:100%}
         <div class="foot">꽃 모임 · 매월 둘째 토요일<br>서울 · 열 명 남짓</div>
       </article>
       <div class="card wide rv" aria-hidden="true">
-        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" style="color:var(--ink)"><!--@svginner illust/community-wide.svg--></svg>
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" style="color:var(--ink)"><!--@svginner illust/community-wide-line.svg--></svg>
       </div>
       <article class="card info rv">
         <span class="vword">꽃모임</span>
@@ -487,15 +521,54 @@ img{display:block;max-width:100%}
 <script>
 const hd=document.getElementById('hd');
 const menuBtn=hd.querySelector('.menu-btn');
+// ===== 히어로 슬라이더 =====
+(function(){
+  const box=document.getElementById('hero'), slides=[...box.querySelectorAll('.hs-slide')], dots=[...box.querySelectorAll('.hs-dots button')];
+  const count=box.querySelector('.hs-count b'), live=document.getElementById('hs-live'), toggle=box.querySelector('[data-hs="toggle"]');
+  const DELAY=6000, still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let cur=0, timer=null, playing=!still, held=false;
+  box.style.setProperty('--hs-delay',DELAY+'ms');
+  function show(i,announce){
+    cur=(i+slides.length)%slides.length;
+    box.classList.toggle('manual',!!announce);
+    slides.forEach((el,k)=>{const on=k===cur; el.classList.toggle('on',on); if(on){el.removeAttribute('aria-hidden');el.inert=false;} else {el.setAttribute('aria-hidden','true');el.inert=true;}});
+    dots.forEach((d,k)=>{ if(k===cur) d.setAttribute('aria-current','true'); else d.removeAttribute('aria-current'); });
+    count.textContent=String(cur+1).padStart(2,'0');
+    if(announce) live.textContent=`${cur+1} / ${slides.length} · ${slides[cur].querySelector('h2').textContent}`;
+    restart();
+  }
+  function restart(){
+    clearTimeout(timer);
+    // 진행 막대 애니메이션을 처음부터 다시
+    box.classList.remove('playing'); void box.offsetWidth;
+    if(playing && !held && !box.closest('[hidden]')){ box.classList.add('playing'); timer=setTimeout(()=>show(cur+1,false),DELAY); }
+  }
+  function setPlaying(p){
+    playing=p;
+    toggle.setAttribute('aria-label', p?'자동 넘김 멈추기':'자동 넘김 시작');
+    toggle.querySelector('.ic-pause').style.display=p?'':'none'; toggle.querySelector('.ic-play').style.display=p?'none':'';
+    restart();
+  }
+  box.querySelector('[data-hs="prev"]').addEventListener('click',()=>show(cur-1,true));
+  box.querySelector('[data-hs="next"]').addEventListener('click',()=>show(cur+1,true));
+  toggle.addEventListener('click',()=>setPlaying(!playing));
+  dots.forEach((d,k)=>d.addEventListener('click',()=>show(k,true)));
+  box.addEventListener('keydown',e=>{ if(e.key==='ArrowLeft'){show(cur-1,true);} else if(e.key==='ArrowRight'){show(cur+1,true);} });
+  // 마우스를 올리거나 안에서 포커스하면 잠시 멈춘다
+  box.addEventListener('mouseenter',()=>{held=true;restart();}); box.addEventListener('mouseleave',()=>{held=false;restart();});
+  box.addEventListener('focusin',()=>{held=true;restart();}); box.addEventListener('focusout',e=>{ if(!box.contains(e.relatedTarget)){held=false;restart();} });
+  document.addEventListener('visibilitychange',()=>{ held=document.hidden; restart(); });
+  window.hsRestart=restart;
+  setPlaying(playing);
+})();
 menuBtn.addEventListener('click',()=>{const open=hd.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open))});
 addEventListener('keydown',e=>{if(e.key==='Escape'&&hd.classList.contains('open')){hd.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.focus()}});
 // 아직 없는 페이지로 가는 링크: 이동하지 않고 준비 중임을 알린다
-const toast=document.getElementById('toast');let toastT;
 document.addEventListener('click',e=>{const a=e.target.closest('a[data-soon]');if(!a)return;e.preventDefault();
-  toast.textContent='준비 중인 페이지예요.';toast.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>toast.classList.remove('on'),2200)});
+  showToast('준비 중인 페이지예요.')});
 addEventListener('scroll',()=>hd.classList.toggle('solid',scrollY>40),{passive:true});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
-document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)*90+'ms';io.observe(el)});
+document.querySelectorAll('.rv').forEach(el=>{const i=[...el.parentElement.children].filter(c=>c.classList.contains('rv')).indexOf(el);el.style.transitionDelay=(i%4)*90+'ms';io.observe(el)});
 
 /*@include _detail.js*/
 /*@include _arrange.js*/
@@ -530,27 +603,34 @@ function showCat(cat){
   catBtns.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.cat===cat)));
   cards.forEach(c=>{c.hidden=!(cat==='all'||c.dataset.cat===cat)});
 }
+let lastKey=null;
+const calm=matchMedia('(prefers-reduced-motion: reduce)');
 function route(k){
   if(k===undefined) k=location.hash.slice(1);
   const isItem=k in ITEMS, isArr=k in ARR, isShop=isItem||isArr||CATS.includes(k), page=PAGES[k]?k:null;
   const view=isShop?'shop':(page||'home');
   homeView.hidden=view!=='home'; shopView.hidden=view!=='shop';
   Object.entries(PAGES).forEach(([key,el])=>{el.hidden=key!==page});
+  const fromOther=lastKey!==null&&document.body.dataset.view!==view;
+  const shown=view==='home'?homeView:view==='shop'?shopView:PAGES[page];
+  if(lastKey!==null&&lastKey!==k&&!(view==='home'&&!fromOther)&&!calm.matches) shown.animate([{opacity:0},{opacity:1}],{duration:180,easing:'cubic-bezier(.23,1,.32,1)'});
+  lastKey=k;
   document.body.dataset.view=view;
+  if(window.hsRestart) requestAnimationFrame(hsRestart);
   navLinks.forEach(a=>{ if(a.dataset.nav===view) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
   hd.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
   if(isShop){
     listView.hidden=isItem||isArr; detailView.hidden=!isItem; arrangeView.hidden=!isArr;
     if(isItem) renderDetail(k); else if(isArr) renderArrange(k); else { showCat(k); document.title='설담화 · 제품'; }
-    scrollTo(0,0);
+    scrollTo({top:0,behavior:'instant'});
   } else if(page){
     if(page==='cart') renderCart();
     document.title='설담화 · '+TITLES[page];
-    scrollTo(0,0);
+    scrollTo({top:0,behavior:'instant'});
   } else {
     document.title='설담화 · 메인';
     const el=k&&k!=='home'&&document.getElementById(k);
-    if(el){ requestAnimationFrame(()=>el.scrollIntoView()); } else scrollTo(0,0);
+    if(el){ requestAnimationFrame(()=>el.scrollIntoView({behavior:fromOther?'instant':'smooth'})); } else scrollTo({top:0,behavior:fromOther?'instant':'smooth'});
   }
 }
 catBtns.forEach(b=>b.addEventListener('click',()=>{showCat(b.dataset.cat);if(canHist) history.replaceState(null,'','#'+b.dataset.cat);}));

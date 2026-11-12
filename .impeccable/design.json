@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-12T16:59:54+09:00",
+  "generatedAt": "2026-11-12T17:19:00+09:00",
   "title": "Design System: 설담화 說談話",
   "extensions": {
     "colorMeta": {
@@ -47,21 +47,6 @@
           "#CFC3A0",
           "#E4DDC9",
           "#F6F4EE"
-        ]
-      },
-      "hero-mist": {
-        "role": "neutral",
-        "displayName": "히어로 안개 Hero Mist",
-        "canonical": "#E9E6E0",
-        "tonalRamp": [
-          "#2D2820",
-          "#4E4637",
-          "#6E644E",
-          "#8F8166",
-          "#AA9F88",
-          "#C4BCAB",
-          "#DDD9CF",
-          "#F4F3F0"
         ]
       },
       "stone": {
@@ -261,19 +246,14 @@
         "purpose": "큰 포스터 한 장."
       },
       {
-        "name": "raise",
-        "value": "14px 14px 30px #CBC6BC, -14px -14px 30px #FBFAF7",
-        "purpose": "히어로 뉴모피즘 판."
-      },
-      {
-        "name": "raise-sm",
-        "value": "5px 5px 12px #CBC6BC, -5px -5px 12px #FBFAF7",
-        "purpose": "히어로 원판과 버튼."
+        "name": "card-edge",
+        "value": "0 1px 2px rgba(60,52,40,.08), 0 14px 28px -18px rgba(60,52,40,.38)",
+        "purpose": "상품 카드 사진 칸 테두리."
       },
       {
         "name": "inset",
         "value": "inset 6px 6px 14px #CBC6BC, inset -6px -6px 14px #FBFAF7",
-        "purpose": "히어로 사진 홈, 눌린 상태."
+        "purpose": "음각 태그."
       }
     ],
     "motion": [
@@ -350,8 +330,8 @@
       "kind": "card",
       "refersTo": "product-card",
       "description": "상품 목록과 메인의 상품 카드.",
-      "html": "<a class=\"ds-prod\" href=\"#\"><span class=\"ds-prod-ph\"><i>01</i></span><b>낙엽송과 연잎</b><span class=\"ds-prod-meta\">꽃꽂이 · 중품<em>68,000원</em></span></a>",
-      "css": ".ds-prod{display:block;width:220px;color:#141413;text-decoration:none}.ds-prod-ph{position:relative;display:block;aspect-ratio:3/4;border-radius:10px;background:linear-gradient(160deg,#E4E1DA,#CFCAC0);transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}.ds-prod:hover .ds-prod-ph,.ds-prod:focus-visible .ds-prod-ph{transform:scale(1.035)}.ds-prod-ph i{position:absolute;top:12px;left:14px;font-family:\"EB Garamond\",serif;font-size:13px;color:#FBFAF7}.ds-prod b{display:block;font-family:\"Noto Serif KR\",serif;font-weight:400;font-size:15px;margin-top:16px}.ds-prod-meta{display:flex;justify-content:space-between;font-family:\"Noto Sans KR\",sans-serif;font-size:11px;letter-spacing:.06em;color:#6E6B66;margin-top:6px}.ds-prod-meta em{font-style:normal;font-family:\"EB Garamond\",serif;font-size:14px;color:#141413;font-variant-numeric:tabular-nums}"
+      "html": "<a class=\"ds-prod\" href=\"#\"><span class=\"ds-prod-ph\"></span><b>낙엽송과 연잎</b><span class=\"ds-prod-meta\">꽃꽂이 · 중품<em>68,000원</em></span></a>",
+      "css": ".ds-prod{display:block;width:220px;color:#141413;text-decoration:none}.ds-prod-ph{position:relative;display:block;aspect-ratio:3/4;border-radius:10px;background:linear-gradient(160deg,#E4E1DA,#CFCAC0);box-shadow:0 1px 2px rgba(60,52,40,.08),0 14px 28px -18px rgba(60,52,40,.38);transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}.ds-prod:hover .ds-prod-ph,.ds-prod:focus-visible .ds-prod-ph{transform:scale(1.035)}.ds-prod b{display:block;font-family:\"Noto Serif KR\",serif;font-weight:400;font-size:15px;margin-top:16px}.ds-prod-meta{display:flex;justify-content:space-between;font-family:\"Noto Sans KR\",sans-serif;font-size:12px;letter-spacing:.06em;color:#6E6B66;margin-top:6px}.ds-prod-meta em{font-style:normal;font-family:\"EB Garamond\",serif;font-size:14px;color:#141413;font-variant-numeric:tabular-nums}"
     },
     {
       "name": "Section Header",
@@ -359,7 +339,7 @@
       "refersTo": "headline",
       "description": "모든 섹션을 여는 머리: 먹선, 라벨, 바탕체 제목, 세리프 이탤릭.",
       "html": "<div class=\"ds-sh\"><div><span>FLOWERS · 꽃과 화기</span><h3>꽃과 화기</h3></div><em>what is in it</em></div>",
-      "css": ".ds-sh{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #141413;padding-top:16px;width:520px}.ds-sh span{font-family:\"Noto Sans KR\",sans-serif;font-size:11px;letter-spacing:.26em;color:#A9A59E}.ds-sh h3{font-family:\"Noto Serif KR\",serif;font-weight:300;font-size:24px;margin:8px 0 0}.ds-sh em{font-family:\"EB Garamond\",serif;font-size:15px;color:#6E6B66}"
+      "css": ".ds-sh{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #141413;padding-top:16px;width:520px}.ds-sh span{font-family:\"Noto Sans KR\",sans-serif;font-size:12px;letter-spacing:.26em;color:#A9A59E}.ds-sh h3{font-family:\"Noto Serif KR\",serif;font-weight:300;font-size:24px;margin:8px 0 0}.ds-sh em{font-family:\"EB Garamond\",serif;font-size:15px;color:#6E6B66}"
     },
     {
       "name": "Header Navigation",
@@ -372,7 +352,7 @@
   ],
   "narrative": {
     "northStar": "보자기 한 장의 여백",
-    "overview": "화면은 펼쳐 놓은 보자기 한 장이다. 한지와 무명 같은 넓고 따뜻한 바탕 위에 꽃 한 줄기와 글 몇 줄을 놓고, 나머지는 비워 둔다. 색을 내는 것은 꽃 사진과 손그림이고, 화면 장치가 쓰는 색은 먹과 쪽빛 한 점뿐이다. 검이불루 화이불치를 화면의 밀도로 옮긴 것으로, 덜어내되 초라하지 않고 고요하되 차갑지 않다.\n\n밀도는 낮고 리듬은 느리다. 섹션 사이를 넓게 띄우고, 섹션의 바탕색은 그라데이션으로 다음 섹션에 스며들어 경계선 없이 이어진다. 글자는 바탕체 제목과 가벼운 고딕 본문으로 나누고, 영문과 숫자는 클래식 세리프로 따로 다룬다. 손글씨와 붓·연필 손그림이 1인 스튜디오의 손을 대신 보여 준다.\n\n깊이는 종이처럼 다룬다. 면은 평평하게 두고, 카드와 사진 같은 '놓인 것'만 종이를 한 장 더 겹쳐 놓은 듯 아주 옅게 떠오른다. 누르고 올린 입체감(뉴모피즘)은 히어로와 음각 태그 같은 특별한 자리에만 쓴다.",
+    "overview": "화면은 펼쳐 놓은 보자기 한 장이다. 한지와 무명 같은 넓고 따뜻한 바탕 위에 꽃 한 줄기와 글 몇 줄을 놓고, 나머지는 비워 둔다. 색을 내는 것은 꽃 사진과 손그림이고, 화면 장치가 쓰는 색은 먹과 쪽빛 한 점뿐이다. 검이불루 화이불치를 화면의 밀도로 옮긴 것으로, 덜어내되 초라하지 않고 고요하되 차갑지 않다.\n\n밀도는 낮고 리듬은 느리다. 섹션 사이를 넓게 띄우고, 섹션의 바탕색은 그라데이션으로 다음 섹션에 스며들어 경계선 없이 이어진다. 글자는 바탕체 제목과 가벼운 고딕 본문으로 나누고, 영문과 숫자는 클래식 세리프로 따로 다룬다. 손글씨와 붓·연필 손그림이 1인 스튜디오의 손을 대신 보여 준다.\n\n깊이는 종이처럼 다룬다. 면은 평평하게 두고, 카드와 사진 같은 '놓인 것'만 종이를 한 장 더 겹쳐 놓은 듯 아주 옅게 떠오른다. 누르고 올린 입체감(뉴모피즘)은 음각 태그 같은 작은 표식에만 쓴다. 첫 화면은 사진이 넘어가는 큰 슬라이더다.",
     "keyCharacteristics": [
       "따뜻한 미색 바탕의 단계(한지, 흰 종이, 돌, 회색 미색)와 먹색 글자",
       "쪽빛은 한 화면에 한 점만",
@@ -396,6 +376,11 @@
         "name": "The Photo Brings Color Rule",
         "body": "화면의 유채색은 꽃 사진과 손그림이 낸다. 화면 장치는 미색, 먹, 쪽빛 한 점 밖의 색을 쓰지 않는다.",
         "section": "colors"
+      },
+      {
+        "name": "The 12px Floor Rule",
+        "body": "어떤 글자도 12px(9pt)보다 작게 쓰지 않는다. 배지, 캡션, 도면 속 글자도 마찬가지다.",
+        "section": "typography"
       },
       {
         "name": "The Bilingual Label Rule",
@@ -424,7 +409,7 @@
       },
       {
         "name": "The Neumorph Is A Guest Rule",
-        "body": "뉴모피즘은 히어로와 음각 태그 같은 표식에만 쓴다. 목록, 카드 격자, 스크롤 표시에는 쓰지 않는다.",
+        "body": "뉴모피즘은 음각 태그 같은 표식에만 쓴다. 히어로, 목록, 카드 격자, 스크롤 표시에는 쓰지 않는다.",
         "section": "elevation"
       }
     ],

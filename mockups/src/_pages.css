@@ -2,7 +2,7 @@
 .pg{max-width:1240px;margin:0 auto;padding:40px var(--gutter) 40px}
 .pg-sec{padding:40px 0 80px}
 .pg .sh{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;border-top:1px solid var(--ink);padding-top:16px;margin-bottom:34px}
-.pg .sh span{font-size:11px;letter-spacing:.26em;color:var(--mist)}
+.pg .sh span{font-size:12px;letter-spacing:.26em;color:var(--mist)}
 .pg .sh h2{font-family:var(--serif-ko);font-weight:300;font-size:24px;margin-top:8px}
 .pg .sh em{font-family:var(--serif-en);font-size:15px;color:var(--graphite);text-align:right}
 .pt{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--blue);vertical-align:middle;margin-left:8px}
@@ -54,7 +54,7 @@ body[data-view="about"] .ft .statement{display:none}
 .wk-feat dl{margin-top:22px;border-top:1px solid var(--hair)}
 .wk-feat dl>div{display:grid;grid-template-columns:80px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--hair);font-size:13px}
 .wk-feat dt{color:var(--mist);font-size:12px;letter-spacing:.08em}
-.wk-tag{display:inline-block;font-size:11px;letter-spacing:.12em;padding:4px 10px;border:1px solid var(--hair);border-radius:999px;margin-left:10px;vertical-align:middle;color:var(--graphite)}
+.wk-tag{display:inline-block;font-size:12px;letter-spacing:.12em;padding:4px 10px;border:1px solid var(--hair);border-radius:999px;margin-left:10px;vertical-align:middle;color:var(--graphite)}
 .wk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 28px;padding-bottom:100px}
 .wk-card .wk-pic{aspect-ratio:4/5}
 .wk-card h3{font-family:var(--serif-ko);font-weight:400;font-size:17px;margin-top:14px}
@@ -66,9 +66,9 @@ body[data-view="about"] .ft .statement{display:none}
 /* 커뮤니티 */
 .cm-feat{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center;padding:20px 0 90px}
 .cm-pic{position:relative;aspect-ratio:4/5;background:var(--sheet);border-radius:10px;display:grid;place-items:center;overflow:hidden}
-.cm-pic svg{width:40%;height:auto}
+.cm-pic svg{width:48%;height:auto}
 .cm-pic .vword{position:absolute;right:30px;top:34px;writing-mode:vertical-rl;font-family:var(--serif-ko);font-size:18px;letter-spacing:.6em}
-.cm-info .eyebrow{font-size:11px;letter-spacing:.3em;color:var(--mist)}
+.cm-info .eyebrow{font-size:12px;letter-spacing:.3em;color:var(--mist)}
 .cm-info h2{font-family:var(--serif-ko);font-weight:300;font-size:34px;margin:12px 0 16px}
 .cm-info>p{font-size:14px;line-height:1.95;color:var(--graphite)}
 .cm-status{margin-top:18px;font-size:13px;letter-spacing:.06em;color:var(--ink)!important}

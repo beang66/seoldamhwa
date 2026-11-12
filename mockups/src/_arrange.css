@@ -1,7 +1,7 @@
 /* ===== 꽃꽂이 상세 (상단은 _detail.css 의 .pd/.gal/.info 를 함께 씀) ===== */
 #arrange-view .gal .main .photo,.thumbs .photo{background-repeat:no-repeat}
 .opt-group+.opt-group{margin-top:18px}
-.sizes span em{display:block;font-style:normal;font-size:11px;color:var(--mist);margin-top:2px}
+.sizes span em{display:block;font-style:normal;font-size:12px;color:var(--mist);margin-top:2px}
 .others{margin-top:28px}
 .others h2{font-size:12px;font-weight:400;letter-spacing:.14em;color:var(--graphite);margin-bottom:12px}
 .others div{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
@@ -14,11 +14,11 @@
 .ar{background:var(--sheet);padding:0 var(--gutter)}
 .ar .wrap{max-width:1240px;margin:0 auto;padding-top:100px}
 .ar-hd{text-align:center;padding-bottom:70px}
-.ar-hd span{font-size:11px;letter-spacing:.3em;color:var(--mist)}
+.ar-hd span{font-size:12px;letter-spacing:.3em;color:var(--mist)}
 .ar-hd h2{font-family:var(--serif-ko);font-weight:300;font-size:28px;margin-top:12px}
 .ar section{padding-bottom:96px}
 .ar .sh{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid var(--ink);padding-top:16px;margin-bottom:34px}
-.ar .sh span{font-size:11px;letter-spacing:.26em;color:var(--mist)}
+.ar .sh span{font-size:12px;letter-spacing:.26em;color:var(--mist)}
 .ar .sh h3{font-family:var(--serif-ko);font-weight:300;font-size:24px;margin-top:8px}
 .ar .sh em{font-family:var(--serif-en);font-size:15px;color:var(--graphite)}
 
@@ -29,7 +29,7 @@
 .flist li i{font-family:var(--serif-en);font-style:normal;font-size:14px;color:var(--mist)}
 .flist li b{font-family:var(--serif-ko);font-weight:400;font-size:16px}
 .flist li small{display:block;font-size:12px;color:var(--graphite);margin-top:4px;line-height:1.7}
-.flist li span{font-size:11px;letter-spacing:.1em;color:var(--mist)}
+.flist li span{font-size:12px;letter-spacing:.1em;color:var(--mist)}
 .memo{position:relative;background:#F4EFE4;border-radius:6px;padding:34px 30px 30px;min-height:260px}
 .memo .hand{font-family:var(--hand);font-size:34px;line-height:1.25;color:#2A2926}
 .memo p{font-size:13px;line-height:1.9;color:var(--graphite);margin-top:14px;max-width:80%}
@@ -39,7 +39,7 @@
 .size{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
 .size svg{width:100%;max-width:420px;height:auto;display:block;margin:0 auto}
 .size dl{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.size dt{font-size:11px;letter-spacing:.2em;color:var(--mist)}
+.size dt{font-size:12px;letter-spacing:.2em;color:var(--mist)}
 .size dd{font-family:var(--serif-en);font-size:40px;line-height:1.2;margin-top:6px}
 .size dd small{font-family:var(--sans);font-size:13px;color:var(--graphite);margin-left:4px}
 .size p{font-size:13px;line-height:1.9;color:var(--graphite);margin-top:22px}

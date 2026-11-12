@@ -71,7 +71,7 @@ function aSizeSvg(c){
       <path d="M${cx+W/2+14} ${base-H} V${base} M${cx+W/2+9} ${base-H} h10 M${cx+W/2+9} ${base} h10"/>
       <path d="M${cx-W/2} ${base+14} H${cx+W/2} M${cx-W/2} ${base+9} v10 M${cx+W/2} ${base+9} v10"/>
     </g>
-    <g font-family="Noto Sans KR" font-size="10" fill="#6E6B66" letter-spacing="1">
+    <g font-family="Noto Sans KR" font-size="12" fill="#6E6B66" letter-spacing=".5">
       <text x="${cx+W/2+22}" y="${base-H/2}" dominant-baseline="middle">${c.h} cm</text>
       <text x="${cx}" y="${base+30}" text-anchor="middle">${c.w} cm</text>
     </g></svg>`;

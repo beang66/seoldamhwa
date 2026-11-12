@@ -28,7 +28,11 @@ function cartTotals(){
 function cartBadge(){
   const n = cart.reduce((s, l) => s + l.qty, 0);
   const a = document.querySelector('.hd .ico[href="#cart"]');
-  a.querySelector('.cnt').textContent = n;
+  const cnt = a.querySelector('.cnt');
+  if (n > (cartBadge.last ?? n) && !matchMedia('(prefers-reduced-motion: reduce)').matches)
+    cnt.animate([{transform: 'scale(1)'}, {transform: 'scale(1.15)'}, {transform: 'scale(1)'}], {duration: 200, easing: 'cubic-bezier(.23,1,.32,1)'});
+  cartBadge.last = n;
+  cnt.textContent = n;
   a.setAttribute('aria-label', `장바구니, 담긴 상품 ${n}개`);
 }
 function cartThumb(l){
