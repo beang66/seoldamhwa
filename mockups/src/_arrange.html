@@ -1,0 +1,90 @@
+  <div class="pd">
+    <p class="crumb"><a href="#all">제품</a><span>/</span><a href="#arrange">꽃꽂이</a><span>/</span><b id="a-crumb"></b></p>
+
+    <div class="gal">
+      <div class="main" id="a-main" aria-live="polite"></div>
+      <div class="thumbs" id="a-thumbs" role="group" aria-label="상품 이미지"></div>
+    </div>
+
+    <div class="info">
+      <span class="no" id="a-no"></span>
+      <h1 id="a-name"></h1>
+      <p class="price" id="a-price"></p>
+      <p class="desc" id="a-desc"></p>
+      <div class="chips" id="a-chips"></div>
+
+      <div class="opt">
+        <div class="opt-group"><h2>화기</h2><div class="sizes" id="a-vessel" role="radiogroup" aria-label="화기 선택"></div></div>
+        <div class="opt-group"><h2>포장</h2><div class="sizes" id="a-wrap" role="radiogroup" aria-label="포장 선택"></div></div>
+        <div class="opt-group"><h2>받는 방법</h2><div class="sizes" id="a-deliv" role="radiogroup" aria-label="받는 방법 선택"></div></div>
+        <div class="buy">
+          <div class="qty"><button type="button" aria-label="수량 줄이기" data-ad="-1">−</button><output id="a-qty" aria-live="polite">1</output><button type="button" aria-label="수량 늘리기" data-ad="1">+</button></div>
+          <button type="button" class="btn p" data-aact="cart">장바구니 담기</button>
+          <button type="button" class="btn s" data-aact="buy">바로 구매</button>
+        </div>
+        <p class="note" id="a-note" role="status"></p>
+      </div>
+
+      <dl class="spec" id="a-spec"></dl>
+
+      <div class="others"><h2>함께 보면 좋은 꽃꽂이</h2><div id="a-others"></div></div>
+    </div>
+  </div>
+
+  <!-- ===== 꽃꽂이 이야기: 01 ~ 05 ===== -->
+  <div class="ar">
+    <div class="wrap">
+      <div class="ar-hd"><span>ABOUT THIS ARRANGEMENT · 꽃꽂이 이야기</span><h2 id="a-story-title"></h2></div>
+
+      <section>
+        <div class="sh"><div><span>01 · FLOWERS</span><h3>꽃과 화기</h3></div><em>what is in it</em></div>
+        <div class="mat2">
+          <ul class="flist" id="a-flist"></ul>
+          <div class="memo"><p class="hand" id="a-memo-hand"></p><p id="a-memo"></p><span class="vt" id="a-memo-vt"></span></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="sh"><div><span>02 · SIZE</span><h3>크기</h3></div><em>height &amp; width</em></div>
+        <div class="size">
+          <div id="a-size-svg"></div>
+          <div>
+            <dl><div><dt>높이</dt><dd id="a-h"></dd></div><div><dt>폭</dt><dd id="a-w"></dd></div><div><dt>화기 지름</dt><dd id="a-v"></dd></div></dl>
+            <p id="a-size-note"></p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="sh"><div><span>03 · CARE</span><h3>오래 보는 법</h3></div><em>a little every day</em></div>
+        <div class="care">
+          <div><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M22 6 C16 15 11 21 11 27 a11 11 0 0 0 22 0 C33 21 28 15 22 6 Z"/><path d="M17 28 a5 5 0 0 0 5 5"/></svg><h4>매일 물 채우기</h4><p>침봉이 늘 잠기도록 아침마다 물을 가득 채워 주세요.</p></div>
+          <div><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="12" cy="32" r="5"/><circle cx="24" cy="36" r="5"/><path d="M15 28 L36 8 M21 32 L34 10"/></svg><h4>사흘마다 줄기 자르기</h4><p>줄기 끝을 1cm쯤 사선으로 잘라 물이 잘 오르게 해요.</p></div>
+          <div><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="7"/><path d="M22 6 v4 M22 34 v4 M6 22 h4 M34 22 h4 M10.7 10.7 l2.8 2.8 M30.5 30.5 l2.8 2.8 M10.7 33.3 l2.8 -2.8 M30.5 13.5 l2.8 -2.8"/><path d="M8 36 L36 8"/></svg><h4>볕과 바람 피하기</h4><p>직사광선과 난방기, 에어컨 바람이 닿지 않는 곳에 두세요.</p></div>
+          <div><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M10 34 C10 18 22 8 36 8 C36 22 26 34 10 34 Z"/><path d="M10 34 L26 18"/></svg><h4>시든 잎은 바로 떼기</h4><p>시든 잎과 꽃잎을 떼면 남은 줄기가 더 오래 갑니다.</p></div>
+        </div>
+        <p class="care-note">이 꽃꽂이는 보통 <b id="a-life"></b> 동안 볼 수 있어요. 화기와 침봉은 계속 쓰실 수 있습니다.</p>
+      </section>
+
+      <section>
+        <div class="sh"><div><span>04 · WRAP &amp; DELIVERY</span><h3>포장과 받는 법</h3></div><em>wrapped in bojagi</em></div>
+        <div class="deliv">
+          <div class="pic"><svg viewBox="0 0 300 330" aria-label="감싸개로 감싼 모습"><use href="#ill-wrap"/></svg></div>
+          <table>
+            <tr><th>포장</th><td>모든 꽃꽂이는 아이보리 감싸개에 싸서 건넵니다. 매듭 보자기를 고르면 화기째 싸서 가방처럼 들고 가실 수 있어요.</td></tr>
+            <tr><th>작업실 픽업</th><td>원하는 날 오후 1시~6시. 꽃꽂이는 주문 다음 날부터 받으실 수 있어요.</td></tr>
+            <tr><th>서울 당일 퀵</th><td>오후 2시까지 주문하면 그날 저녁에 도착해요. 화기가 흔들리지 않게 상자에 고정해 보냅니다.</td></tr>
+            <tr><th>택배</th><td>꽃과 화기가 상할 수 있어 꽃꽂이는 택배로 보내지 않아요.</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <div class="sh"><div><span>05 · SEASON</span><h3>절기 이야기</h3></div><em>why this flower, now</em></div>
+        <div class="season">
+          <span class="big" id="a-season-big"></span>
+          <div><h4 id="a-season-h"></h4><p id="a-season-p"></p><small id="a-season-en"></small></div>
+        </div>
+      </section>
+    </div>
+  </div>

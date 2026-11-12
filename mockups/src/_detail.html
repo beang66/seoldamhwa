@@ -1,0 +1,39 @@
+  <div class="pd">
+    <p class="crumb"><a href="products.html" data-crumb="all">제품</a><span>/</span><a href="products.html#bojagi" data-crumb="bojagi">보자기</a><span>/</span><b id="crumb-name"></b></p>
+
+    <div class="gal">
+      <div class="main" id="d-main" aria-live="polite"></div>
+      <div class="thumbs" id="d-thumbs" role="group" aria-label="상품 이미지"></div>
+    </div>
+
+    <div class="info">
+      <span class="no" id="no"></span>
+      <h1 id="name"></h1>
+      <p class="price" id="price"></p>
+      <p class="desc" id="desc"></p>
+      <div class="chips" id="modes"></div>
+
+      <div class="opt">
+        <h2>크기</h2>
+        <div class="sizes" id="sizes" role="radiogroup" aria-label="크기 선택"></div>
+        <div class="buy">
+          <div class="qty"><button type="button" aria-label="수량 줄이기" data-d="-1">−</button><output id="qty" aria-live="polite">1</output><button type="button" aria-label="수량 늘리기" data-d="1">+</button></div>
+          <button type="button" class="btn p" data-act="cart">장바구니 담기</button>
+          <button type="button" class="btn s" data-act="buy">바로 구매</button>
+        </div>
+        <p class="note" id="note" role="status"></p>
+      </div>
+
+      <dl class="spec" id="spec"></dl>
+
+      <a class="other" id="other" href="#"></a>
+    </div>
+  </div>
+
+  <!-- ===== 보자기 이야기: 01 ~ 05 ===== -->
+  <div class="bj">
+    <div class="wrap">
+      <div class="bj-hd"><span>ABOUT BOJAGI · 보자기 이야기</span><h2>설담화 보자기를 짓고, 쓰는 방법</h2></div>
+<!--@include _bojagi-sections.html-->
+    </div>
+  </div>

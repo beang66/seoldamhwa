@@ -1,0 +1,33 @@
+/* ===== 제품 목록 ===== */
+.page-hd{padding:150px var(--gutter) 0}
+.page-hd .eyebrow{font-size:11px;letter-spacing:.3em;color:var(--mist)}
+.page-hd h1{font-family:var(--serif-ko);font-weight:300;font-size:40px;letter-spacing:.04em;margin-top:12px}
+.page-hd p{font-size:14px;line-height:1.9;color:var(--graphite);margin-top:14px;max-width:520px}
+.cats{position:sticky;top:61px;z-index:10;background:var(--paper);display:flex;gap:6px;flex-wrap:wrap;margin:48px var(--gutter) 0;padding:14px 0;border-bottom:1px solid var(--hair)}
+.cats button{border:1px solid transparent;background:none;padding:8px 16px;border-radius:999px;font-size:13px;letter-spacing:.06em;color:var(--graphite);cursor:pointer;transition:color .3s,border-color .3s}
+.cats button:hover{color:var(--ink)}
+.cats button[aria-pressed="true"]{color:var(--ink);border-color:var(--ink)}
+.cats button small{font-family:var(--serif-en);font-size:12px;margin-left:5px;color:var(--mist)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;padding:40px var(--gutter) 110px}
+.prod[hidden]{display:none}
+.prod .frame{position:relative;aspect-ratio:3/4;overflow:hidden;background:#E4E1DA;border-radius:10px;isolation:isolate}
+.prod .frame>span{position:absolute;inset:0;background-size:cover;background-position:center;filter:saturate(.8) contrast(.96);transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .8s}
+.prod:hover .frame>span{transform:scale(1.035);filter:saturate(1)}
+.prod .frame.ill{background:#EFE8DA;display:grid;place-items:center}
+.prod .frame.ill svg{width:84%;height:auto;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.prod:hover .frame.ill svg{transform:scale(1.035)}
+.prod .no{position:absolute;top:12px;left:14px;font-family:var(--serif-en);font-size:13px;color:var(--sheet);mix-blend-mode:difference}
+.prod .frame.ill .no{color:var(--graphite);mix-blend-mode:normal}
+.prod h3{font-family:var(--serif-ko);font-weight:400;font-size:15px;margin-top:16px}
+.prod p{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.06em;color:var(--graphite);margin-top:6px}
+.prod p b{font-family:var(--serif-en);font-weight:400;font-size:14px;color:var(--ink);letter-spacing:.02em}
+
+@media (max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:860px){.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:720px){
+  .page-hd{padding-top:110px}
+  .page-hd h1{font-size:32px}
+  .cats{top:57px;flex-wrap:nowrap;overflow-x:auto;margin-top:32px}
+  .cats button{flex:none}
+  .grid{gap:18px 14px;padding-bottom:80px}
+}

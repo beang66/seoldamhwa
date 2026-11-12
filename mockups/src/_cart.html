@@ -1,0 +1,35 @@
+  <div class="page-hd">
+    <span class="eyebrow">CART · 장바구니</span>
+    <h1>장바구니</h1>
+    <p>담아 두신 꽃과 보자기입니다. 꽃꽂이는 받는 날 아침에 꽂아 보내드려요.</p>
+  </div>
+
+  <div class="pg">
+    <div class="cart" id="cart-full">
+      <section aria-labelledby="cart-list-title">
+        <h2 class="sr-only" id="cart-list-title">담은 상품</h2>
+        <ul class="cart-list" id="cart-list"></ul>
+        <p class="cart-note">모든 꽃은 감싸개에 싸서 건네고, 보자기는 다시 쓰는 천이라 따로 포장하지 않아요.</p>
+      </section>
+
+      <aside class="cart-sum" aria-labelledby="cart-sum-title">
+        <h2 id="cart-sum-title">주문 금액</h2>
+        <dl>
+          <div><dt>상품 금액</dt><dd id="sum-items"></dd></div>
+          <div><dt>서울 당일 퀵</dt><dd id="sum-quick"></dd></div>
+          <div><dt>보자기 택배</dt><dd id="sum-ship"></dd></div>
+          <div class="total"><dt><i class="pt" aria-hidden="true"></i>합계</dt><dd id="sum-total"></dd></div>
+        </dl>
+        <p class="cart-rule">보자기 택배비는 3,000원이고, 보자기 상품이 5만 원 이상이면 무료예요. 꽃꽂이는 택배로 보내지 않아요.</p>
+        <button type="button" class="pill dark wide" id="cart-order">주문하기</button>
+        <a class="pill wide" href="#all">계속 둘러보기</a>
+      </aside>
+    </div>
+
+    <div class="cart-empty" id="cart-empty" hidden>
+      <svg viewBox="0 0 300 330" aria-hidden="true"><use href="#ill-wrap"/></svg>
+      <h2>장바구니가 비어 있어요</h2>
+      <p>계절의 꽃이나 다시 쓰는 보자기를 담아 보세요.</p>
+      <a class="pill dark" href="#all">제품 보러 가기</a>
+    </div>
+  </div>

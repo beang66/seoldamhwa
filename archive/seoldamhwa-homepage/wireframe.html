@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="설담화 메인페이지 정보 구조와 반응형 배치를 확인하는 HTML 와이어프레임" />
+    <title>설담화 메인페이지 와이어프레임</title>
+    <style>
+      :root {
+        --ground: #f3f3f0;
+        --paper: #ffffff;
+        --ink: #171717;
+        --muted: #4d4d49;
+        --block: #d7d7d1;
+        --block-dark: #a4a49d;
+        --accent: #242424;
+        --pad: clamp(1.25rem, 4vw, 4rem);
+        --section: clamp(5rem, 10vw, 9rem);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--ground);
+        color: var(--ink);
+        font-family: Pretendard, "Noto Sans KR", system-ui, sans-serif;
+        font-size: 17px;
+        line-height: 1.65;
+      }
+      a { color: inherit; text-underline-offset: 0.2em; }
+      button, input { font: inherit; }
+      :focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+      h1, h2, h3, p, dl, dd, figure { margin: 0; }
+      h1, h2, h3 { line-height: 1.08; letter-spacing: -0.04em; }
+      p { max-width: 60ch; }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem var(--pad);
+        background: var(--paper);
+      }
+      .logo { font-size: 1.4rem; font-weight: 800; text-decoration: none; }
+      .nav { display: flex; align-items: center; gap: clamp(1rem, 3vw, 2.5rem); }
+      .nav a { text-decoration: none; }
+      .nav .action { padding: 0.7rem 1rem; background: var(--accent); color: white; }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        min-height: 88svh;
+        background: var(--paper);
+      }
+      .hero-copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: var(--section) var(--pad);
+      }
+      .hero h1 { max-width: 9ch; font-size: clamp(3.4rem, 8vw, 8rem); }
+      .hero-copy p { margin-top: 2rem; font-size: clamp(1.15rem, 2vw, 1.55rem); }
+      .hero-copy a {
+        align-self: flex-start;
+        margin-top: 2rem;
+        padding: 0.9rem 1.1rem;
+        background: var(--accent);
+        color: white;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .folder-map {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.65rem;
+        padding: var(--section) var(--pad);
+        background: var(--block);
+      }
+      .folder-map div {
+        min-height: 5rem;
+        padding: 1.25rem;
+        background: var(--paper);
+        font-weight: 700;
+      }
+      .folder-map div:nth-child(2) { margin-left: 8%; }
+      .folder-map div:nth-child(3) { margin-left: 16%; }
+      .folder-map div:nth-child(4) { margin-left: 24%; background: var(--accent); color: white; }
+
+      .section { padding: var(--section) var(--pad); }
+      .section h2 { max-width: 15ch; font-size: clamp(2.5rem, 5vw, 5rem); }
+      .intro {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: clamp(3rem, 8vw, 8rem);
+        align-items: center;
+      }
+      .intro-copy p { margin-top: 2rem; }
+      .media-placeholder {
+        position: relative;
+        display: grid;
+        min-height: 34rem;
+        place-items: center;
+        padding: 2rem;
+        overflow: hidden;
+        background: var(--block);
+        color: var(--muted);
+        text-align: center;
+      }
+      .media-placeholder img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(1);
+        opacity: 0.32;
+        animation: drift 14s ease-in-out infinite alternate;
+      }
+      .media-placeholder span { position: relative; padding: 0.7rem 0.9rem; background: var(--paper); }
+      .principles {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        padding-top: 0;
+      }
+      .principles dt { font-size: 2rem; font-weight: 800; }
+      .principles dd { margin-top: 0.75rem; color: var(--muted); }
+
+      .gifts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 0;
+        background: var(--paper);
+      }
+      .gifts .media-placeholder { min-height: 46rem; }
+      .gift-copy { display: flex; flex-direction: column; justify-content: center; padding: var(--section) var(--pad); }
+      .gift-types { display: grid; gap: 2rem; margin-top: 3rem; }
+      .gift-types h3 { font-size: 1.5rem; }
+      .gift-types p { margin-top: 0.7rem; color: var(--muted); }
+
+      .builder { background: var(--block); }
+      .builder-head { display: flex; justify-content: space-between; gap: 3rem; align-items: end; }
+      .builder-head p { max-width: 30ch; }
+      .choice-groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
+      fieldset { margin: 0; padding: 0; border: 0; }
+      legend { margin-bottom: 1rem; font-weight: 800; }
+      .choices { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+      .choices label { position: relative; }
+      .choices input { position: absolute; opacity: 0; }
+      .choices span { display: block; padding: 0.65rem 0.9rem; background: var(--paper); cursor: pointer; }
+      .choices input:checked + span { background: var(--accent); color: white; }
+      .sentence { margin-top: 4rem; padding: 2rem; background: var(--paper); font-size: 1.4rem; }
+
+      .process { background: var(--paper); }
+      .process-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4rem 2rem; margin-top: 4rem; }
+      .process-list article:nth-child(even) { margin-top: 6rem; }
+      .process-list h3 { font-size: 1.5rem; }
+      .process-list p { margin-top: 0.75rem; color: var(--muted); }
+      .process-list .media-placeholder { min-height: 20rem; margin-top: 2rem; }
+
+      .story {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: clamp(3rem, 8vw, 8rem);
+        background: var(--accent);
+        color: white;
+      }
+      .letter { padding: clamp(2rem, 5vw, 4rem); background: var(--paper); color: var(--ink); }
+      .letter p + p { margin-top: 1.25rem; }
+      .facts { display: grid; align-content: center; gap: 2.5rem; }
+      .facts dt { font-size: 2.2rem; font-weight: 800; }
+      .facts dd { color: #cfcfca; }
+
+      .contact {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: clamp(3rem, 8vw, 8rem);
+        align-items: center;
+      }
+      .contact-copy p { margin-top: 2rem; }
+      .ticket { padding: clamp(2rem, 5vw, 4rem); background: var(--block-dark); }
+      .ticket h3 { font-size: 2rem; }
+      .ticket ul { margin: 1.5rem 0 2rem; padding-left: 1.2rem; }
+      .ticket a { display: inline-block; padding: 0.8rem 1rem; background: var(--accent); color: white; text-decoration: none; }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 4rem var(--pad);
+        background: var(--accent);
+        color: white;
+      }
+      footer strong { font-size: clamp(2.8rem, 7vw, 7rem); line-height: 0.9; }
+      footer p { align-self: end; text-align: right; }
+
+      @keyframes drift {
+        from { transform: scale(1.01); }
+        to { transform: scale(1.06); }
+      }
+
+      @keyframes rise {
+        from { opacity: 0; transform: translateY(1.25rem); }
+        to { opacity: 1; transform: none; }
+      }
+
+      .header, main > section, footer { animation: rise 650ms both; }
+      main > section:nth-child(2) { animation-delay: 60ms; }
+      main > section:nth-child(3) { animation-delay: 120ms; }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+      }
+
+      @media (max-width: 760px) {
+        .nav a:not(.action) { display: none; }
+        .hero, .intro, .gifts, .story, .contact { grid-template-columns: 1fr; }
+        .hero { min-height: auto; }
+        .hero-copy { min-height: 70svh; }
+        .folder-map { padding-block: 4rem; }
+        .media-placeholder, .gifts .media-placeholder { min-height: 24rem; }
+        .principles, .choice-groups { grid-template-columns: 1fr; }
+        .builder-head { display: block; }
+        .builder-head p { margin-top: 1.5rem; }
+        .process-list { grid-template-columns: 1fr; }
+        .process-list article:nth-child(even) { margin-top: 0; }
+        footer { flex-direction: column; }
+        footer p { text-align: left; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <a class="logo" href="#top">설담화</a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="#gifts">선물</a>
+        <a href="#process">과정</a>
+        <a href="#story">이야기</a>
+        <a class="action" href="#contact">상담하기</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <h1>선물을,<br />이야기로.</h1>
+          <p>전통 원단과 꽃, 받는 사람의 이야기를 엮어 오래 곁에 남는 K-헤리티지 기프트를 만듭니다.</p>
+          <a href="#builder">선물 이야기 만들기</a>
+        </div>
+        <div class="folder-map" aria-label="메인 콘텐츠 구조">
+          <div>시작 · 브랜드가 시작된 이유</div>
+          <div>선물 · 포장과 꽃</div>
+          <div>마음 · 맞춤 상담</div>
+          <div>이야기 · 오래 남는 쓰임</div>
+        </div>
+      </section>
+
+      <section class="section intro" aria-labelledby="intro-title">
+        <div class="intro-copy">
+          <h2 id="intro-title">마음은 남고,<br />포장은 버려집니다</h2>
+          <p>광장시장의 전통 원단을 포장 이후에도 사용할 수 있는 파우치와 소품백으로 만듭니다. 선물의 감정이 물건 안에서 더 오래 머물도록 설계합니다.</p>
+        </div>
+        <figure class="media-placeholder"><img src="assets/concept-contact-sheet.png" alt="" /><span>대표 제품 또는 포장 과정 이미지 영역<br />권장 비율 4:5</span></figure>
+      </section>
+
+      <dl class="section principles" aria-label="핵심 가치">
+        <div><dt>순환</dt><dd>포장이 다음 쓰임으로 이어집니다.</dd></div>
+        <div><dt>헤리티지</dt><dd>한국의 소재를 오늘의 감각으로 풉니다.</dd></div>
+        <div><dt>맞춤</dt><dd>받는 사람의 이야기에서 시작합니다.</dd></div>
+      </dl>
+
+      <section class="gifts" id="gifts" aria-labelledby="gifts-title">
+        <div class="media-placeholder"><img src="assets/concept-contact-sheet.png" alt="" /><span>재사용 패키징 또는 꽃 이미지 영역<br />데스크톱 1/2 폭</span></div>
+        <div class="gift-copy">
+          <h2 id="gifts-title">포장과 꽃,<br />같은 마음에서</h2>
+          <div class="gift-types">
+            <div><h3>다시 쓰이는 포장</h3><p>전통 원단을 현대적인 파우치와 소품백으로 풀어 포장을 선물의 일부로 만듭니다.</p></div>
+            <div><h3>사람을 닮은 꽃</h3><p>받는 사람의 색과 분위기, 관계의 이야기를 듣고 가장 자연스러운 꽃의 모습으로 전합니다.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section builder" id="builder" aria-labelledby="builder-title">
+        <div class="builder-head">
+          <h2 id="builder-title">누구에게<br />전하시나요?</h2>
+          <p>관계, 순간, 떠오르는 색을 고르면 상담을 시작할 한 문장이 완성됩니다.</p>
+        </div>
+        <form class="choice-groups">
+          <fieldset><legend>관계</legend><div class="choices"><label><input type="radio" name="relation" checked /><span>연인</span></label><label><input type="radio" name="relation" /><span>가족</span></label><label><input type="radio" name="relation" /><span>브랜드 VIP</span></label></div></fieldset>
+          <fieldset><legend>순간</legend><div class="choices"><label><input type="radio" name="moment" checked /><span>기념일</span></label><label><input type="radio" name="moment" /><span>감사</span></label><label><input type="radio" name="moment" /><span>환영</span></label></div></fieldset>
+          <fieldset><legend>색</legend><div class="choices"><label><input type="radio" name="color" checked /><span>아이보리</span></label><label><input type="radio" name="color" /><span>블루</span></label><label><input type="radio" name="color" /><span>자연색</span></label></div></fieldset>
+        </form>
+        <p class="sentence">기념일을 위한 연인 선물을 찾고 있어요. 아이보리가 떠오릅니다.</p>
+      </section>
+
+      <section class="section process" id="process" aria-labelledby="process-title">
+        <h2 id="process-title">이야기를 듣고,<br />오래 남게 만듭니다</h2>
+        <div class="process-list">
+          <article><h3>이야기를 듣습니다</h3><p>누구에게 어떤 마음을 전하는지 확인합니다.</p><div class="media-placeholder"><img src="assets/concept-contact-sheet.png" alt="" /><span>상담 장면 이미지</span></div></article>
+          <article><h3>색과 소재를 고릅니다</h3><p>사람의 분위기와 꽃말에 맞춰 꽃과 전통 원단을 큐레이션합니다.</p><div class="media-placeholder"><img src="assets/concept-contact-sheet.png" alt="" /><span>꽃과 원단 이미지</span></div></article>
+          <article><h3>손으로 완성합니다</h3><p>자연스러운 꽃의 형태와 다시 쓸 수 있는 포장을 함께 만듭니다.</p><div class="media-placeholder"><img src="assets/concept-contact-sheet.png" alt="" /><span>제작 과정 이미지</span></div></article>
+          <article><h3>다음 쓰임을 전합니다</h3><p>꽃 이야기와 관리법, 패키지 재사용 안내를 함께 담습니다.</p><div class="media-placeholder"><img src="assets/concept-contact-sheet.png" alt="" /><span>완성 제품 이미지</span></div></article>
+        </div>
+      </section>
+
+      <section class="section story" id="story" aria-label="대표 이야기">
+        <div class="letter">
+          <p>꽃을 사러 간 시간, 상대를 떠올리며 고른 순간, 들고 가는 동안의 설렘까지 선물이라고 생각합니다.</p>
+          <p>그 마음을 감쌌던 포장도 너무 빨리 버려지지 않기를 바랐습니다. 설담화는 사람의 이야기를 먼저 듣고, 꽃과 색, 다음 쓰임이 있는 포장으로 답합니다.</p>
+          <p><strong>박설아</strong><br />설담화 대표</p>
+        </div>
+        <dl class="facts">
+          <div><dt>10여 년</dt><dd>꽃을 가까이해 온 시간</dd></div>
+          <div><dt>10년</dt><dd>VVIP 고객과 만난 도슨트 경험</dd></div>
+          <div><dt>약 8만</dt><dd>SNS 콘텐츠 커뮤니케이션 경험</dd></div>
+        </dl>
+      </section>
+
+      <section class="section contact" id="contact" aria-labelledby="contact-title">
+        <div class="contact-copy"><h2 id="contact-title">누구에게<br />전하시나요?</h2><p>정해진 상품을 고르기 전에 먼저 전하고 싶은 마음에서 꽃과 색, 오래 남을 포장의 방향을 찾습니다.</p></div>
+        <div class="ticket"><h3>상담 준비</h3><ul><li>선물하는 사람과 받는 사람의 관계</li><li>선물하는 날짜와 상황</li><li>떠오르는 색 또는 분위기</li><li>예산 범위와 연락받을 방법</li></ul><a href="#builder">상담 문장 만들기</a></div>
+      </section>
+    </main>
+
+    <footer><strong>설담화</strong><p>한 번의 선물을, 다시 쓰이는 이야기로.<br />메인페이지 구조 검토용 와이어프레임</p></footer>
+  </body>
+</html>

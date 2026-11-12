@@ -1,0 +1,17 @@
+# 도구가 만든 임시 파일
+.superpowers/
+.playwright-mcp/
+mockups/.render/
+
+# 파이썬 캐시
+__pycache__/
+*.pyc
+
+# 다른 사람의 참고 사진: 공개 저장소에 올리지 않는다 (PRODUCT.md · Evidence on Hand)
+cobalt blue/
+smpth/
+묵분오채/
+SeolDamHwa/
+mockups/src/img/
+# 참고 사진이 들어간 작업용 빌드. 공유용 mockups/main-share.html만 올린다.
+mockups/main.html

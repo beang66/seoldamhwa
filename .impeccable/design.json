@@ -1,0 +1,448 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-12T16:59:54+09:00",
+  "title": "Design System: 설담화 說談話",
+  "extensions": {
+    "colorMeta": {
+      "indigo-point": {
+        "role": "primary",
+        "displayName": "쪽빛 Indigo Point",
+        "canonical": "#2F56A8",
+        "tonalRamp": [
+          "#111F3C",
+          "#1D3568",
+          "#294B93",
+          "#3662BF",
+          "#6085D2",
+          "#8FA9E0",
+          "#BFCEED",
+          "#EBF0F9"
+        ]
+      },
+      "hanji": {
+        "role": "neutral",
+        "displayName": "한지 Hanji",
+        "canonical": "#F1EEE8",
+        "tonalRamp": [
+          "#30291D",
+          "#524832",
+          "#756647",
+          "#98845D",
+          "#B2A180",
+          "#C9BDA6",
+          "#E0DACC",
+          "#F5F3EF"
+        ]
+      },
+      "white-sheet": {
+        "role": "neutral",
+        "displayName": "흰 종이 White Sheet",
+        "canonical": "#FBFAF7",
+        "tonalRamp": [
+          "#332D1A",
+          "#584D2C",
+          "#7E6E3F",
+          "#A38F52",
+          "#BBAA77",
+          "#CFC3A0",
+          "#E4DDC9",
+          "#F6F4EE"
+        ]
+      },
+      "hero-mist": {
+        "role": "neutral",
+        "displayName": "히어로 안개 Hero Mist",
+        "canonical": "#E9E6E0",
+        "tonalRamp": [
+          "#2D2820",
+          "#4E4637",
+          "#6E644E",
+          "#8F8166",
+          "#AA9F88",
+          "#C4BCAB",
+          "#DDD9CF",
+          "#F4F3F0"
+        ]
+      },
+      "stone": {
+        "role": "neutral",
+        "displayName": "돌 Stone",
+        "canonical": "#E3DFD7",
+        "tonalRamp": [
+          "#2D2920",
+          "#4E4637",
+          "#6F644E",
+          "#908265",
+          "#AB9F87",
+          "#C4BCAB",
+          "#DDD9CF",
+          "#F4F3F0"
+        ]
+      },
+      "works-greige": {
+        "role": "neutral",
+        "displayName": "회색 미색 Works Greige",
+        "canonical": "#DCD8CF",
+        "tonalRamp": [
+          "#2C2920",
+          "#4D4638",
+          "#6D6450",
+          "#8E8267",
+          "#A99F89",
+          "#C3BCAC",
+          "#DDD9D0",
+          "#F4F3F0"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "가는 선 Hairline",
+        "canonical": "#D9D5CD",
+        "tonalRamp": [
+          "#2B2821",
+          "#4B4539",
+          "#6B6351",
+          "#8B806A",
+          "#A79E8B",
+          "#C1BBAE",
+          "#DCD8D1",
+          "#F4F3F1"
+        ]
+      },
+      "mist": {
+        "role": "neutral",
+        "displayName": "안개 글자 Mist",
+        "canonical": "#A9A59E",
+        "tonalRamp": [
+          "#292724",
+          "#46433E",
+          "#646059",
+          "#827C73",
+          "#9F9B93",
+          "#BCB9B3",
+          "#D9D7D4",
+          "#F3F2F1"
+        ]
+      },
+      "pencil": {
+        "role": "neutral",
+        "displayName": "연필 Pencil",
+        "canonical": "#6E6B66",
+        "tonalRamp": [
+          "#282725",
+          "#454340",
+          "#625F5B",
+          "#7F7C76",
+          "#9D9A95",
+          "#BAB8B5",
+          "#D8D7D5",
+          "#F3F2F2"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "먹 Ink",
+        "canonical": "#141413",
+        "tonalRamp": [
+          "#272725",
+          "#444441",
+          "#61615C",
+          "#7E7E77",
+          "#9C9C96",
+          "#B9B9B6",
+          "#D7D7D5",
+          "#F3F3F2"
+        ]
+      },
+      "cotton-ivory": {
+        "role": "neutral",
+        "displayName": "무명 아이보리 Cotton Ivory",
+        "canonical": "#F4EFE4",
+        "tonalRamp": [
+          "#362C16",
+          "#5E4D26",
+          "#866D37",
+          "#AE8E47",
+          "#C4A96E",
+          "#D6C39A",
+          "#E7DDC5",
+          "#F8F4ED"
+        ]
+      },
+      "raw-cotton": {
+        "role": "neutral",
+        "displayName": "생무명 Raw Cotton",
+        "canonical": "#EFE8DA",
+        "tonalRamp": [
+          "#352B17",
+          "#5D4B28",
+          "#846B39",
+          "#AB8B4A",
+          "#C1A671",
+          "#D4C19B",
+          "#E6DCC6",
+          "#F7F4ED"
+        ]
+      },
+      "raw-linen": {
+        "role": "neutral",
+        "displayName": "생리넨 Raw Linen",
+        "canonical": "#E2D8C4",
+        "tonalRamp": [
+          "#332B19",
+          "#594A2C",
+          "#7F693E",
+          "#A48851",
+          "#BCA576",
+          "#D0C09F",
+          "#E4DBC8",
+          "#F7F4EE"
+        ]
+      },
+      "cloth-ink": {
+        "role": "neutral",
+        "displayName": "천 먹 Cloth Ink",
+        "canonical": "#2A2926",
+        "tonalRamp": [
+          "#282724",
+          "#46443F",
+          "#63615A",
+          "#817D74",
+          "#9E9C94",
+          "#BBB9B4",
+          "#D8D7D4",
+          "#F3F3F2"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "히어로의 영문 seoldamhwa, 푸터 이름."
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "화면 제목 h1."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "섹션 제목. 화면 안 섹션은 24px."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "상품명, 카드 제목."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "설명과 안내."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "영문 대문자 · 한글 섹션 라벨."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "가격·날짜·번호, tabular."
+      },
+      "hand": {
+        "displayName": "Hand",
+        "purpose": "손글씨 로고와 라벨 (임시 서체)."
+      }
+    },
+    "shadows": [
+      {
+        "name": "paper-lift",
+        "value": "0 24px 50px -38px rgba(60,52,40,.35)",
+        "purpose": "바탕 위에 놓인 카드와 포스터."
+      },
+      {
+        "name": "paper-lift-deep",
+        "value": "0 30px 60px -40px rgba(0,0,0,.35)",
+        "purpose": "큰 포스터 한 장."
+      },
+      {
+        "name": "raise",
+        "value": "14px 14px 30px #CBC6BC, -14px -14px 30px #FBFAF7",
+        "purpose": "히어로 뉴모피즘 판."
+      },
+      {
+        "name": "raise-sm",
+        "value": "5px 5px 12px #CBC6BC, -5px -5px 12px #FBFAF7",
+        "purpose": "히어로 원판과 버튼."
+      },
+      {
+        "name": "inset",
+        "value": "inset 6px 6px 14px #CBC6BC, inset -6px -6px 14px #FBFAF7",
+        "purpose": "히어로 사진 홈, 눌린 상태."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-reveal",
+        "value": "cubic-bezier(.2,.7,.2,1)",
+        "purpose": "섹션이 나타날 때와 사진 확대."
+      },
+      {
+        "name": "duration-reveal",
+        "value": "1.2s",
+        "purpose": "스크롤로 나타나는 요소."
+      },
+      {
+        "name": "duration-state",
+        "value": ".25s",
+        "purpose": "버튼 색 전환."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "720px"
+      },
+      {
+        "name": "grid-2",
+        "value": "860px"
+      },
+      {
+        "name": "stack",
+        "value": "900px"
+      },
+      {
+        "name": "grid-3",
+        "value": "1100px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Pill Button",
+      "kind": "button",
+      "refersTo": "button-pill",
+      "description": "기본 행동. 투명 바탕의 알약 버튼.",
+      "html": "<a class=\"ds-pill\" href=\"#\">작업 기록 보기</a>",
+      "css": ".ds-pill{display:inline-flex;align-items:center;height:44px;padding:0 22px;border:1px solid #141413;border-radius:999px;font-family:\"Noto Sans KR\",sans-serif;font-size:13px;letter-spacing:.12em;color:#141413;text-decoration:none;transition:background-color .25s,color .25s}.ds-pill:hover,.ds-pill:focus-visible{background:#141413;color:#FBFAF7}.ds-pill:focus-visible{outline:1px solid #141413;outline-offset:4px}"
+    },
+    {
+      "name": "Pill Button Dark",
+      "kind": "button",
+      "refersTo": "button-pill-dark",
+      "description": "주요 행동. 장바구니 담기, 주문하기.",
+      "html": "<button class=\"ds-pill-dark\" type=\"button\">장바구니 담기</button>",
+      "css": ".ds-pill-dark{height:44px;padding:0 22px;border:1px solid #141413;border-radius:999px;background:#141413;color:#FBFAF7;font-family:\"Noto Sans KR\",sans-serif;font-size:13px;letter-spacing:.14em;cursor:pointer;transition:background-color .25s}.ds-pill-dark:hover{background:#2e2d2a}.ds-pill-dark:focus-visible{outline:1px solid #141413;outline-offset:4px}"
+    },
+    {
+      "name": "Filter Chips",
+      "kind": "chip",
+      "refersTo": "chip-filter",
+      "description": "제품·works 분류 필터.",
+      "html": "<div class=\"ds-chips\"><button type=\"button\" aria-pressed=\"true\">전체<small>9</small></button><button type=\"button\" aria-pressed=\"false\">꽃꽂이<small>4</small></button><button type=\"button\" aria-pressed=\"false\">보자기<small>2</small></button></div>",
+      "css": ".ds-chips{display:flex;gap:6px}.ds-chips button{border:1px solid transparent;background:none;padding:8px 16px;border-radius:999px;font-family:\"Noto Sans KR\",sans-serif;font-size:13px;letter-spacing:.06em;color:#6E6B66;cursor:pointer;transition:color .3s,border-color .3s}.ds-chips button small{font-family:\"EB Garamond\",serif;font-size:12px;margin-left:5px;color:#A9A59E}.ds-chips button:hover{color:#141413}.ds-chips button[aria-pressed=\"true\"]{color:#141413;border-color:#141413}"
+    },
+    {
+      "name": "Option Box",
+      "kind": "input",
+      "refersTo": "option-box",
+      "description": "크기·화기·포장·받는 방법 선택.",
+      "html": "<div class=\"ds-opts\"><label><input type=\"radio\" name=\"ds-s\" checked><span>소 45 cm<b>38,000</b></span></label><label><input type=\"radio\" name=\"ds-s\"><span>중 70 cm<b>46,000</b></span></label></div>",
+      "css": ".ds-opts{display:flex;gap:8px}.ds-opts input{position:absolute;opacity:0}.ds-opts span{display:block;padding:12px 18px;border:1px solid #D9D5CD;border-radius:10px;font-family:\"Noto Sans KR\",sans-serif;font-size:13px;line-height:1.5;cursor:pointer;transition:border-color .2s}.ds-opts b{display:block;font-family:\"EB Garamond\",serif;font-weight:400;font-size:14px;color:#6E6B66;font-variant-numeric:tabular-nums}.ds-opts input:checked+span{border-color:#141413}.ds-opts input:focus-visible+span{outline:1px solid #141413;outline-offset:3px}"
+    },
+    {
+      "name": "Product Card",
+      "kind": "card",
+      "refersTo": "product-card",
+      "description": "상품 목록과 메인의 상품 카드.",
+      "html": "<a class=\"ds-prod\" href=\"#\"><span class=\"ds-prod-ph\"><i>01</i></span><b>낙엽송과 연잎</b><span class=\"ds-prod-meta\">꽃꽂이 · 중품<em>68,000원</em></span></a>",
+      "css": ".ds-prod{display:block;width:220px;color:#141413;text-decoration:none}.ds-prod-ph{position:relative;display:block;aspect-ratio:3/4;border-radius:10px;background:linear-gradient(160deg,#E4E1DA,#CFCAC0);transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}.ds-prod:hover .ds-prod-ph,.ds-prod:focus-visible .ds-prod-ph{transform:scale(1.035)}.ds-prod-ph i{position:absolute;top:12px;left:14px;font-family:\"EB Garamond\",serif;font-size:13px;color:#FBFAF7}.ds-prod b{display:block;font-family:\"Noto Serif KR\",serif;font-weight:400;font-size:15px;margin-top:16px}.ds-prod-meta{display:flex;justify-content:space-between;font-family:\"Noto Sans KR\",sans-serif;font-size:11px;letter-spacing:.06em;color:#6E6B66;margin-top:6px}.ds-prod-meta em{font-style:normal;font-family:\"EB Garamond\",serif;font-size:14px;color:#141413;font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Section Header",
+      "kind": "custom",
+      "refersTo": "headline",
+      "description": "모든 섹션을 여는 머리: 먹선, 라벨, 바탕체 제목, 세리프 이탤릭.",
+      "html": "<div class=\"ds-sh\"><div><span>FLOWERS · 꽃과 화기</span><h3>꽃과 화기</h3></div><em>what is in it</em></div>",
+      "css": ".ds-sh{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #141413;padding-top:16px;width:520px}.ds-sh span{font-family:\"Noto Sans KR\",sans-serif;font-size:11px;letter-spacing:.26em;color:#A9A59E}.ds-sh h3{font-family:\"Noto Serif KR\",serif;font-weight:300;font-size:24px;margin:8px 0 0}.ds-sh em{font-family:\"EB Garamond\",serif;font-size:15px;color:#6E6B66}"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "고정 헤더 메뉴. 현재 화면 아래에 먹 점.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">제품</a><a href=\"#\">브랜드 소개</a><a href=\"#\">works</a><a href=\"#\">커뮤니티</a></nav>",
+      "css": ".ds-nav{display:flex;gap:28px;padding:18px 0;font-family:\"Noto Sans KR\",sans-serif;font-size:12px;letter-spacing:.08em}.ds-nav a{position:relative;color:#6E6B66;text-decoration:none;transition:color .3s}.ds-nav a:hover,.ds-nav a[aria-current]{color:#141413}.ds-nav a[aria-current]::after{content:\"\";position:absolute;left:50%;bottom:-6px;width:3px;height:3px;border-radius:50%;background:#141413;transform:translateX(-50%)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "보자기 한 장의 여백",
+    "overview": "화면은 펼쳐 놓은 보자기 한 장이다. 한지와 무명 같은 넓고 따뜻한 바탕 위에 꽃 한 줄기와 글 몇 줄을 놓고, 나머지는 비워 둔다. 색을 내는 것은 꽃 사진과 손그림이고, 화면 장치가 쓰는 색은 먹과 쪽빛 한 점뿐이다. 검이불루 화이불치를 화면의 밀도로 옮긴 것으로, 덜어내되 초라하지 않고 고요하되 차갑지 않다.\n\n밀도는 낮고 리듬은 느리다. 섹션 사이를 넓게 띄우고, 섹션의 바탕색은 그라데이션으로 다음 섹션에 스며들어 경계선 없이 이어진다. 글자는 바탕체 제목과 가벼운 고딕 본문으로 나누고, 영문과 숫자는 클래식 세리프로 따로 다룬다. 손글씨와 붓·연필 손그림이 1인 스튜디오의 손을 대신 보여 준다.\n\n깊이는 종이처럼 다룬다. 면은 평평하게 두고, 카드와 사진 같은 '놓인 것'만 종이를 한 장 더 겹쳐 놓은 듯 아주 옅게 떠오른다. 누르고 올린 입체감(뉴모피즘)은 히어로와 음각 태그 같은 특별한 자리에만 쓴다.",
+    "keyCharacteristics": [
+      "따뜻한 미색 바탕의 단계(한지, 흰 종이, 돌, 회색 미색)와 먹색 글자",
+      "쪽빛은 한 화면에 한 점만",
+      "바탕체 제목 + 가벼운 고딕 본문 + 세리프 숫자, 작고 넓게 띄운 라벨",
+      "섹션 바탕이 그라데이션으로 이어짐",
+      "붓·연필·X-ray 계열의 손그림 벡터",
+      "카드는 종이처럼 살짝 떠 있고, 뉴모피즘은 예외적인 자리에만"
+    ],
+    "rules": [
+      {
+        "name": "The One Indigo Rule",
+        "body": "쪽빛은 한 화면(뷰포트)에 한 점만 쓴다. 버튼이나 링크의 기본색으로 쓰지 않는다. 두 번째 쪽빛이 보이면 그중 하나는 먹으로 바꾼다.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Black Ground Rule",
+        "body": "페이지나 섹션의 바탕에 검은색이나 그에 가까운 어두운 색을 쓰지 않는다. 가라앉힐 때는 돌이나 회색 미색을 쓴다. 먹은 글자와 선, 작은 진한 버튼에만 쓴다.",
+        "section": "colors"
+      },
+      {
+        "name": "The Photo Brings Color Rule",
+        "body": "화면의 유채색은 꽃 사진과 손그림이 낸다. 화면 장치는 미색, 먹, 쪽빛 한 점 밖의 색을 쓰지 않는다.",
+        "section": "colors"
+      },
+      {
+        "name": "The Bilingual Label Rule",
+        "body": "섹션 라벨은 `영문 대문자 · 한글`로 쓰고, 0.26–0.3em 정도로 넓게 띄운다. 한글만 쓰는 라벨에도 넓은 자간을 유지한다.",
+        "section": "typography"
+      },
+      {
+        "name": "The Vertical Hanja Rule",
+        "body": "說談話, 꽃모임 같은 짧은 한자·한글 표식은 세로쓰기로 카드 모서리에 둔다. 본문은 세로로 쓰지 않는다. 보자기 섹션의 세로 문단만 예외이고, 모바일에서는 가로로 바뀐다.",
+        "section": "typography"
+      },
+      {
+        "name": "The Seamless Ground Rule",
+        "body": "섹션 바탕이 바뀔 때는 앞 섹션 아래쪽 200px(모바일 120px)을 다음 섹션 색으로 그라데이션해 경계선이 보이지 않게 한다.",
+        "section": "layout"
+      },
+      {
+        "name": "The Wide Margin Rule",
+        "body": "섹션 사이 여백을 줄여 정보를 채우지 않는다. 넓은 여백이 기본이다.",
+        "section": "layout"
+      },
+      {
+        "name": "The Paper Not Plastic Rule",
+        "body": "그림자는 아래로만, 옅고 넓게, 따뜻한 색으로 드리운다. 사방으로 퍼지는 회색 그림자나 진한 테두리 그림자는 쓰지 않는다.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Neumorph Is A Guest Rule",
+        "body": "뉴모피즘은 히어로와 음각 태그 같은 표식에만 쓴다. 목록, 카드 격자, 스크롤 표시에는 쓰지 않는다.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** 쪽빛(#2F56A8)은 한 화면에 한 점만 쓴다 (The One Indigo Rule).",
+      "**Do** 섹션 바탕을 바꿀 때 200px 그라데이션으로 이어 붙인다.",
+      "**Do** 가격과 날짜는 EB Garamond의 자릿수 맞춤 숫자로 쓰고, 가격 뒤에 '원'을 붙인다.",
+      "**Do** 섹션 라벨은 `영문 대문자 · 한글` 형식에 0.26–0.3em 자간으로 쓴다.",
+      "**Do** 카드와 포스터처럼 놓인 것에는 Paper Lift 그림자를 쓴다.",
+      "**Do** 손그림은 벡터로 쓰고, 선 끝은 붓처럼 가늘어지게 마무리한다."
+    ],
+    "donts": [
+      "**Don't** 페이지나 섹션 바탕에 검은색이나 어두운 색을 쓴다.",
+      "**Don't** 쪽빛을 버튼, 링크, 넓은 면의 기본색으로 쓴다.",
+      "**Don't** 목록, 카드 격자, 스크롤 표시에 뉴모피즘을 쓴다.",
+      "**Don't** 사방으로 퍼지는 회색 그림자나 두꺼운 테두리를 쓴다.",
+      "**Don't** 섹션 경계를 색이 뚝 바뀌는 직선으로 둔다.",
+      "**Don't** 꽃꽂이를 '이케바나'라고 표기한다."
+    ]
+  }
+}

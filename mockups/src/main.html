@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F1EEE8">
+<meta name="color-scheme" content="light">
+<script>document.documentElement.classList.add("js")</script>
+<title>설담화 · 메인</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F1EEE8;      /* 한지 */
+  --sheet:#FBFAF7;      /* 흰 종이 */
+  --ink:#141413;        /* 먹 */
+  --graphite:#6E6B66;   /* 연필 */
+  --mist:#A9A59E;       /* 옅은 글자 */
+  --hair:#D9D5CD;       /* 가는 선 */
+  --stone:#E3DFD7;      /* 돌 바탕 (어두운 배경 대신) */
+  --blue:#2F56A8;       /* 쪽빛 포인트 */
+  --serif-ko:'Noto Serif KR',serif;
+  --serif-en:'EB Garamond',serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --hand:'Nanum Pen Script',cursive;
+  --gutter:40px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+.skip{position:absolute;left:12px;top:-60px;z-index:50;padding:10px 16px;background:var(--ink);color:var(--sheet);font-size:13px;border-radius:6px;transition:top .2s}
+.skip:focus{top:12px}
+.toast{position:fixed;left:50%;bottom:28px;z-index:60;transform:translate(-50%,16px);opacity:0;pointer-events:none;padding:12px 20px;border-radius:999px;background:var(--ink);color:var(--sheet);font-size:13px;letter-spacing:.04em;transition:opacity .3s,transform .3s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* 종이 결 */
+.paper{position:relative;isolation:isolate}
+.paper::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.5;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .5  0 0 0 0 .44  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+/* ---------- 헤더 ---------- */
+.hd{position:fixed;inset:0 0 auto 0;z-index:20;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:18px var(--gutter);font-size:12px;letter-spacing:.08em;border-bottom:1px solid transparent;transition:background-color .4s,border-color .4s}
+.hd.solid{background-color:rgba(241,238,232,.92);backdrop-filter:blur(8px);border-bottom-color:var(--hair)}
+.hd nav ul{display:flex;gap:28px;list-style:none}
+.hd nav a{position:relative;padding-bottom:3px;color:var(--graphite);transition:color .3s}
+.hd nav a:hover,.hd nav a[aria-current]{color:var(--ink)}
+.hd nav a[aria-current]::after{content:"";position:absolute;left:50%;bottom:-6px;width:3px;height:3px;border-radius:50%;background:var(--ink);transform:translateX(-50%)}
+.hd .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif-ko);font-size:15px;letter-spacing:.32em}
+.hd .brand svg{width:22px;height:22px}
+.hd .util{display:flex;justify-content:flex-end;align-items:center;gap:18px;color:var(--graphite)}
+.hd .util a:hover{color:var(--ink)}
+.hd .ico{position:relative;display:grid;place-items:center;width:32px;height:32px}
+.hd .ico svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.hd .ico .cnt{position:absolute;right:-1px;top:1px;min-width:15px;height:15px;padding:0 4px;border-radius:8px;background:var(--ink);color:var(--sheet);font-family:var(--serif-en);font-size:10px;line-height:15px;text-align:center;letter-spacing:0}
+.menu-btn{display:none;background:none;border:none;font:inherit;letter-spacing:.12em;color:var(--ink);cursor:pointer}
+
+/* ---------- 1. 히어로 (terra nua) ---------- */
+.hero{min-height:100vh;display:grid;place-items:center;padding:110px var(--gutter) 64px;background:#E9E6E0}
+.hero .pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:min(1080px,100%);aspect-ratio:2/1.32}
+.hero .ph{position:relative;overflow:hidden;background:#EAE8E3;border:10px solid var(--sheet)}
+.hero .ph .img{position:absolute;inset:-30px;background:var(--img-ikebana-larch) center 30%/cover;filter:grayscale(1) blur(7px) contrast(.9) brightness(1.12)}
+.hero .ph .veil{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,rgba(251,250,247,.0),rgba(251,250,247,.45))}
+.hero .ph .mark{position:absolute;left:50%;top:50%;width:38px;height:38px;transform:translate(-50%,-50%)}
+.hero .sheet{position:relative;background:var(--sheet);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:52px 58px 44px;text-align:center}
+.hero .word{font-family:var(--serif-en);font-weight:400;font-size:clamp(40px,5.6vw,72px);letter-spacing:-.01em;line-height:1}
+.hero .tag{font-size:11px;letter-spacing:.14em;line-height:1.9;text-transform:uppercase}
+.hero .tag b{display:block;font-family:var(--serif-ko);font-weight:300;font-size:15px;letter-spacing:.2em;text-transform:none;margin-bottom:14px}
+.hero .site{font-size:12px;letter-spacing:.14em}
+.hero .vt{position:absolute;right:18px;top:52px;writing-mode:vertical-rl;font-family:var(--serif-ko);font-size:12px;letter-spacing:.6em;color:var(--mist)}
+.hero .scroll{margin-top:34px;font-size:10px;letter-spacing:.3em;color:var(--mist);text-align:center}
+.hero .scroll i{display:block;width:1px;height:38px;background:var(--mist);margin:12px auto 0;animation:drip 2.4s ease-in-out infinite;transform-origin:top}
+@keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+/* 히어로 뉴모피즘: 바탕과 같은 색의 면을 빛과 그늘로만 올리고 누른다 */
+.hero{--nm:#E9E6E0;--nm-hi:#FBFAF7;--nm-lo:#CBC6BC;
+  --raise:14px 14px 30px var(--nm-lo),-14px -14px 30px var(--nm-hi);
+  --raise-sm:5px 5px 12px var(--nm-lo),-5px -5px 12px var(--nm-hi);
+  --inset:inset 6px 6px 14px var(--nm-lo),inset -6px -6px 14px var(--nm-hi);
+  background:var(--nm)}
+.hero .pair{gap:34px}
+.hero .ph,.hero .sheet{background:var(--nm);border:none;border-radius:28px;box-shadow:var(--raise)}
+.hero .ph{overflow:visible;padding:16px}
+.hero .well{position:absolute;inset:16px;border-radius:18px;overflow:hidden}
+.hero .well::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--inset);pointer-events:none}
+.hero .ph .mark{z-index:2;width:66px;height:66px;padding:15px;border-radius:50%;background:rgba(233,230,224,.72);backdrop-filter:blur(6px);box-shadow:var(--raise-sm)}
+.hero .cta{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:14px 26px;border:none;border-radius:999px;background:var(--nm);box-shadow:var(--raise-sm);
+  font:inherit;font-size:12px;letter-spacing:.16em;color:var(--ink);cursor:pointer;position:relative}
+.hero .cta::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:7px 7px 16px var(--nm-lo),-7px -7px 16px var(--nm-hi);opacity:0;transition:opacity .25s ease;pointer-events:none}
+.hero .cta:hover::after,.hero .cta:focus-visible::after{opacity:1}
+.hero .cta:active::after{opacity:0}
+.hero .cta:active{box-shadow:var(--inset)}
+.hero .cta:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+.hero .cta i{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+
+/* ---------- 2. 브랜드 문장 (ESAKU) ---------- */
+.statement{min-height:92vh;display:grid;place-items:center;text-align:center;padding:120px var(--gutter)}
+.statement svg.vase{width:min(300px,62vw);height:auto;margin:0 auto}
+.statement .spaced{font-family:var(--serif-en);font-size:clamp(22px,2.6vw,30px);letter-spacing:.55em;margin:58px 0 18px;padding-left:.55em}
+.statement .it{font-family:var(--serif-en);font-size:17px;line-height:1.5;color:#3a3936}
+.statement .it em{display:block}
+.statement .ko{margin-top:56px;font-family:var(--serif-ko);font-size:15px;line-height:2.3;color:#3a3936}
+.statement .ko small{display:block;margin-top:10px;font-size:11px;letter-spacing:.5em;color:var(--mist)}
+
+/* ---------- 공통 섹션 머리 ---------- */
+.sec{padding:120px var(--gutter)}
+.sec-hd{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid #b9bab9;padding-bottom:18px;margin-bottom:40px}
+.sec-hd .eyebrow{font-size:11px;letter-spacing:.3em;color:var(--mist);display:block;margin-bottom:12px}
+.sec-hd h2{font-family:var(--serif-ko);font-weight:300;font-size:28px;letter-spacing:.04em}
+.sec-hd .ttl{display:flex;align-items:flex-end;gap:20px}
+.sec-hd .sec-ill{width:76px;height:76px;flex:none;margin-bottom:-4px}
+.sec-hd a{font-size:12px;letter-spacing:.12em;color:var(--graphite);border-bottom:1px solid #b9bab9;padding-bottom:3px}
+.sec-hd a:hover{color:var(--ink);border-color:var(--ink)}
+
+/* ---------- 3. 제품 ---------- */
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.prod .frame{position:relative;aspect-ratio:3/4;overflow:hidden;background:#E4E1DA;border-radius:10px;isolation:isolate}
+.prod .frame .ph{position:absolute;inset:0;background-size:cover;background-position:center;filter:saturate(.8) contrast(.96);transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .8s}
+.prod:hover .frame .ph,.prod:focus-visible .frame .ph{transform:scale(1.035);filter:saturate(1)}
+.prod:focus-visible{outline:1px solid var(--ink);outline-offset:6px;border-radius:12px}
+.prod .no{position:absolute;top:12px;left:14px;font-family:var(--serif-en);font-size:13px;color:var(--sheet);mix-blend-mode:difference}
+.prod h3{font-family:var(--serif-ko);font-weight:400;font-size:15px;margin-top:16px}
+.prod p{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.06em;color:var(--graphite);margin-top:6px}
+.prod p b{font-variant-numeric:tabular-nums;font-family:var(--serif-en);font-weight:400;font-size:14px;color:var(--ink);letter-spacing:.02em}
+
+/* ---------- 4. 보자기 (封丘 포스터) ---------- */
+.bojagi{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:center;background:var(--sheet);padding:110px var(--gutter)}
+.bojagi .draw{position:relative}
+.bojagi .draw svg{width:100%;height:auto;max-width:560px;display:block;margin:0 auto}
+.bojagi .draw .inset{position:absolute;right:4%;bottom:2%;width:26%;aspect-ratio:4/5;background:var(--img-bojagi) center/cover;filter:grayscale(1) contrast(.95);border:6px solid var(--sheet);box-shadow:0 1px 0 var(--hair)}
+.bojagi .cols{display:flex;flex-direction:row-reverse;justify-content:flex-start;gap:26px;height:560px}
+.bojagi .title{writing-mode:vertical-rl;font-family:var(--serif-ko);font-weight:400;font-size:44px;letter-spacing:.32em;line-height:1}
+.bojagi .roman{writing-mode:vertical-rl;font-family:var(--serif-en);font-style:italic;font-size:13px;letter-spacing:.2em;color:var(--graphite)}
+.bojagi .col{position:relative;writing-mode:vertical-rl;font-family:var(--serif-ko);font-size:13px;line-height:2.1;letter-spacing:.18em;color:#3a3936;padding-right:16px;border-right:1px solid var(--hair)}
+.bojagi .col::before{content:"";position:absolute;right:-3px;top:var(--dot,40%);width:5px;height:5px;border-radius:50%;background:var(--blue)}
+.bojagi .col.sm{font-size:11px;color:var(--graphite)}
+.bojagi .col strong{font-weight:400;color:var(--ink)}
+.bojagi .cta{writing-mode:vertical-rl;align-self:flex-end;font-size:12px;letter-spacing:.3em;color:var(--ink);border-left:1px solid var(--ink);padding-left:8px}
+
+/* ---------- 5. Works (Through the tea) ---------- */
+.works{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;align-items:start;background:var(--c-works);padding:120px var(--gutter)}
+.poster{background:#fff;aspect-ratio:3/4;padding:12% 11% 10%;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 30px 60px -40px rgba(0,0,0,.35)}
+.poster svg{width:100%;height:auto}
+.poster .hand{font-family:var(--hand);font-size:44px;color:#3a3936;margin-top:-10px;margin-left:8%}
+.poster .cap{font-family:var(--serif-en);font-size:15px;line-height:1.45}
+.poster .cap em{display:block}
+.poster .cap span{display:block;margin-top:18px}
+.wlist{list-style:none;margin-top:-40px}
+.wlist li{display:grid;grid-template-columns:90px 1fr auto;gap:18px;align-items:baseline;padding:22px 0;border-bottom:1px solid #C3BDB2}
+.wlist time{font-variant-numeric:tabular-nums;font-family:var(--serif-en);font-size:14px;color:var(--graphite)}
+.wlist b{font-family:var(--serif-ko);font-weight:400;font-size:17px}
+.wlist small{display:block;font-size:11px;color:var(--graphite);margin-top:6px;letter-spacing:.04em}
+.wlist i{font-style:normal;font-size:11px;letter-spacing:.14em;color:var(--graphite)}
+.works .sec-hd{border-color:#A9A296}
+
+/* ---------- 6. 커뮤니티 (FLEUR) ---------- */
+.community{background:var(--stone);padding:120px var(--gutter)}
+.community .sec-hd{border-color:#C9C4BA}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:980px;margin:0 auto}
+.card{background:var(--sheet);color:var(--ink);position:relative;overflow:hidden;box-shadow:0 24px 50px -38px rgba(60,52,40,.35)}
+.card.tall{grid-row:span 2;aspect-ratio:auto;min-height:620px;display:flex;flex-direction:column}
+.card.tall .body{flex:1;position:relative}
+.card.tall .vword{position:absolute;right:30px;top:40px;writing-mode:vertical-rl;font-family:var(--serif-ko);font-size:24px;letter-spacing:.7em}
+.card.tall svg{position:absolute;left:30%;top:46%;width:34%;height:auto}
+.card.tall .foot{border-top:1px solid #cfccc5;padding:26px 30px;font-size:12px;letter-spacing:.1em;line-height:1.9;text-align:center}
+.card.wide{min-height:300px}
+.card.wide svg{position:absolute;inset:0;width:100%;height:100%}
+.card.info{min-height:300px;padding:34px 30px;display:flex;flex-direction:column;justify-content:space-between}
+.card.info .vword{position:absolute;right:30px;top:30px;writing-mode:vertical-rl;font-family:var(--serif-ko);font-size:16px;letter-spacing:.6em}
+.card.info dl{font-size:12px;line-height:2;letter-spacing:.06em}
+.card.info dt{color:var(--graphite);font-size:10px;letter-spacing:.24em;margin-top:10px}
+.card.info a{align-self:flex-start;font-size:12px;letter-spacing:.14em;border-bottom:1px solid var(--ink);padding-bottom:3px}
+
+/* ---------- 푸터 ---------- */
+.ft{font-size:12px;letter-spacing:.08em;color:var(--graphite)}
+.ft .statement{min-height:auto;padding:130px var(--gutter) 110px}
+.ft .statement svg.vase{width:min(220px,52vw)}
+.ft .statement .spaced{margin-top:44px}
+.ft .statement .ko{margin-top:40px}
+.ft .statement .ko small{font-size:13px;margin-top:14px;color:var(--graphite)}
+.ft-info{margin:0 var(--gutter);padding:44px 0 40px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px;align-items:end;border-top:1px solid var(--hair)}
+.ft .word{font-family:var(--serif-en);font-size:34px;color:var(--ink);letter-spacing:-.01em}
+.ft .word small{display:block;font-family:var(--serif-ko);font-size:12px;letter-spacing:.5em;color:var(--mist);margin-top:8px}
+.ft address{font-style:normal;line-height:2;text-align:center}
+.ft ul{list-style:none;display:flex;justify-content:flex-end;gap:20px}
+
+/* 섹션 사이 색 전환: 각 섹션의 아래쪽이 다음 섹션 색으로 서서히 넘어간다 */
+:root{--blend:200px;--c-works:#DCD8CF}
+.hero{background:linear-gradient(180deg,var(--nm) calc(100% - var(--blend)),var(--paper) 100%)}
+#season{background:linear-gradient(180deg,var(--paper) calc(100% - var(--blend)),var(--sheet) 100%)}
+.bojagi{background:linear-gradient(180deg,var(--sheet) calc(100% - var(--blend)),var(--c-works) 100%)}
+.works{background:linear-gradient(180deg,var(--c-works) calc(100% - var(--blend)),var(--stone) 100%)}
+.community{background:linear-gradient(180deg,var(--stone) calc(100% - var(--blend)),var(--paper) 100%)}
+@media (max-width:720px){:root{--blend:120px}}
+
+/* ===== 제품 화면 (같은 파일 안의 다른 화면) ===== */
+/*@include _bojagi.css*/
+/*@include _detail.css*/
+/*@include _arrange.css*/
+/*@include _products-list.css*/
+:root{--img-bojagi:__IMG_bojagi__;--img-dried-box:__IMG_dried-box__;--img-field:__IMG_field__;--img-ikebana-bamboo:__IMG_ikebana-bamboo__;--img-ikebana-daffodil:__IMG_ikebana-daffodil__;--img-ikebana-larch:__IMG_ikebana-larch__;--img-ikebana-nasturtium:__IMG_ikebana-nasturtium__;}
+#home-view[hidden],#shop-view[hidden],#list-view[hidden],#detail-view[hidden],#arrange-view[hidden]{display:none}
+#shop-view{background:var(--paper)}
+
+/*@include _pages.css*/
+#about-view[hidden],#works-view[hidden],#community-view[hidden],#cart-view[hidden]{display:none}
+
+/* 나타나기 */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity 1.2s ease,transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.js .rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rv{opacity:1;transform:none;transition:none}
+  .hero .scroll i{animation:none}
+  .prod .frame .ph,.toast,.skip,.hero .cta::after{transition:none}
+  .prod:hover .frame .ph,.prod:focus-visible .frame .ph{transform:none}
+}
+
+/* ---------- 반응형 ---------- */
+@media (max-width:980px){
+  .products{grid-template-columns:repeat(2,1fr)}
+  .bojagi,.works{grid-template-columns:1fr}
+  .bojagi .cols{height:440px;justify-content:center}
+}
+@media (max-width:720px){
+  :root{--gutter:16px}
+  .hd{grid-template-columns:auto 1fr auto}
+  .hd nav{display:none}
+  .hd.open nav{display:block;position:absolute;top:100%;left:0;right:0;background:var(--paper);border-bottom:1px solid #b9bab9;padding:18px var(--gutter)}
+  .hd.open nav ul{flex-direction:column;gap:16px}
+  .menu-btn{display:block}
+  .hd .brand{justify-content:center}
+  .hd .util{gap:14px}
+  .hero{padding-top:90px}
+  .hero .pair{grid-template-columns:1fr;aspect-ratio:auto}
+  .hero .ph{aspect-ratio:4/5}
+  .hero .sheet{min-height:400px}
+  .hero{--raise:8px 8px 18px var(--nm-lo),-8px -8px 18px var(--nm-hi)}
+  .hero .pair{gap:24px}
+  .hero .ph,.hero .sheet{border-radius:22px}
+  .sec,.bojagi,.works,.community{padding-top:84px;padding-bottom:84px}
+  .sec-hd{flex-wrap:wrap;gap:14px}
+  .sec-hd a{white-space:nowrap}
+  .bojagi>*{min-width:0}
+  .bojagi .cols{height:auto;flex-direction:column;gap:18px}
+  .bojagi .title,.bojagi .roman,.bojagi .col,.bojagi .cta{writing-mode:horizontal-tb}
+  .bojagi .title{font-size:30px;letter-spacing:.12em}
+  .bojagi .col{border-right:none;border-top:1px solid #cfccc5;padding:16px 0 0 14px}
+  .bojagi .col::before{right:auto;left:0;top:23px}
+  .bojagi .cta{align-self:flex-start;border-left:none;border-bottom:1px solid var(--ink);padding:0 0 3px}
+  .statement .spaced{letter-spacing:.32em;padding-left:.32em}
+  .cards{grid-template-columns:1fr}
+  .card.tall{min-height:520px}
+  .wlist li{grid-template-columns:70px 1fr}
+  .wlist i{display:none}
+  .ft-info{grid-template-columns:1fr;text-align:center}
+  .ft .statement{padding:90px var(--gutter) 70px}
+  .ft address{text-align:center}
+  .ft ul{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- 공용 그림 정의 -->
+<!--@include _symbols.html-->
+
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<header class="hd" id="hd">
+  <nav aria-label="주 메뉴" id="gnb">
+    <ul>
+      <li><a href="#all" data-nav="shop">제품</a></li>
+      <li><a href="#about" data-nav="about">브랜드 소개</a></li>
+      <li><a href="#works" data-nav="works">works</a></li>
+      <li><a href="#community" data-nav="community">커뮤니티</a></li>
+    </ul>
+  </nav>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="gnb">메뉴</button>
+  <a class="brand" href="#home" aria-label="설담화 메인페이지" translate="no"><svg aria-hidden="true" style="color:var(--ink)"><use href="#blossom"/></svg>설담화</a>
+  <div class="util">
+    <a class="ico" href="#cart" aria-label="장바구니, 담긴 상품 0개">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1.2 11a1.5 1.5 0 0 1-1.5 1.3H8.2a1.5 1.5 0 0 1-1.5-1.3z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg>
+      <span class="cnt">0</span>
+    </a>
+    <a class="ico" href="#" data-soon aria-label="마이페이지 (준비 중)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="3.7"/><path d="M4.8 20.5c.9-3.9 3.7-6 7.2-6s6.3 2.1 7.2 6"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+<div id="home-view">
+  <!-- 1. 히어로 -->
+  <section class="hero paper">
+    <div>
+      <div class="pair">
+        <div class="ph"><div class="well"><div class="img"></div><div class="veil"></div></div><svg class="mark" aria-hidden="true" style="color:var(--ink)"><use href="#blossom"/></svg></div>
+        <div class="sheet">
+          <h1 class="word" lang="en" translate="no">seoldamhwa</h1>
+          <div class="tag"><b>꽃으로 건네는 말</b>slowly arranged flowers<br>wrapped in reusable bojagi<br><a class="cta" href="#season"><i></i>이번 계절의 꽃</a></div>
+          <p class="site" translate="no">SEOLDAMHWA.STUDIO</p>
+          <span class="vt">說談話</span>
+        </div>
+      </div>
+      <p class="scroll" aria-hidden="true">SCROLL<i></i></p>
+    </div>
+  </section>
+
+  <!-- 3. 제품 -->
+  <section class="sec paper" id="season">
+    <div class="sec-hd rv"><div class="ttl"><svg class="sec-ill" viewBox="0 0 320 320" aria-hidden="true" style="color:var(--ink)"><!--@svginner illust/statement.svg--></svg><div><span class="eyebrow">PRODUCTS · 제품</span><h2>입동의 꽃</h2></div></div><a href="#all">모든 제품 보기</a></div>
+    <div class="products">
+      <a class="prod rv" href="#larch"><div class="frame"><span class="ph" role="img" aria-label="굽 높은 회색 수반에 S자로 선 낙엽송 가지와 연잎 한 장" style="background-image:var(--img-ikebana-larch)"></span><i class="no">01</i></div><h3>낙엽송과 연잎</h3><p>꽃꽂이 · 중품<b data-price="larch"></b></p></a>
+      <a class="prod rv" href="#bamboo"><div class="frame"><span class="ph" role="img" aria-label="대나무 줄기 옆에 부채처럼 접은 잎과 흰 들꽃을 꽂은 꽃꽂이" style="background-image:var(--img-ikebana-bamboo)"></span><i class="no">02</i></div><h3>대나무와 부채 잎</h3><p>꽃꽂이 · 중품<b data-price="bamboo"></b></p></a>
+      <a class="prod rv" href="#daffodil"><div class="frame"><span class="ph" role="img" aria-label="깔때기 모양 화기에 꽂은 노란 수선 한 송이" style="background-image:var(--img-ikebana-daffodil)"></span><i class="no">03</i></div><h3>수선 한 줄기</h3><p>꽃꽂이 · 소품<b data-price="daffodil"></b></p></a>
+      <a class="prod rv" href="#gift"><div class="frame"><span class="ph" role="img" aria-label="아이보리 보자기로 싼 선물과 백자 화병" style="background-image:var(--img-bojagi)"></span><i class="no">04</i></div><h3>백자와 보자기 선물</h3><p>보자기 포함<b data-price="baekja"></b></p></a>
+    </div>
+  </section>
+
+  <!-- 4. 보자기 -->
+  <section class="bojagi paper">
+    <div class="draw rv">
+      <svg viewBox="0 0 520 560" role="img" aria-label="보자기로 싼 꽃 선물 연필 그림">
+        <g fill="none" stroke="#3b3a37" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+          <!-- 꽃줄기들 -->
+          <path d="M262 300 C258 230 246 170 214 112"/>
+          <path d="M268 300 C272 236 292 176 330 128"/>
+          <path d="M265 300 C266 240 262 196 270 150"/>
+          <path d="M258 300 C238 250 206 222 168 206"/>
+          <!-- 잎 -->
+          <path d="M240 196 C222 186 206 186 192 196 C206 204 224 204 240 196 Z"/>
+          <path d="M300 190 C318 176 336 174 352 182 C338 194 318 196 300 190 Z"/>
+          <path d="M266 230 C254 214 252 200 258 188 C268 202 270 216 266 230 Z"/>
+          <path d="M214 228 C200 230 188 240 182 252 C196 250 208 242 214 228 Z"/>
+          <!-- 꽃 (위 왼쪽) -->
+          <path d="M214 112 C200 104 196 88 206 80 C214 74 222 82 222 92 C226 80 240 78 244 88 C248 98 236 108 224 110 C234 116 236 130 226 134 C216 138 210 126 214 112 Z"/>
+          <circle cx="220" cy="100" r="3"/>
+          <!-- 꽃 (위 오른쪽, 매화) -->
+          <circle cx="330" cy="118" r="8"/><circle cx="342" cy="126" r="8"/><circle cx="338" cy="140" r="8"/><circle cx="323" cy="140" r="8"/><circle cx="318" cy="126" r="8"/>
+          <circle cx="330" cy="131" r="2.5"/>
+          <!-- 봉오리 -->
+          <path d="M270 150 C264 140 266 128 272 122 C278 130 278 142 270 150 Z"/>
+          <path d="M168 206 C158 200 156 190 162 184 C170 188 172 198 168 206 Z"/>
+          <!-- 보자기 매듭 귀 -->
+          <path d="M248 318 C222 290 196 268 176 272 C160 276 166 300 190 310 C208 318 230 322 248 324"/>
+          <path d="M286 318 C312 290 340 270 358 276 C372 282 364 304 342 312 C324 318 304 322 286 324"/>
+          <path d="M190 292 C204 296 222 304 236 314" opacity=".6"/>
+          <path d="M344 294 C330 298 312 306 298 316" opacity=".6"/>
+          <!-- 매듭 -->
+          <path d="M246 316 C252 306 282 306 288 316 C294 330 282 340 268 340 C252 340 240 330 246 316 Z"/>
+          <path d="M256 322 C262 318 274 318 280 324" opacity=".6"/>
+          <!-- 보자기 몸 -->
+          <path d="M248 334 C210 340 170 352 146 372 C118 398 110 444 120 480 C126 502 146 512 172 514 L364 514 C390 512 410 500 414 476 C422 438 412 396 384 372 C360 352 324 340 290 334"/>
+          <!-- 아래로 접힌 모서리 -->
+          <path d="M146 372 C128 404 124 436 132 470" opacity=".7"/>
+          <path d="M384 372 C402 404 406 436 400 470" opacity=".7"/>
+          <path d="M210 346 C200 392 198 448 206 512" opacity=".55"/>
+          <path d="M324 346 C336 392 338 448 332 512" opacity=".55"/>
+          <path d="M268 342 C266 400 266 460 268 512" opacity=".35"/>
+          <!-- 바닥 -->
+          <path d="M96 520 C180 526 360 526 440 520" opacity=".5"/>
+        </g>
+        <!-- 연필 음영 -->
+        <g stroke="#3b3a37" stroke-width=".8" opacity=".45">
+          <path d="M370 400 L392 380 M372 416 L400 390 M374 432 L404 404 M374 448 L406 418 M372 464 L406 432 M368 480 L404 446 M360 494 L400 460 M350 506 L392 472"/>
+          <path d="M140 450 L156 434 M138 466 L160 444 M142 480 L166 456 M150 492 L174 468"/>
+          <path d="M264 330 L274 322 M262 336 L280 324"/>
+        </g>
+              <!-- 쪽빛 한 줄: 보자기 윗단 -->
+        <path d="M248 334 C210 340 170 352 146 372 M290 334 C324 340 360 352 384 372" fill="none" stroke="var(--blue)" stroke-width="2.6" stroke-linecap="round"/>
+      </svg>
+      <div class="inset" aria-hidden="true"></div>
+    </div>
+    <div class="cols rv">
+      <h2 class="title">다시 쓰는 보자기</h2>
+      <span class="roman">dasi sseuneun bojagi</span>
+      <p class="col" style="--dot:22%"><strong>꽃을 감싼 천은 버려지지 않습니다.</strong></p>
+      <p class="col" style="--dot:58%">쪽물과 감물로 들인 무명과 모시.<br>매듭을 풀면 손수건이 되고<br>식탁보가 되고, 다음 선물의 포장이 됩니다.</p>
+      <p class="col sm" style="--dot:34%">비닐과 플라스틱 리본 없이<br>천 한 장과 매듭 하나로 전합니다.</p>
+      <p class="col sm" style="--dot:70%">가방 끈을 걸면 주머니가 됩니다.<br>보자기만 따로 구매할 수 있습니다.</p>
+      <a class="cta" href="#bojagi">보자기 보기</a>
+    </div>
+  </section>
+
+  <!-- 5. works -->
+  <section class="works paper" id="home-works">
+    <div class="poster rv">
+      <div>
+        <svg viewBox="0 0 360 230" role="img" aria-label="수반과 가위 선화" style="color:#2c2b29"><!--@svginner illust/works.svg--></svg>
+        <p class="hand">꽃과,</p>
+      </div>
+      <p class="cap"><em>Through the Seasons</em>Seoldamhwa works<span>2026 — Seoul</span></p>
+    </div>
+    <div>
+      <div class="sec-hd rv"><div><span class="eyebrow">WORKS · 작업</span><h2>계절마다 남긴 꽃</h2></div><a href="#works">전체 아카이브</a></div>
+      <ol class="wlist">
+        <li class="rv"><time datetime="2026-11">2026.11</time><div><b>입동, 찻자리의 꽃</b><small>개인 다회 · 낙엽송과 마른 연밥</small></div><i>공간 연출</i></li>
+        <li class="rv"><time datetime="2026-10">2026.10</time><div><b>갤러리 개관 꽃</b><small>설치 작업 · 억새와 감나무 가지</small></div><i>프로젝트</i></li>
+        <li class="rv"><time datetime="2026-09">2026.09</time><div><b>백로의 한 줄기</b><small>정기 구독 · 아홉 번째 꽃</small></div><i>구독</i></li>
+        <li class="rv"><time datetime="2026-08">2026.08</time><div><b>보자기 워크숍 기록</b><small>커뮤니티 · 쪽물 들이기와 매듭 짓기</small></div><i>모임</i></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6. 커뮤니티 -->
+  <section class="community paper" id="home-community">
+    <div class="sec-hd rv"><div><span class="eyebrow">COMMUNITY · 커뮤니티</span><h2>꽃을 사이에 두고 나누는 이야기</h2></div><a href="#community">모임 둘러보기</a></div>
+    <div class="cards">
+      <article class="card tall rv">
+        <div class="body">
+          <span class="vword">說談話</span>
+          <svg viewBox="0 0 200 280" aria-hidden="true" style="color:var(--ink)"><!--@svginner illust/community-tall.svg--></svg>
+        </div>
+        <div class="foot">꽃 모임 · 매월 둘째 토요일<br>서울 · 열 명 남짓</div>
+      </article>
+      <div class="card wide rv" aria-hidden="true">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" style="color:var(--ink)"><!--@svginner illust/community-wide.svg--></svg>
+      </div>
+      <article class="card info rv">
+        <span class="vword">꽃모임</span>
+        <dl>
+          <dt>이번 달 모임</dt><dd>입동의 수반 꽃꽂이</dd>
+          <dt>일시</dt><dd>11월 14일 토요일 오후 2시</dd>
+          <dt>함께 나누는 것</dt><dd>꽃 한 단, 차 한 잔, 보자기 한 장</dd>
+        </dl>
+        <a href="#community">이번 달 모임 보기</a>
+      </article>
+    </div>
+  </section>
+</div>
+
+<div id="about-view" hidden>
+<!--@include _about.html-->
+</div>
+
+<div id="works-view" hidden>
+<!--@include _works.html-->
+</div>
+
+<div id="community-view" hidden>
+<!--@include _community.html-->
+</div>
+
+<div id="cart-view" hidden>
+<!--@include _cart.html-->
+</div>
+
+<div id="shop-view" hidden>
+<div id="list-view">
+<!--@include _products-list.html-->
+</div>
+
+<div id="arrange-view" hidden>
+<!--@include _arrange.html-->
+</div>
+
+<div id="detail-view" hidden>
+<!--@include _detail.html-->
+</div>
+</div>
+</main>
+
+<footer class="ft paper" id="statement">
+  <div class="statement">
+    <div class="rv">
+      <svg class="vase" viewBox="0 0 320 320" role="img" aria-label="달항아리에 꽂은 한 줄기" style="color:var(--ink)"><!--@svginner illust/statement.svg--></svg>
+      <p class="spaced" translate="no">SEOLDAMHWA</p>
+      <p class="it">a quiet word<em>in the form of flowers</em></p>
+      <p class="ko">검소하되 누추하지 않고<br>화려하되 사치하지 않게<small>儉而不陋 華而不侈</small></p>
+    </div>
+  </div>
+  <div class="ft-info">
+  <div class="word" translate="no">seoldamhwa<small>說談話 · 설담화</small></div>
+  <address>문의 메일 준비 중<br>서울 · 작업실 방문은 예약제로 운영합니다</address>
+  <ul><li><a href="#" data-soon>인스타그램</a></li><li><a href="#" data-soon>이용 안내</a></li><li><a href="#" data-soon>문의</a></li></ul>
+  </div>
+</footer>
+
+<!--@include _detail-templates.html-->
+
+<p class="toast" id="toast" role="status" aria-live="polite"></p>
+
+<script>
+const hd=document.getElementById('hd');
+const menuBtn=hd.querySelector('.menu-btn');
+menuBtn.addEventListener('click',()=>{const open=hd.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open))});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&hd.classList.contains('open')){hd.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.focus()}});
+// 아직 없는 페이지로 가는 링크: 이동하지 않고 준비 중임을 알린다
+const toast=document.getElementById('toast');let toastT;
+document.addEventListener('click',e=>{const a=e.target.closest('a[data-soon]');if(!a)return;e.preventDefault();
+  toast.textContent='준비 중인 페이지예요.';toast.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>toast.classList.remove('on'),2200)});
+addEventListener('scroll',()=>hd.classList.toggle('solid',scrollY>40),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)*90+'ms';io.observe(el)});
+
+/*@include _detail.js*/
+/*@include _arrange.js*/
+/*@include _works.js*/
+/*@include _cart.js*/
+
+// ===== 가격: 상세 데이터(ITEMS, ARR)와 아래 목록 한 곳에서만 정하고, 카드와 표는 여기서 채운다 =====
+const OTHER_PRICES = {baekja:96000, driedbox:42000, 'season-sub':89000};
+function priceText(k){
+  if(k in ARR) return won(ARR[k].base)+'원';
+  if(k in ITEMS){ const s=ITEMS[k].sizes; return won(s[0].price)+'원'+(s.length>1?'부터':''); }
+  return (k==='season-sub'?'월 ':'')+won(OTHER_PRICES[k])+'원';
+}
+document.querySelectorAll('[data-price]').forEach(el=>{ el.textContent=priceText(el.dataset.price); });
+document.querySelectorAll('[data-price-sizes]').forEach(el=>{
+  el.textContent=ITEMS[el.dataset.priceSizes].sizes.map(s=>s.label.split(' ')[0]+' '+won(s.price)).join(' · ');
+});
+
+// ===== 화면 전환: 메인 ↔ 제품 목록 ↔ 상세 (한 파일 안에서) =====
+const homeView=document.getElementById('home-view'), shopView=document.getElementById('shop-view');
+const listView=document.getElementById('list-view'), detailView=document.getElementById('detail-view'), arrangeView=document.getElementById('arrange-view');
+const catBtns=[...document.querySelectorAll('#list-view .cats button')], cards=[...document.querySelectorAll('#grid .prod')];
+const CATS=catBtns.map(b=>b.dataset.cat);
+const PAGES={about:document.getElementById('about-view'),works:document.getElementById('works-view'),community:document.getElementById('community-view'),cart:document.getElementById('cart-view')};
+const TITLES={about:'브랜드 소개',works:'works',community:'커뮤니티',cart:'장바구니'};
+const navLinks=[...document.querySelectorAll('[data-nav]')];
+// 미리보기 창(data: 주소)에서는 주소 기록을 바꾸면 창이 다시 그려지므로 화면만 바꾼다
+const canHist=/^(https?|file):$/.test(location.protocol);
+document.querySelector('[data-crumb="all"]').setAttribute('href','#all');
+document.querySelector('[data-crumb="bojagi"]').setAttribute('href','#bojagi');
+function showCat(cat){
+  catBtns.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.cat===cat)));
+  cards.forEach(c=>{c.hidden=!(cat==='all'||c.dataset.cat===cat)});
+}
+function route(k){
+  if(k===undefined) k=location.hash.slice(1);
+  const isItem=k in ITEMS, isArr=k in ARR, isShop=isItem||isArr||CATS.includes(k), page=PAGES[k]?k:null;
+  const view=isShop?'shop':(page||'home');
+  homeView.hidden=view!=='home'; shopView.hidden=view!=='shop';
+  Object.entries(PAGES).forEach(([key,el])=>{el.hidden=key!==page});
+  document.body.dataset.view=view;
+  navLinks.forEach(a=>{ if(a.dataset.nav===view) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  hd.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
+  if(isShop){
+    listView.hidden=isItem||isArr; detailView.hidden=!isItem; arrangeView.hidden=!isArr;
+    if(isItem) renderDetail(k); else if(isArr) renderArrange(k); else { showCat(k); document.title='설담화 · 제품'; }
+    scrollTo(0,0);
+  } else if(page){
+    if(page==='cart') renderCart();
+    document.title='설담화 · '+TITLES[page];
+    scrollTo(0,0);
+  } else {
+    document.title='설담화 · 메인';
+    const el=k&&k!=='home'&&document.getElementById(k);
+    if(el){ requestAnimationFrame(()=>el.scrollIntoView()); } else scrollTo(0,0);
+  }
+}
+catBtns.forEach(b=>b.addEventListener('click',()=>{showCat(b.dataset.cat);if(canHist) history.replaceState(null,'','#'+b.dataset.cat);}));
+// 같은 파일 안의 링크는 스크립트로 처리 (미리보기 창처럼 주소가 바뀌지 않는 곳에서도 동작)
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href^="#"]');
+  if(!a||a.hasAttribute('data-soon')) return;
+  const k=a.getAttribute('href').slice(1);
+  if(k==='main') return;
+  e.preventDefault();
+  if(canHist) history.pushState(null,'','#'+k);
+  route(k);
+});
+// 스크립트에서 화면을 바꿀 때 (예: 바로 구매 → 장바구니)
+function go(k){ if(canHist) history.pushState(null,'','#'+k); route(k); }
+addEventListener('popstate',()=>route());
+route();
+</script>
+</body>
+</html>
