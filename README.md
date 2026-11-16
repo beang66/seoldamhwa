@@ -1,5 +1,10 @@
+# 설담화 說談話 — 브랜드 웹 시안
 
-# 설담화 說談話
+> **README 구조 개편:** 2026-11-16 · 기존 설명·명령·이미지·원저작자 표기를 보존하고 제품·의사결정·검증 기준으로 재배열했습니다. **이번 작업에서 앱과 테스트를 재실행하지 않았습니다.** 기재된 성과는 원본 README의 기록입니다.
+
+**읽는 순서:** 0~2 제품 설명 → 3~4 설계 판단 → 5~8 실행·검증·권리 → 9 다음 단계.
+
+## 0. 30초 요약·실행 상태
 
 **꽃으로 건네는 말.** 절기마다 고른 꽃 한 줄기를, 다시 쓰는 보자기에 싸서 건네는 1인 꽃 스튜디오의 브랜드 사이트입니다.
 
@@ -10,8 +15,13 @@
 
 검소하되 누추하지 않고, 화려하되 사치하지 않게(儉而不陋 華而不侈). 한국의 미감을 화면으로 옮기는 것을 목표로 브랜드 정의부터 디자인 시스템, 시안, Next.js 구현까지 한 사람이 진행한 프로젝트입니다.
 
+## 1. 사용자 문제·프로젝트 목표
 
-## Screenshots
+> **확인 필요:** 누가 어떤 문제를 겪는지, 사용자 인터뷰·관찰·분석 근거 또는 가설을 기록.
+
+## 2. 핵심 사용 흐름·기능
+
+### Screenshots
 
 | 메인 · 히어로 슬라이더 | 모바일 |
 | --- | --- |
@@ -33,8 +43,7 @@
 
 > 화면의 회색 면은 사진 자리입니다. 시안에 쓴 참고 사진은 다른 사람의 사진이라 저장소와 캡처에서 뺐습니다.
 
-
-## Features
+### Features
 
 - **큰 이미지 히어로 슬라이더**: 6초마다 넘어가고, 마우스·포커스·탭 숨김에 멈춥니다. 직접 넘길 때는 더 빠르게 반응하고, 동작 줄이기 설정에서는 자동으로 넘기지 않습니다.
 - **제품 목록과 카테고리**: 꽃꽂이, 선물, 보자기, 정기 구독. 주소(`/shop?cat=bojagi`)로 바로 들어올 수 있습니다.
@@ -46,8 +55,41 @@
 - **손그림 벡터 일러스트**: 연필 선화와 붓 그림을 직접 그려 벡터로 옮겼습니다.
 - **접근성**: 12px 최소 글자, 키보드 조작, 스크린리더용 안내, `prefers-reduced-motion` 대응
 
+### Usage Guide
 
-## Tech Stack
+#### 둘러보기
+
+| 주소 | 화면 |
+| --- | --- |
+| `/` | 메인. 히어로 슬라이더, 이번 계절의 꽃, 보자기, works, 커뮤니티 |
+| `/shop` | 제품 목록. `?cat=arrange · gift · bojagi · sub` 로 분류 |
+| `/shop/larch` `/shop/bamboo` `/shop/daffodil` `/shop/nasturtium` | 꽃꽂이 상세 |
+| `/shop/wrap` `/shop/knot` | 보자기 상세 |
+| `/about` · `/works` · `/community` · `/cart` | 브랜드 소개 · 작업 기록 · 꽃 모임 · 장바구니 |
+
+#### 주문 흐름 해 보기
+
+1. `/shop/larch` 에서 화기·포장·받는 방법을 고르면 가격이 바로 바뀝니다.
+2. **장바구니 담기**를 누르면 헤더의 숫자가 늘고 알림이 뜹니다. **바로 구매**는 장바구니로 바로 이동합니다.
+3. `/cart` 에서 수량을 바꾸거나 빼면 상품 금액, 퀵, 택배비, 합계가 다시 계산됩니다.
+4. **주문하기**는 아직 결제와 연결되어 있지 않습니다.
+
+#### 상품과 가격 바꾸기
+
+상품, 가격, 작업 기록은 모두 [`web/lib/catalog.ts`](web/lib/catalog.ts) 한 파일에 있습니다.
+
+- 꽃꽂이: `ARR` (기본가 `base`, 화기 없이 살 때 빼는 금액 `vesselOff`, 크기 `h·w·v`)
+- 보자기: `ITEMS` (크기별 가격 `sizes`)
+- 목록 카드: `SHOP`
+- 택배비 규칙: [`web/components/Providers.tsx`](web/components/Providers.tsx)의 `SHIP_FEE`, `SHIP_FREE_FROM`
+
+#### 디자인 바꾸기
+
+색과 글꼴은 [`web/app/globals.css`](web/app/globals.css) 맨 위의 CSS 변수(`--paper`, `--ink`, `--blue` 등)에서 바꿉니다. 규칙과 이유는 [`DESIGN.md`](DESIGN.md)에 있습니다.
+
+## 3. 시스템 구조·데이터·기술
+
+### Tech Stack
 
 | 구분 | 사용한 것 | 이유 |
 | --- | --- | --- |
@@ -60,8 +102,36 @@
 | 시안 | HTML·CSS·바닐라 JS + Python 빌드 스크립트 | 프레임워크 없이 한 파일로 빠르게 확인하던 단계 (`mockups/`) |
 | 디자인 문서 | `PRODUCT.md`, `DESIGN.md` | 사용자·원칙·색·글꼴·간격 규칙을 글로 정리 |
 
+### Project Structure
 
-## Run Locally
+```
+seoldamhwa/
+├─ web/                     Next.js 앱
+│  ├─ app/                  페이지 (/, shop, shop/[slug], about, works, community, cart)
+│  ├─ components/           헤더, 히어로 슬라이더, 상세, 장바구니 등
+│  │  └─ static/            시안 HTML에서 옮긴 정적 화면과 손그림 SVG
+│  └─ lib/catalog.ts        상품·가격·작업 기록 데이터
+├─ mockups/                 프레임워크 없이 만든 HTML 시안과 빌드 스크립트
+│  └─ src/illust/           손그림 벡터와 그리는 스크립트
+├─ docs/screenshots/        README 캡처
+├─ PRODUCT.md               누구를 위한 사이트인지, 브랜드 원칙
+└─ DESIGN.md                디자인 시스템 (색, 글꼴, 간격, 컴포넌트, 금지 사항)
+```
+
+### Design Notes
+
+- **색**: 한지(#F1EEE8)와 먹(#141413)의 농담을 바탕으로 하고, 쪽빛(#2F56A8)은 한 화면에 한 점만 씁니다. 검은 바탕은 쓰지 않습니다.
+- **글꼴**: 제목은 바탕체(Noto Serif KR), 본문은 돋움체(Noto Sans KR), 영문은 EB Garamond, 손글씨는 나눔펜. 가장 작은 글자도 12px(9pt)입니다.
+- **움직임**: 감상하는 부분(히어로, 나타나기)은 느리게, 누르는 부분(버튼, 페이지 이동)은 빠르게. 버튼은 눌린 순간 97%로 들어갑니다.
+- **깊이**: 면은 평평하게 두고, 카드와 포스터처럼 '놓인 것'만 종이 한 장만큼 떠오르게 합니다.
+
+## 4. 핵심 의사결정·대안
+
+> **확인 필요:** 채택안/대안/선택 이유와 근거가 있는 설계 변경을 기록.
+
+## 5. 설치·실행·배포
+
+### Run Locally
 
 Node.js 20 이상이 필요합니다.
 
@@ -81,7 +151,7 @@ npm run build
 npm run start
 ```
 
-### 사진 넣기
+#### 사진 넣기
 
 사진은 저장소에 없습니다. `web/public/img/` 폴더를 만들고 아래 이름으로 사진을 넣으면 화면에 나타납니다. 없으면 회색 면으로 보입니다.
 
@@ -90,66 +160,23 @@ bojagi.jpg  dried-box.jpg  field.jpg
 ikebana-bamboo.jpg  ikebana-daffodil.jpg  ikebana-larch.jpg  ikebana-nasturtium.jpg
 ```
 
+## 6. 검증·측정 결과
 
-## Usage Guide
+> **확인 필요:** 시험일·버전·표본·성공/실패·재현 로그와 실제 사용자 성과를 분리.
 
-### 둘러보기
+## 7. 담당 역할·협업
 
-| 주소 | 화면 |
-| --- | --- |
-| `/` | 메인. 히어로 슬라이더, 이번 계절의 꽃, 보자기, works, 커뮤니티 |
-| `/shop` | 제품 목록. `?cat=arrange · gift · bojagi · sub` 로 분류 |
-| `/shop/larch` `/shop/bamboo` `/shop/daffodil` `/shop/nasturtium` | 꽃꽂이 상세 |
-| `/shop/wrap` `/shop/knot` | 보자기 상세 |
-| `/about` · `/works` · `/community` · `/cart` | 브랜드 소개 · 작업 기록 · 꽃 모임 · 장바구니 |
+### Author
 
-### 주문 흐름 해 보기
+설담화 · 브랜드, 디자인, 개발
 
-1. `/shop/larch` 에서 화기·포장·받는 방법을 고르면 가격이 바로 바뀝니다.
-2. **장바구니 담기**를 누르면 헤더의 숫자가 늘고 알림이 뜹니다. **바로 구매**는 장바구니로 바로 이동합니다.
-3. `/cart` 에서 수량을 바꾸거나 빼면 상품 금액, 퀵, 택배비, 합계가 다시 계산됩니다.
-4. **주문하기**는 아직 결제와 연결되어 있지 않습니다.
+## 8. 한계·보안·라이선스
 
-### 상품과 가격 바꾸기
+> **확인 필요:** 운영 한계, 보안·개인정보·데이터·이미지·소스 라이선스 확인.
 
-상품, 가격, 작업 기록은 모두 [`web/lib/catalog.ts`](web/lib/catalog.ts) 한 파일에 있습니다.
+## 9. 다음 단계·참고 문서
 
-- 꽃꽂이: `ARR` (기본가 `base`, 화기 없이 살 때 빼는 금액 `vesselOff`, 크기 `h·w·v`)
-- 보자기: `ITEMS` (크기별 가격 `sizes`)
-- 목록 카드: `SHOP`
-- 택배비 규칙: [`web/components/Providers.tsx`](web/components/Providers.tsx)의 `SHIP_FEE`, `SHIP_FREE_FROM`
-
-### 디자인 바꾸기
-
-색과 글꼴은 [`web/app/globals.css`](web/app/globals.css) 맨 위의 CSS 변수(`--paper`, `--ink`, `--blue` 등)에서 바꿉니다. 규칙과 이유는 [`DESIGN.md`](DESIGN.md)에 있습니다.
-
-
-## Project Structure
-
-```
-seoldamhwa/
-├─ web/                     Next.js 앱
-│  ├─ app/                  페이지 (/, shop, shop/[slug], about, works, community, cart)
-│  ├─ components/           헤더, 히어로 슬라이더, 상세, 장바구니 등
-│  │  └─ static/            시안 HTML에서 옮긴 정적 화면과 손그림 SVG
-│  └─ lib/catalog.ts        상품·가격·작업 기록 데이터
-├─ mockups/                 프레임워크 없이 만든 HTML 시안과 빌드 스크립트
-│  └─ src/illust/           손그림 벡터와 그리는 스크립트
-├─ docs/screenshots/        README 캡처
-├─ PRODUCT.md               누구를 위한 사이트인지, 브랜드 원칙
-└─ DESIGN.md                디자인 시스템 (색, 글꼴, 간격, 컴포넌트, 금지 사항)
-```
-
-
-## Design Notes
-
-- **색**: 한지(#F1EEE8)와 먹(#141413)의 농담을 바탕으로 하고, 쪽빛(#2F56A8)은 한 화면에 한 점만 씁니다. 검은 바탕은 쓰지 않습니다.
-- **글꼴**: 제목은 바탕체(Noto Serif KR), 본문은 돋움체(Noto Sans KR), 영문은 EB Garamond, 손글씨는 나눔펜. 가장 작은 글자도 12px(9pt)입니다.
-- **움직임**: 감상하는 부분(히어로, 나타나기)은 느리게, 누르는 부분(버튼, 페이지 이동)은 빠르게. 버튼은 눌린 순간 97%로 들어갑니다.
-- **깊이**: 면은 평평하게 두고, 카드와 포스터처럼 '놓인 것'만 종이 한 장만큼 떠오르게 합니다.
-
-
-## Roadmap
+### Roadmap
 
 - [ ] 상품·주문 데이터를 DB로 옮기고, 금액은 서버에서 다시 계산
 - [ ] 토스페이먼츠 결제 연결 (테스트 키부터)
@@ -157,7 +184,6 @@ seoldamhwa/
 - [ ] 관리자 화면 (주문 상태, 상품·가격, 모임 신청)
 - [ ] 직접 촬영한 사진으로 교체
 
+---
 
-## Author
-
-설담화 · 브랜드, 디자인, 개발
+> 공통 작성 가이드: [Vault README 표준](https://github.com/beang66/Vault/blob/main/wiki/concepts/GitHub%20README%20%EA%B0%80%EC%9D%B4%EB%93%9C%20%E2%80%94%20%EC%A0%9C%ED%92%88%C2%B7%EC%9D%98%EC%82%AC%EA%B2%B0%EC%A0%95%C2%B7%EA%B2%80%EC%A6%9D.md). '확인 필요'는 구현 완료가 아닙니다.
