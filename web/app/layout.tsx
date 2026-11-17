@@ -12,6 +12,12 @@ const sans = Noto_Sans_KR({ weight: ['300', '400', '600'], preload: false, displ
 const serifEn = EB_Garamond({ weight: ['400', '500'], style: ['normal', 'italic'], subsets: ['latin'], display: 'swap', variable: '--font-serif-en' });
 const hand = Nanum_Pen_Script({ weight: '400', preload: false, display: 'swap', variable: '--font-hand' });
 
+// 사진 경로는 CSS 안의 url()에 basePath가 붙지 않으므로 여기서 붙여 CSS 변수로 넘긴다
+// (GitHub Pages에서는 /seoldamhwa 아래에서 열린다)
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+const IMAGES = ['bojagi', 'dried-box', 'field', 'ikebana-bamboo', 'ikebana-daffodil', 'ikebana-larch', 'ikebana-nasturtium'];
+const imageVars = `:root{${IMAGES.map(n => `--img-${n}:url(${BASE}/img/${n}.jpg)`).join(';')}}`;
+
 export const metadata: Metadata = {
   title: { default: '설담화 · 꽃으로 건네는 말', template: '설담화 · %s' },
   description: '절기마다 고른 꽃 한 줄기를, 다시 쓰는 보자기에 싸서 건네는 1인 꽃 스튜디오.',
@@ -22,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko" data-scroll-behavior="smooth" className={[serifKo.variable, sans.variable, serifEn.variable, hand.variable].join(' ')} suppressHydrationWarning>
       <head>
         {/* 스크립트가 켜진 경우에만 나타나기 효과를 쓴다 */}
+        <style dangerouslySetInnerHTML={{ __html: imageVars }} />
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body>
