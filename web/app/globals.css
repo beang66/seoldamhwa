@@ -912,7 +912,7 @@ h1,h2,h3{text-wrap:balance}
 .ft-brand{align-items:center;gap:18px}
 .ft-vase{width:56px;height:56px;margin-bottom:0}
 /* 사업자 정보: 3열 표로 정리 */
-.ft-biz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 32px;margin-top:6px;padding-top:22px;border-top:1px solid var(--hair);line-height:1.7}
+.ft-biz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 32px;margin-top:10px;line-height:1.7}
 .ft-biz div{display:grid;grid-template-columns:9.5em 1fr;gap:10px}
 .ft-biz dt{color:var(--graphite)}
 .ft-biz dd{color:var(--mist)}
