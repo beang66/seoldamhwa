@@ -1,3 +1,4 @@
+import { GatherFeat, GatherNotes, GatherSched } from '@/components/Gatherings';
 
 export default function CommunityPage() {
   return (
@@ -12,6 +13,7 @@ export default function CommunityPage() {
     <section className="cm-feat">
       <div className="cm-pic"><span className="vword" aria-hidden="true">꽃모임</span><svg viewBox="0 0 200 280" aria-hidden="true" style={{color: 'var(--ink)'}}><g fill="none" stroke="#3b3a37" strokeWidth="1.2" vectorEffect="non-scaling-stroke" strokeLinecap="round" strokeLinejoin="round"><path d="M95.5 268 C95 236 93.6 204 96 172 C98.6 140 107 116 117 99" /><path d="M117.0 99.0 C108.1 82.6 86.3 78.0 69.0 84.7 C79.2 97.7 99.7 105.7 117.0 99.0 Z" /><path d="M117.0 99.0 C123.2 86.4 118.8 71.2 110.0 63.4 C103.8 76.0 105.6 92.1 117.0 99.0 Z" /><path d="M117.0 99.0 C134.8 102.9 152.7 91.8 159.8 77.1 C142.7 74.3 123.0 82.5 117.0 99.0 Z" /><path d="M117.0 99.0 C125.6 111.7 144.0 114.5 158.0 108.6 C148.6 98.5 131.0 93.0 117.0 99.0 Z" /><path d="M117.0 99.0 C102.3 93.0 85.1 99.7 76.7 111.0 C91.0 116.1 109.3 112.2 117.0 99.0 Z" /><path d="M117.0 99.0 C104.7 102.2 98.1 114.7 99.6 125.9 C111.0 122.2 119.8 110.9 117.0 99.0 Z" /><path d="M95.0 206.0 C84.8 192.7 65.3 191.9 51.3 200.5 C62.0 210.8 80.9 214.9 95.0 206.0 Z" /><path d="M96.0 233.0 C108.7 239.8 124.8 235.4 133.4 226.0 C121.0 220.1 104.2 221.9 96.0 233.0 Z" /></g><g fill="none" stroke="#3b3a37" strokeWidth=".8" vectorEffect="non-scaling-stroke" strokeLinecap="round" opacity=".6"><path d="M114.2 98.0 Q93.7 90.0 75.8 86.4" /><path d="M116.3 96.9 Q113.3 81.3 110.5 68.6" /><path d="M119.5 97.6 Q138.7 88.5 153.6 79.9" /><path d="M119.4 99.7 Q137.1 105.2 152.1 107.5" /><path d="M114.6 99.9 Q96.7 104.7 82.4 109.6" /><path d="M116.0 100.7 Q107.9 112.2 102.2 122.2" /><path d="M92.4 205.5 Q73.4 201.6 57.5 201.0" /><path d="M98.2 232.5 Q114.8 229.8 128.1 226.7" /></g><path d="M70 270 C90 273 112 273 130 270" fill="none" stroke="#3b3a37" strokeWidth=".8" vectorEffect="non-scaling-stroke" opacity=".45" strokeLinecap="round" /></svg></div>
       <div className="cm-info">
+        <GatherFeat fallback={<>
         <span className="eyebrow">이번 달 모임</span>
         <h2>입동의 수반 꽃꽂이</h2>
         <p>낮은 수반에 침봉을 놓고, 겨울로 들어서는 가지 하나와 마른 잎으로 선을 세워 봅니다. 꽂은 꽃은 감싸개에 싸서 가져가세요.</p>
@@ -23,6 +25,7 @@ export default function CommunityPage() {
           <div><dt>참가비</dt><dd>55,000원 · 꽃, 화기 대여, 차, 감싸개 포함</dd></div>
         </dl>
         <a className="pill dark" href="#" data-soon="">참여 신청하기</a>
+        </>} />
       </div>
     </section>
 
@@ -37,21 +40,25 @@ export default function CommunityPage() {
 
     <section className="pg-sec">
       <div className="sh"><div><span>SCHEDULE · 일정</span><h2>다가오는 모임</h2></div><em>upcoming</em></div>
+      <GatherSched fallback={
       <ol className="cm-sched">
         <li><time dateTime="2026-11-14">11.14 토</time><b>입동의 수반 꽃꽂이</b><span>꽃 모임</span><em>모집 중</em></li>
         <li><time dateTime="2026-11-28">11.28 토</time><b>쪽물 보자기 매듭 짓기</b><span>보자기 매듭 수업</span><em>모집 중</em></li>
         <li><time dateTime="2026-12-12">12.12 토</time><b>대설, 소나무 한 가지</b><span>꽃 모임</span><em>모집 예정</em></li>
         <li><time dateTime="2026-12-21">12.21 월</time><b>동지 찻자리</b><span>계절 찻자리</span><em>모집 예정</em></li>
       </ol>
+      } />
     </section>
 
     <section className="pg-sec">
       <div className="sh"><div><span>NOTES · 기록</span><h2>지난 모임에서</h2></div><em>from past gatherings</em></div>
+      <GatherNotes fallback={
       <div className="cm-notes">
         <article><time dateTime="2026-10-10">2026.10.10</time><h3>한로의 억새</h3><p>억새 세 줄기를 서로 다른 높이로 세우고, 남은 잎은 말려 책갈피로 나눠 가졌어요.</p></article>
         <article><time dateTime="2026-09-26">2026.09.26</time><h3>쪽물 들이기</h3><p>무명 손수건을 쪽물에 세 번 담갔다 꺼내며, 같은 천도 담그는 횟수마다 빛이 달라지는 걸 보았어요.</p></article>
         <article><time dateTime="2026-09-12">2026.09.12</time><h3>백로의 한 줄기</h3><p>이슬이 맺히기 시작하는 때라 물을 머금은 잎을 골랐어요. 차는 햇보리차를 냈습니다.</p></article>
       </div>
+      } />
     </section>
 
     <section className="pg-sec">

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Noto_Serif_KR, Noto_Sans_KR, EB_Garamond, Nanum_Pen_Script } from 'next/font/google';
+import { Noto_Serif_KR, Noto_Sans_KR, EB_Garamond } from 'next/font/google';
 import './globals.css';
 import Providers from '@/components/Providers';
 import Header from '@/components/Header';
@@ -10,7 +10,6 @@ import Symbols from '@/components/static/Symbols';
 const serifKo = Noto_Serif_KR({ weight: ['300', '400', '600'], preload: false, display: 'swap', variable: '--font-serif-ko' });
 const sans = Noto_Sans_KR({ weight: ['300', '400', '600'], preload: false, display: 'swap', variable: '--font-sans' });
 const serifEn = EB_Garamond({ weight: ['400', '500'], style: ['normal', 'italic'], subsets: ['latin'], display: 'swap', variable: '--font-serif-en' });
-const hand = Nanum_Pen_Script({ weight: '400', preload: false, display: 'swap', variable: '--font-hand' });
 
 // 사진 경로는 CSS 안의 url()에 basePath가 붙지 않으므로 여기서 붙여 CSS 변수로 넘긴다
 // (GitHub Pages에서는 /seoldamhwa 아래에서 열린다)
@@ -25,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko" data-scroll-behavior="smooth" className={[serifKo.variable, sans.variable, serifEn.variable, hand.variable].join(' ')} suppressHydrationWarning>
+    <html lang="ko" data-scroll-behavior="smooth" className={[serifKo.variable, sans.variable, serifEn.variable].join(' ')} suppressHydrationWarning>
       <head>
         {/* 스크립트가 켜진 경우에만 나타나기 효과를 쓴다 */}
         <style dangerouslySetInnerHTML={{ __html: imageVars }} />

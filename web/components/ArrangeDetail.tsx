@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ARR, A_DELIV, A_WRAP, won, type ArrKey, type Arrangement, type Choice } from '@/lib/catalog';
+import { useProduct } from '@/lib/data';
 import { useCart, useToast } from './Providers';
 import ArrangeCare from './static/ArrangeCare';
 import ArrangeDelivery from './static/ArrangeDelivery';
@@ -38,7 +39,10 @@ function SizeSvg({ c }: { c: Arrangement }) {
 }
 
 export default function ArrangeDetail({ k }: { k: ArrKey }) {
-  const c = ARR[k];
+  // 이름·가격·화기 할인·품절은 DB 값을 쓴다(없으면 코드 안의 값)
+  const row = useProduct(k);
+  const c = { ...ARR[k], name: row?.name ?? ARR[k].name, base: row?.price ?? ARR[k].base, vesselOff: row?.vessel_off ?? ARR[k].vesselOff };
+  const soldOut = !!row?.sold_out;
   const [vessel, setVessel] = useState(0), [wrap, setWrap] = useState(0), [deliv, setDeliv] = useState(0);
   const [qty, setQty] = useState(1), [main, setMain] = useState(0), [note, setNote] = useState('');
   const { add } = useCart(); const toast = useToast(); const router = useRouter();
@@ -56,7 +60,7 @@ export default function ArrangeDetail({ k }: { k: ArrKey }) {
   const act = (buy: boolean) => {
     // 퀵은 장바구니에서 따로 한 줄로 보여준다
     const opt = [vessel ? '꽃과 침봉만' : '화기 포함', A_WRAP[wrap].label].concat(deliv ? [] : [A_DELIV[0].label]).join(' · ');
-    add({ id: k + '|' + opt, key: k, kind: 'arr', name: c.name, opt, unit, qty, quick: A_DELIV[deliv].add, img: c.img });
+    add({ id: k + '|' + opt, key: k, kind: 'arr', name: c.name, opt, unit, qty, quick: A_DELIV[deliv].add, img: c.img, sel: { vessel: !!vessel, wrap, deliv } });
     if (buy) router.push('/cart'); else { setNote('장바구니에 담았어요.'); toast('장바구니에 담았어요 · ' + c.name); }
   };
 
@@ -82,10 +86,10 @@ export default function ArrangeDetail({ k }: { k: ArrKey }) {
             <div className="opt-group"><h2>받는 방법</h2><Radios name="a-deliv" label="받는 방법 선택" list={A_DELIV} sel={deliv} set={setDeliv} /></div>
             <div className="buy">
               <div className="qty"><button type="button" aria-label="수량 줄이기" onClick={() => setQty(q => Math.max(1, q - 1))}>−</button><output aria-live="polite">{qty}</output><button type="button" aria-label="수량 늘리기" onClick={() => setQty(q => Math.min(20, q + 1))}>+</button></div>
-              <button type="button" className="btn p" onClick={() => act(false)}>장바구니 담기</button>
-              <button type="button" className="btn s" onClick={() => act(true)}>바로 구매</button>
+              <button type="button" className="btn p" disabled={soldOut} onClick={() => act(false)}>{soldOut ? '품절' : '장바구니 담기'}</button>
+              <button type="button" className="btn s" disabled={soldOut} onClick={() => act(true)}>바로 구매</button>
             </div>
-            <p className="note" role="status">{note}</p>
+            <p className="note" role="status">{soldOut ? '이번 절기의 꽃은 모두 나갔어요.' : note}</p>
           </div>
           <dl className="spec">
             {[['구성', c.chips.join(', ')], ['크기', `높이 약 ${c.h}cm · 폭 약 ${c.w}cm`], ['기간', c.life], ['포장', '감싸개 기본 포함']].map(([a, b]) => <div key={a}><dt>{a}</dt><dd>{b}</dd></div>)}

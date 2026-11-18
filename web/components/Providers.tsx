@@ -1,14 +1,17 @@
 'use client';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { AuthProvider } from './Auth';
 
 // ===== 장바구니 =====
 // shortcut: 이 브라우저(localStorage)에만 저장한다. 회원·주문을 붙일 때 서버 장바구니로 옮긴다.
-export type CartLine = { id: string; key: string; kind: 'bojagi' | 'arr'; name: string; opt: string; unit: number; qty: number; quick: number; img?: string };
+// sel: 주문할 때 서버가 가격을 다시 계산하는 데 쓰는 선택값. 화면의 unit·quick은 보여 주기용이다
+export type CartSel = { vessel?: boolean; wrap?: number; deliv?: number; size?: string };
+export type CartLine = { id: string; key: string; kind: 'bojagi' | 'arr'; name: string; opt: string; unit: number; qty: number; quick: number; img?: string; sel?: CartSel };
 const CART_KEY = 'seoldamhwa-cart';
 export const SHIP_FEE = 3000, SHIP_FREE_FROM = 50000; // 보자기 택배비 (예시 값)
 
-type CartCtx = { lines: CartLine[]; count: number; add: (l: CartLine) => void; setQty: (i: number, d: number) => void; remove: (i: number) => CartLine | undefined };
+type CartCtx = { lines: CartLine[]; count: number; add: (l: CartLine) => void; setQty: (i: number, d: number) => void; remove: (i: number) => CartLine | undefined; clear: () => void };
 const Cart = createContext<CartCtx | null>(null);
 export const useCart = () => useContext(Cart)!;
 
@@ -39,8 +42,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   }), []);
   const setQty = useCallback((i: number, d: number) => setLines(cur => cur.map((x, k) => k === i ? { ...x, qty: Math.min(20, Math.max(1, x.qty + d)) } : x)), []);
   const remove = useCallback((i: number) => { const gone = lines[i]; setLines(cur => cur.filter((_, k) => k !== i)); return gone; }, [lines]);
+  const clear = useCallback(() => setLines([]), []);
   const count = lines.reduce((s, l) => s + l.qty, 0);
-  const cart = useMemo(() => ({ lines, count, add, setQty, remove }), [lines, count, add, setQty, remove]);
+  const cart = useMemo(() => ({ lines, count, add, setQty, remove, clear }), [lines, count, add, setQty, remove, clear]);
 
   const [msg, setMsg] = useState(''); const [on, setOn] = useState(false); const timer = useRef<number>(0);
   const show = useCallback((m: string) => { setMsg(m); setOn(true); clearTimeout(timer.current); timer.current = window.setTimeout(() => setOn(false), 2200); }, []);
@@ -52,13 +56,15 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   }, [show]);
 
   return (
-    <Cart.Provider value={cart}>
-      <Toast.Provider value={show}>
-        {children}
-        <Reveal />
-        <p className={'toast' + (on ? ' on' : '')} role="status" aria-live="polite">{msg}</p>
-      </Toast.Provider>
-    </Cart.Provider>
+    <AuthProvider>
+      <Cart.Provider value={cart}>
+        <Toast.Provider value={show}>
+          {children}
+          <Reveal />
+          <p className={'toast' + (on ? ' on' : '')} role="status" aria-live="polite">{msg}</p>
+        </Toast.Provider>
+      </Cart.Provider>
+    </AuthProvider>
   );
 }
 

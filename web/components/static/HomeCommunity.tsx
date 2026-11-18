@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { HomeGather } from '@/components/Gatherings';
 
 export default function HomeCommunity() {
   return (
@@ -18,11 +19,13 @@ export default function HomeCommunity() {
       </div>
       <article className="card info rv">
         <span className="vword">꽃모임</span>
+        <HomeGather fallback={
         <dl>
           <dt>이번 달 모임</dt><dd>입동의 수반 꽃꽂이</dd>
           <dt>일시</dt><dd>11월 14일 토요일 오후 2시</dd>
           <dt>함께 나누는 것</dt><dd>꽃 한 단, 차 한 잔, 보자기 한 장</dd>
         </dl>
+        } />
         <Link href="/community">이번 달 모임 보기</Link>
       </article>
     </div>

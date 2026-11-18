@@ -2,25 +2,31 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { SHOP, SHOP_CATS, priceText, type ShopCat, type ShopCard } from '@/lib/catalog';
+import { SHOP_CATS, type ShopCat } from '@/lib/catalog';
+import { productPrice, useProducts, type ProductRow } from '@/lib/data';
 
-function Card({ p, hidden }: { p: ShopCard; hidden: boolean }) {
+const ILL_LABEL: Record<string, string> = { 'ill-wrap': '감싸개 그림', 'ill-knot': '가방 끈을 단 매듭 보자기 그림' };
+
+function Card({ p, hidden }: { p: ProductRow; hidden: boolean }) {
+  // 사진이 없는 보자기는 선화로 보여 준다
+  const ill = !p.img && p.cat === 'bojagi' ? (p.key === 'knot' ? 'ill-knot' : 'ill-wrap') : null;
   const inner = (
     <>
-      {p.ill
-        ? <div className="frame ill"><svg viewBox="0 0 300 330" aria-label={p.illLabel}><use href={`#${p.ill}`} /></svg></div>
-        : <div className="frame"><span style={{ backgroundImage: `var(--img-${p.img})` }} /></div>}
-      <h3>{p.name}</h3><p>{p.meta}<b>{priceText(p.price)}</b></p>
+      {ill
+        ? <div className="frame ill"><svg viewBox="0 0 300 330" aria-label={ILL_LABEL[ill]}><use href={`#${ill}`} /></svg></div>
+        : <div className="frame">{p.img ? <span style={{ backgroundImage: `var(--img-${p.img})` }} /> : <span className="blank" />}</div>}
+      <h3>{p.name}</h3><p>{p.meta}<b>{p.sold_out ? <span className="so">품절 · </span> : null}{productPrice(p)}</b></p>
     </>
   );
-  return p.href
-    ? <Link className="prod" href={p.href} hidden={hidden}>{inner}</Link>
+  return p.has_detail
+    ? <Link className="prod" href={`/shop/${p.key}`} hidden={hidden}>{inner}</Link>
     : <a className="prod" href="#" data-soon="" hidden={hidden}>{inner}</a>;
 }
 
 export default function ShopList({ initial }: { initial: ShopCat }) {
   const [cat, setCat] = useState<ShopCat>(initial);
-  const pick = (c: ShopCat) => { setCat(c); history.replaceState(null, '', c === 'all' ? '/shop' : `/shop?cat=${c}`); };
+  const list = useProducts();
+  const pick = (c: ShopCat) => { setCat(c); history.replaceState(null, '', (process.env.NEXT_PUBLIC_BASE_PATH ?? '') + (c === 'all' ? '/shop/' : `/shop/?cat=${c}`)); };
   return (
     <>
       <div className="page-hd">
@@ -31,12 +37,12 @@ export default function ShopList({ initial }: { initial: ShopCat }) {
       <div className="cats" role="group" aria-label="제품 카테고리">
         {SHOP_CATS.map(([k, n]) => (
           <button key={k} type="button" aria-pressed={cat === k} onClick={() => pick(k)}>
-            {n}<small>{k === 'all' ? SHOP.length : SHOP.filter(p => p.cat === k).length}</small>
+            {n}<small>{k === 'all' ? list.length : list.filter(p => p.cat === k).length}</small>
           </button>
         ))}
       </div>
       <div className="grid">
-        {SHOP.map(p => <Card key={p.name} p={p} hidden={!(cat === 'all' || p.cat === cat)} />)}
+        {list.map(p => <Card key={p.key} p={p} hidden={!(cat === 'all' || p.cat === cat)} />)}
       </div>
     </>
   );

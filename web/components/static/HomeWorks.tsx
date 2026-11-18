@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import HomeWorksList from '@/components/HomeWorksList';
 
 export default function HomeWorks() {
   return (
@@ -13,12 +14,7 @@ export default function HomeWorks() {
     </div>
     <div>
       <div className="sec-hd rv"><div><span className="eyebrow">WORKS · 작업</span><h2>계절마다 남긴 꽃</h2></div><Link href="/works">전체 아카이브</Link></div>
-      <ol className="wlist">
-        <li className="rv"><time dateTime="2026-11">2026.11</time><div><b>입동, 찻자리의 꽃</b><small>개인 다회 · 낙엽송과 마른 연밥</small></div><i>공간 연출</i></li>
-        <li className="rv"><time dateTime="2026-10">2026.10</time><div><b>갤러리 개관 꽃</b><small>설치 작업 · 억새와 감나무 가지</small></div><i>프로젝트</i></li>
-        <li className="rv"><time dateTime="2026-09">2026.09</time><div><b>백로의 한 줄기</b><small>정기 구독 · 아홉 번째 꽃</small></div><i>구독</i></li>
-        <li className="rv"><time dateTime="2026-08">2026.08</time><div><b>보자기 워크숍 기록</b><small>커뮤니티 · 쪽물 들이기와 매듭 짓기</small></div><i>모임</i></li>
-      </ol>
+      <HomeWorksList />
     </div>
   </section>
 

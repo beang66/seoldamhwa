@@ -55,10 +55,6 @@ typography:
     fontSize: "14px"
     fontWeight: 400
     fontFeature: "tnum"
-  hand:
-    fontFamily: "Nanum Pen Script, cursive"
-    fontSize: "30px"
-    fontWeight: 400
 rounded:
   hair: "2px"
   sm: "6px"
@@ -179,7 +175,7 @@ components:
 **Display Font:** Noto Serif KR (with serif)
 **Body Font:** Noto Sans KR (with sans-serif)
 **Latin & Numeral Font:** EB Garamond (with serif)
-**Hand Font:** Nanum Pen Script. 확정된 손글씨 로고가 나오기 전까지 쓰는 임시 서체다.
+**Hand Font:** 쓰지 않는다. 손맛은 연필 선화가 맡고, 손글씨 자리(로고 라벨, 카드 제목, 메모)는 바탕체로 쓴다.
 
 **Character:** 가는 바탕체 제목이 시처럼 놓이고, 가벼운 고딕 본문이 조용히 받친다. 영문 브랜드명과 가격, 날짜는 클래식 세리프가 맡아 한글과 결을 달리한다.
 
@@ -191,7 +187,7 @@ components:
 - **Body**: 설명과 안내. 한 줄은 대략 40자 안쪽으로 두고, 짧은 문단으로 끊는다.
 - **Label**: `PRODUCTS · 제품`처럼 영문 대문자와 한글을 가운뎃점으로 잇는 섹션 라벨. 안개 글자색이다.
 - **Numeral**: 가격, 날짜, 번호. 자릿수를 맞추는 숫자(tabular)를 쓰고, 가격 뒤에는 '원'을 붙인다.
-- **Hand**: 손글씨 로고 '설담화', 천 라벨, 다시 쓰는 법 카드의 손글씨.
+- **Hand**: 손글씨 서체 없이 바탕체로 쓴다. 천 라벨, 다시 쓰는 법 카드 제목, 메모 문구.
 
 ### Named Rules
 **The 12px Floor Rule.** 어떤 글자도 12px(9pt)보다 작게 쓰지 않는다. 배지, 캡션, 도면 속 글자도 마찬가지다. 화면에 맞춰 줄어드는 SVG 도면 글자는 13으로 둔다.

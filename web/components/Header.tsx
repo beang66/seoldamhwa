@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { useCart } from './Providers';
+import { useAuth } from './Auth';
 
 const NAV = [
   { href: '/shop', key: 'shop', label: '제품' },
@@ -14,6 +15,7 @@ const NAV = [
 export default function Header() {
   const path = usePathname();
   const { count } = useCart();
+  const { user, isAdmin } = useAuth();
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
   const btn = useRef<HTMLButtonElement>(null);
@@ -51,9 +53,10 @@ export default function Header() {
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1.2 11a1.5 1.5 0 0 1-1.5 1.3H8.2a1.5 1.5 0 0 1-1.5-1.3z" /><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" /></svg>
           <span className="cnt" ref={cnt}>{count}</span>
         </Link>
-        <a className="ico" href="#" data-soon="" aria-label="마이페이지 (준비 중)">
+        <Link className="ico" href={user ? (isAdmin ? '/admin' : '/mypage') : '/login'} aria-label={user ? (isAdmin ? '관리자 페이지' : '마이페이지') : '로그인'}>
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="3.7" /><path d="M4.8 20.5c.9-3.9 3.7-6 7.2-6s6.3 2.1 7.2 6" /></svg>
-        </a>
+          {user && <i className="on-dot" aria-hidden="true" />}
+        </Link>
       </div>
     </header>
   );
