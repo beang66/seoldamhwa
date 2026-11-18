@@ -11,9 +11,18 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=fff)
 ![Supabase](https://img.shields.io/badge/Supabase-Postgres·Auth-3FCF8E?logo=supabase&logoColor=fff)
 
+**작업 기간** 2026.10.29 – 2026.11.18
+
+### 핵심 성과
+
 | 화면 | 상품 | DB 테이블 | 관리자 탭 |
 | --- | --- | --- | --- |
 | 14종 (주소 19개) | 9개 | 6개 | 4개 |
+
+- 브랜드 방향(C안)을 디자인 시스템과 화면으로 옮기고, 회원·주문·관리자 기능까지 구현
+- 서버 없는 정적 사이트에서 회원가입·로그인, 주문 접수, 마이페이지, 관리자 페이지 동작
+- 주문 금액은 DB 함수가 다시 계산하고, 읽기·쓰기 권한은 RLS 정책으로 제한
+- 대표가 코드 없이 상품·사진·상세 페이지·모임·작업 기록을 등록하고 고칠 수 있음
 
 ![메인 화면](docs/screenshots/home.png)
 
