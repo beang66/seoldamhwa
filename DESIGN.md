@@ -17,25 +17,25 @@ colors:
   cloth-ink: "#2A2926"
 typography:
   wordmark:
-    fontFamily: "EB Garamond, serif"
+    fontFamily: "Inter Tight, sans-serif"
     fontSize: "clamp(40px, 5.6vw, 72px)"
     fontWeight: 400
     lineHeight: 1
     letterSpacing: "-0.01em"
   display:
-    fontFamily: "Noto Serif KR, serif"
+    fontFamily: "Noto Sans KR, sans-serif"
     fontSize: "40px"
     fontWeight: 300
     lineHeight: 1.3
     letterSpacing: "0.04em"
   headline:
-    fontFamily: "Noto Serif KR, serif"
+    fontFamily: "Noto Sans KR, sans-serif"
     fontSize: "28px"
     fontWeight: 300
     lineHeight: 1.45
     letterSpacing: "0.04em"
   title:
-    fontFamily: "Noto Serif KR, serif"
+    fontFamily: "Noto Sans KR, sans-serif"
     fontSize: "16px"
     fontWeight: 400
     lineHeight: 1.5
@@ -51,7 +51,7 @@ typography:
     lineHeight: 1.4
     letterSpacing: "0.3em"
   numeral:
-    fontFamily: "EB Garamond, serif"
+    fontFamily: "Inter Tight, sans-serif"
     fontSize: "14px"
     fontWeight: 400
     fontFeature: "tnum"
@@ -172,9 +172,9 @@ components:
 
 ## Typography
 
-**Display Font:** Noto Serif KR (with serif)
+**Display Font:** Noto Sans KR Light (with sans-serif) — 명조 계열은 쓰지 않는다
 **Body Font:** Noto Sans KR (with sans-serif)
-**Latin & Numeral Font:** EB Garamond (with serif)
+**Latin & Numeral Font:** Inter Tight Light (with sans-serif)
 **Hand Font:** 쓰지 않는다. 손맛은 연필 선화가 맡고, 손글씨 자리(로고 라벨, 카드 제목, 메모)는 바탕체로 쓴다.
 
 **Character:** 가는 바탕체 제목이 시처럼 놓이고, 가벼운 고딕 본문이 조용히 받친다. 영문 브랜드명과 가격, 날짜는 클래식 세리프가 맡아 한글과 결을 달리한다.
@@ -280,7 +280,7 @@ components:
 ### Do:
 - **Do** 쪽빛(#2F56A8)은 한 화면에 한 점만 쓴다 (The One Indigo Rule).
 - **Do** 섹션 바탕을 바꿀 때 200px 그라데이션으로 이어 붙인다.
-- **Do** 가격과 날짜는 EB Garamond의 자릿수 맞춤 숫자로 쓰고, 가격 뒤에 '원'을 붙인다.
+- **Do** 가격과 날짜는 Inter Tight의 자릿수 맞춤 숫자로 쓰고, 가격 뒤에 '원'을 붙인다.
 - **Do** 섹션 라벨은 `영문 대문자 · 한글` 형식에 0.26–0.3em 자간으로 쓴다.
 - **Do** 카드와 포스터처럼 놓인 것에는 Paper Lift 그림자를 쓴다.
 - **Do** 손그림은 벡터로 쓰고, 선 끝은 붓처럼 가늘어지게 마무리한다.
