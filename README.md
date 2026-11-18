@@ -1,4 +1,4 @@
-# 🌸 설담화 說談話
+# 🌸 설담화 說談花
 
 > **"말로 다 못 한 마음을 꽃으로 전합니다."**
 
@@ -15,7 +15,7 @@
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=000)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=fff)
 ![Supabase](https://img.shields.io/badge/Supabase-Postgres·Auth·Storage-3FCF8E?style=flat-square&logo=supabase&logoColor=fff)
-![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-정적_배포-222?style=flat-square&logo=githubpages)
+![Vercel](https://img.shields.io/badge/Vercel-배포-000000?style=flat-square&logo=vercel)
 
 <br>
 
@@ -65,7 +65,8 @@
 | 글자 | 뜻 |
 | :---: | --- |
 | **說** 설 | 대표 이름의 '설'이자 '말씀·이야기 설' — 이야기를 전하는 브랜드 |
-| **談話** 담화 | 주고받는 이야기. 편지·손글씨처럼 마음을 건네는 말 |
+| **談** 담 | 이야기 담 — 마주 앉아 나누는 이야기. 우리말 '담다'와 소리가 같음 |
+| **花** 화 | 꽃 화 — 말로 다 못 한 마음을 담아 건네는 꽃 |
 | **담다 · 닮다** | 대표의 초기 메모 — 당신을 닮다, 꽃을 담다, 이야기를 담다 |
 
 ### 💬 슬로건
@@ -108,7 +109,7 @@
 | 대상 | 꽃 선물을 고르는 손님, 혼자 운영하는 대표 |
 | 기간 | 2026.10.29 대표 인터뷰 – 2026.11.18 |
 | 역할 | 브랜드 기획·BI/CI·디자인 판단·클라이언트 협의·검수: 안정빈 / 구현: Claude Code / 브랜드 방향 결정: 설담화 대표 |
-| 실행 환경 | 정적 사이트(GitHub Pages) + Supabase(서울 리전), 데스크톱·모바일 브라우저 |
+| 실행 환경 | 정적 사이트(Vercel) + Supabase(서울 리전), 데스크톱·모바일 브라우저 |
 
 <a id="background"></a>
 ## 🎯 2. 기획 배경
@@ -185,12 +186,12 @@ flowchart LR
 | Frontend | Next.js 16 (App Router, 정적 내보내기), React 19, TypeScript | 페이지별 주소, 미리 만든 정적 페이지 |
 | Styling | 순수 CSS + 디자인 토큰(CSS 변수), `next/font` | 3장의 색·글꼴·여백 규칙 |
 | Backend·DB | Supabase (Postgres, Auth, Storage, Edge Function) | 회원·주문·상품·사진·새 주문 알림 |
-| 배포 | GitHub Actions → GitHub Pages | `main`에 푸시하면 빌드·배포 |
+| 배포 | Vercel | `main`에 푸시하면 운영 배포, PR마다 미리보기 주소 |
 
 ```mermaid
 flowchart TB
     subgraph Client["🖥️ 브라우저"]
-        UI["정적 페이지 (GitHub Pages)"]
+        UI["정적 페이지 (Vercel)"]
         LS[("localStorage<br>장바구니")]
         UI --- LS
     end
@@ -575,13 +576,16 @@ npm run dev        # http://localhost:3000
 | --- | --- | --- | --- |
 | `NEXT_PUBLIC_SUPABASE_URL` | 로그인·주문을 쓸 때 | Supabase 프로젝트 주소 | 코드 안의 기본 상품·works 데이터로 화면만 열림, 로그인·주문 불가 |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | 로그인·주문을 쓸 때 | 공개(publishable) 키. `web/.env.development`·`.env.production`에 있음 | 위와 같음 |
-| `NEXT_PUBLIC_BASE_PATH` | 하위 경로에 배포할 때 | 예: `/seoldamhwa` | 도메인 루트(`/`) 기준으로 빌드 |
+| `NEXT_PUBLIC_BASE_PATH` | 하위 경로에 배포할 때만 (Vercel에는 넣지 않음) | 예: `/seoldamhwa` | 도메인 루트(`/`) 기준으로 빌드 |
 
-### ☁️ 방법 2. GitHub Pages로 배포
+### ☁️ 방법 2. Vercel로 배포
 
-1. `npm run build` — 정적 파일이 `web/out/`에 만들어짐
-2. `main`에 푸시하면 `.github/workflows/pages.yml`이 같은 빌드를 돌려 GitHub Pages에 올림
-3. DB 만들기, 마이그레이션 순서, 관리자 등록, 다른 Supabase 계정으로 옮기기, 메일 알림 켜기는 [`supabase/README.md`](supabase/README.md)
+1. Vercel에서 이 저장소를 가져오고 Root Directory를 `web`으로 지정 (Framework Preset: Next.js)
+2. Environment Variables에 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` 입력
+3. `main`에 푸시하면 운영 주소 [seoldamhwa.vercel.app](https://seoldamhwa.vercel.app/)에 배포되고, PR마다 미리보기 주소가 생김
+4. Supabase Authentication의 Site URL과 Redirect URLs에 `https://seoldamhwa.vercel.app` 추가 (가입 확인·비밀번호 재설정 메일의 링크)
+
+DB 만들기, 마이그레이션 순서, 관리자 등록, 다른 Supabase 계정으로 옮기기, 메일 알림 켜기는 [`supabase/README.md`](supabase/README.md)에 있습니다.
 
 <a id="verify"></a>
 ## ✅ 10. 검증 결과
@@ -596,7 +600,7 @@ npm run dev        # http://localhost:3000
 | Supabase 보안 점검 | Supabase 보안 어드바이저 | 주문·취소·탈퇴·관리자 확인 함수 공개(함수 안에서 본인·관리자 확인), `admins` 정책 없음(직접 접근 차단), 유출 비밀번호 차단 꺼짐 |
 | 화면 흐름 | Playwright, Supabase 응답 모의, 1440px·390px | 옵션 선택 → 장바구니 → 로그인 이동 → 틀린 비밀번호 안내 → 주문 접수(바뀐 가격 반영) → 마이페이지 → 관리자 로그인 → 주문 상태 변경 → 제품 수정 통과 |
 | 레이아웃 | 브라우저 1440·1680px, 모바일 375px | 가로 넘침 없음, 좌우 여백 대칭, 섹션 구분선 폭 1200px 통일, 위치 바 이동·가격순 정렬 동작 |
-| 확인하지 않은 범위 | — | 실제 관리자 계정의 사진 업로드, 결제, 실제 메일 발송, GitHub Actions 배포 |
+| 확인하지 않은 범위 | — | 실제 관리자 계정의 사진 업로드, 결제, 실제 메일 발송, Vercel 운영 배포 |
 
 <a id="retro"></a>
 ## 📈 11. 회고
@@ -660,10 +664,10 @@ flowchart LR
 <a id="license"></a>
 ## 📄 14. 라이선스
 
-설담화(說談話) 클라이언트 프로젝트입니다. 오픈소스 라이선스를 두지 않았으며, 브랜드명·로고·사진의 사용은 설담화의 허락이 필요합니다.
+설담화(說談花) 클라이언트 프로젝트입니다. 오픈소스 라이선스를 두지 않았으며, 브랜드명·로고·사진의 사용은 설담화의 허락이 필요합니다.
 
 <div align="center">
 <br>
-<strong>🌸 설담화 說談話</strong> · 말로 다 못 한 마음을 꽃으로 전합니다<br>
+<strong>🌸 설담화 說談花</strong> · 말로 다 못 한 마음을 꽃으로 전합니다<br>
 기획·디자인 안정빈
 </div>

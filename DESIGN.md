@@ -1,5 +1,5 @@
 ---
-name: 설담화 說談話
+name: 설담화 說談花
 description: 꽃으로 건네는 말, 다시 쓰는 보자기에 싸서
 colors:
   indigo-point: "#2F56A8"
@@ -118,7 +118,7 @@ components:
     textColor: "{colors.ink}"
 ---
 
-# Design System: 설담화 說談話
+# Design System: 설담화 說談花
 
 ## Overview
 
@@ -196,7 +196,7 @@ components:
 
 **The Bilingual Label Rule.** 섹션 라벨은 `영문 대문자 · 한글`로 쓰고, 0.26–0.3em 정도로 넓게 띄운다. 한글만 쓰는 라벨에도 넓은 자간을 유지한다.
 
-**The Vertical Hanja Rule.** 說談話, 꽃모임 같은 짧은 한자·한글 표식은 세로쓰기로 카드 모서리에 둔다. 본문은 세로로 쓰지 않는다. 보자기 섹션의 세로 문단만 예외이고, 모바일에서는 가로로 바뀐다.
+**The Vertical Hanja Rule.** 說談花, 꽃모임 같은 짧은 한자·한글 표식은 세로쓰기로 카드 모서리에 둔다. 본문은 세로로 쓰지 않는다. 보자기 섹션의 세로 문단만 예외이고, 모바일에서는 가로로 바뀐다.
 
 ## Layout
 

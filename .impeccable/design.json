@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "generatedAt": "2026-11-12T17:19:00+09:00",
-  "title": "Design System: 설담화 說談話",
+  "title": "Design System: 설담화 說談花",
   "extensions": {
     "colorMeta": {
       "indigo-point": {
@@ -389,7 +389,7 @@
       },
       {
         "name": "The Vertical Hanja Rule",
-        "body": "說談話, 꽃모임 같은 짧은 한자·한글 표식은 세로쓰기로 카드 모서리에 둔다. 본문은 세로로 쓰지 않는다. 보자기 섹션의 세로 문단만 예외이고, 모바일에서는 가로로 바뀐다.",
+        "body": "說談花, 꽃모임 같은 짧은 한자·한글 표식은 세로쓰기로 카드 모서리에 둔다. 본문은 세로로 쓰지 않는다. 보자기 섹션의 세로 문단만 예외이고, 모바일에서는 가로로 바뀐다.",
         "section": "typography"
       },
       {
