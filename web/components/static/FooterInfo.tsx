@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { BUSINESS, filled, show } from '@/lib/business';
+import { BUSINESS, BUSINESS_FIELDS, filled, show } from '@/lib/business';
 
-// 사업자 정보는 lib/business.ts 한 곳에서 채운다. 비어 있으면 '확정 전'으로 보인다.
+// 사업자 정보는 lib/business.ts 한 곳에서 채운다. 비어 있으면 '준비 중'으로 보인다.
 export default function FooterInfo() {
   const b = BUSINESS;
   return (
@@ -16,10 +16,9 @@ export default function FooterInfo() {
         <li><Link href="/privacy"><b>개인정보처리방침</b></Link></li>
         <li><Link href="/refund">취소·환불</Link></li>
       </ul>
-      <p className="ft-biz">
-        상호 {show(b.name)} · 대표 {show(b.ceo)} · 사업자등록번호 {show(b.regNo)} · 통신판매업 신고 {show(b.mailOrderNo)}<br />
-        주소 {show(b.address)} · 전화 {show(b.phone)}
-      </p>
+      <dl className="ft-biz" aria-label="사업자 정보">
+        {BUSINESS_FIELDS.map(([label, k]) => <div key={k}><dt>{label}</dt><dd>{show(b[k])}</dd></div>)}
+      </dl>
     </div>
   );
 }

@@ -845,7 +845,10 @@ img{display:block;max-width:100%}
 }
 
 /* 사업자 정보 · 약관 */
-.ft-biz{grid-column:1/-1;font-size:12px;line-height:1.9;color:var(--mist);letter-spacing:.02em}
+.ft-biz{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:2px 18px;font-size:12px;line-height:1.9;color:var(--mist);letter-spacing:.02em}
+.ft-biz div{display:flex;gap:6px}
+.ft-biz dt{color:var(--graphite)}
+@media (max-width:720px){.ft-biz{justify-content:center;gap:2px 12px}}
 .ft ul b{font-weight:600;color:var(--ink)}
 .legal{max-width:760px;margin:0 auto;padding-bottom:120px;font-size:14px;line-height:1.95;color:var(--graphite)}
 .legal section{padding:28px 0;border-top:1px solid var(--hair)}
