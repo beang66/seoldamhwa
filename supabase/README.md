@@ -11,6 +11,7 @@
 | `migrations/20261118000100_tighten_function_grants.sql` | 함수 실행 권한 좁히기 |
 | `migrations/20261118000200_account_deletion.sql` | 회원 탈퇴 `delete_my_account`(주문은 계정과 분리해 5년 보관), 보관 기간 지난 주문 정리 `purge_expired_orders` |
 | `migrations/20261118000300_review_fixes.sql` | 관리자는 메일 인증을 마친 계정만, 금액 계산을 `price_lines`로 모음, 주문 전 금액 보기 `quote_order`, 주문 때 받는 날·합계 확인 |
+| `migrations/20261118000400_product_detail.sql` | 제품 상세 사진(`photos`)·상세 설명(`body`)·상세 정보(`info`) 열, 제품 사진 저장소 `products` |
 | `seed.sql` | 지금 사이트의 제품·works·모임 내용 (관리자 이메일은 넣지 않음) |
 | `functions/notify-new-order/` | 새 주문을 관리자에게 메일로 알리는 Edge Function (메일 서비스 키를 넣어야 켜짐) |
 
