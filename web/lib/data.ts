@@ -72,11 +72,19 @@ export function productPrice(p: ProductRow): string {
   const min = sizes ? Math.min(...sizes.map(s => s.price)) : p.price;
   return (p.cat === 'sub' ? '월 ' : '') + won(min) + '원' + (sizes && sizes.length > 1 ? '부터' : '');
 }
-export const ymText = (ym: string) => ym.slice(0, 7).replace('-', '.');
-const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
+// 날짜는 Intl로 읽고, 화면의 점 표기(2026.11.22)는 그 조각을 이어 붙여 만든다
+const day = (d: string) => new Date(d.slice(0, 10) + 'T00:00:00');
+const parts = (d: string, o: Intl.DateTimeFormatOptions) =>
+  Object.fromEntries(new Intl.DateTimeFormat('ko-KR', o).formatToParts(day(d)).map(p => [p.type, p.value])) as Record<string, string>;
+/** 2026-11-01 → 2026.11 */
+export const ymText = (ym: string) => { const p = parts(ym, { year: 'numeric', month: '2-digit' }); return `${p.year}.${p.month}`; };
+/** 2026-11-22 → 2026.11.22 */
+export const dotDate = (d: string) => { const p = parts(d, { year: 'numeric', month: '2-digit', day: '2-digit' }); return `${p.year}.${p.month}.${p.day}`; };
+/** 짧게 11.22 토 / 길게 11월 22일 토요일 */
 export function dateText(d: string, long = false) {
-  const t = new Date(d + 'T00:00:00');
-  return long ? `${t.getMonth() + 1}월 ${t.getDate()}일 ${DAYS[t.getDay()]}요일` : `${t.getMonth() + 1}.${String(t.getDate()).padStart(2, '0')} ${DAYS[t.getDay()]}`;
+  if (long) return new Intl.DateTimeFormat('ko-KR', { month: 'long', day: 'numeric', weekday: 'long' }).format(day(d));
+  const p = parts(d, { month: 'numeric', day: '2-digit', weekday: 'short' });
+  return `${p.month}.${p.day} ${p.weekday}`;
 }
 export const todayIso = () => { const t = new Date(); t.setMinutes(t.getMinutes() - t.getTimezoneOffset()); return t.toISOString().slice(0, 10); };
 /** works 사진: 기본 사진 이름이면 CSS 변수, 업로드한 사진이면 주소 */

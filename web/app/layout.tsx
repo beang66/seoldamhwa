@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Noto_Serif_KR, Noto_Sans_KR, EB_Garamond } from 'next/font/google';
 import './globals.css';
 import Providers from '@/components/Providers';
@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   title: { default: '설담화 · 꽃으로 건네는 말', template: '설담화 · %s' },
   description: '절기마다 고른 꽃 한 줄기를, 다시 쓰는 보자기에 싸서 건네는 1인 꽃 스튜디오.',
 };
+
+// 모바일 브라우저 상단바를 한지 바탕색에 맞춘다
+export const viewport: Viewport = { themeColor: '#F1EEE8', viewportFit: 'cover' };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

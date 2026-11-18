@@ -89,7 +89,7 @@ export default function OrderForm() {
         {changed && quote && <small>가격이 바뀌어 장바구니 금액을 지금 가격으로 고쳤어요.</small>}
       </p>
       <label className="field"><span>받는 분</span><input name="name" defaultValue={prof.name} key={'n' + prof.name} autoComplete="name" required maxLength={40} /></label>
-      <label className="field"><span>연락처</span><input name="phone" defaultValue={prof.phone} key={'p' + prof.phone} type="tel" autoComplete="tel" required minLength={6} maxLength={20} placeholder="010-0000-0000" /></label>
+      <label className="field"><span>연락처</span><input name="phone" defaultValue={prof.phone} key={'p' + prof.phone} type="tel" autoComplete="tel" required minLength={6} maxLength={20} placeholder="예: 010-1234-5678" /></label>
       <label className="field"><span>받고 싶은 날</span><input name="date" type="date" min={tomorrowLocal()} /><small>꽃꽂이는 받는 날 아침에 꽂아요. 비워 두면 연락드려 정해요.</small></label>
       <label className="field"><span>요청 사항</span><textarea name="memo" rows={3} maxLength={500} /></label>
       <p className="form-msg err" role="alert">{err}</p>

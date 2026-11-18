@@ -1,7 +1,7 @@
 'use client';
 // 커뮤니티의 모임 정보. DB가 있으면 DB의 모임으로, 없으면 fallback(코드 안의 안내)을 그대로 보여 준다
 import { won } from '@/lib/catalog';
-import { dateText, todayIso, useGatherings, type GatheringRow } from '@/lib/data';
+import { dateText, dotDate, todayIso, useGatherings, type GatheringRow } from '@/lib/data';
 
 const upcoming = (list: GatheringRow[]) => { const t = todayIso(); return list.filter(g => g.date >= t).sort((a, b) => a.date.localeCompare(b.date)); };
 export const featured = (list: GatheringRow[]) => upcoming(list).find(g => g.status !== '마감') ?? null;
@@ -49,7 +49,7 @@ export function GatherNotes({ fallback }: { fallback: React.ReactNode }) {
   if (!past.length) return <p className="cm-empty">아직 남긴 기록이 없어요.</p>;
   return (
     <div className="cm-notes">
-      {past.map(g => <article key={g.id}><time dateTime={g.date}>{g.date.replaceAll('-', '.')}</time><h3>{g.title}</h3><p>{g.note}</p></article>)}
+      {past.map(g => <article key={g.id}><time dateTime={g.date}>{dotDate(g.date)}</time><h3>{g.title}</h3><p>{g.note}</p></article>)}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { won } from '@/lib/catalog';
+import { dotDate } from '@/lib/data';
 import { errText, supabase } from '@/lib/supabase';
 import { useAuth } from './Auth';
 import { useToast } from './Providers';
@@ -90,7 +91,7 @@ export default function MyPage() {
                   </div>
                   <ul>{o.items.map((it, i) => <li key={i}><b>{it.name}</b><span>{it.opt} · {it.qty}개</span><em>{won(it.unit * it.qty)}원</em></li>)}</ul>
                   <div className="order-ft">
-                    <span>{o.receive_date ? `받는 날 ${o.receive_date.replaceAll('-', '.')}` : '받는 날 상의'}</span>
+                    <span>{o.receive_date ? `받는 날 ${dotDate(o.receive_date)}` : '받는 날 상의'}</span>
                     <b>합계 {won(o.total)}원</b>
                   </div>
                   {o.admin_note && <p className="order-note">설담화 · {o.admin_note}</p>}
@@ -108,7 +109,7 @@ export default function MyPage() {
           <form className="form" onSubmit={save}>
             <label className="field"><span>이메일</span><input value={user.email ?? ''} readOnly /></label>
             <label className="field"><span>이름</span><input name="name" defaultValue={profile.name} autoComplete="name" maxLength={40} required /></label>
-            <label className="field"><span>연락처</span><input name="phone" defaultValue={profile.phone} type="tel" autoComplete="tel" maxLength={20} placeholder="010-0000-0000" /></label>
+            <label className="field"><span>연락처</span><input name="phone" defaultValue={profile.phone} type="tel" autoComplete="tel" maxLength={20} placeholder="예: 010-1234-5678" /></label>
             <button className="pill wide" type="submit" disabled={busy}>저장</button>
           </form>
         )}

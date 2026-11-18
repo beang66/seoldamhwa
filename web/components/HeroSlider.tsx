@@ -15,6 +15,7 @@ export default function HeroSlider() {
   const box = useRef<HTMLElement>(null);
   const [cur, setCur] = useState(0);
   const [manual, setManual] = useState(false);
+  // 움직임 줄이기를 켠 사람에게는 자동으로 넘기지 않는다 (마우스·포커스가 올라가면 잠시 멈춤)
   const [playing, setPlaying] = useState(true);
   const [held, setHeld] = useState(false);
   const [live, setLive] = useState('');
@@ -57,13 +58,10 @@ export default function HeroSlider() {
         </div>
       ))}
       <div className="hs-ui">
-        <div className="hs-dots" role="group" aria-label="슬라이드 선택">
-          {SLIDES.map((_, k) => <button key={k === cur ? `on-${run}` : k} type="button" aria-label={`${k + 1}번째 장 보기`} aria-current={k === cur ? 'true' : undefined} onClick={() => show(k, true, k > cur ? 'fwd' : 'back')} />)}
+        <div className="hs-dots" role="group" aria-label="장 위치 · 눌러서 이동">
+          {SLIDES.map((_, k) => <button key={k === cur ? `on-${run}` : k} type="button" aria-label={`${k + 1}번째 장으로 이동 · ${SLIDES[k].title}`} aria-current={k === cur ? 'true' : undefined} onClick={() => show(k, true, k > cur ? 'fwd' : 'back')} />)}
         </div>
         <span className="hs-count" aria-hidden="true"><b>{String(cur + 1).padStart(2, '0')}</b> / 05</span>
-        <button type="button" className="hs-btn" aria-label={playing ? '자동 넘김 멈추기' : '자동 넘김 시작'} onClick={() => { setPlaying(p => !p); setRun(r => r + 1); }}>
-          <svg viewBox="0 0 24 24" aria-hidden="true">{playing ? <path d="M9 6v12M15 6v12" /> : <path d="M8 5l11 7-11 7z" />}</svg>
-        </button>
       </div>
       {/* 좌우 가장자리의 테두리 없는 화살표 */}
       <button type="button" className="hs-arrow prev" aria-label="이전 장" onClick={() => show(cur - 1, true, 'back')}><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M20 5L9 16l11 11" /></svg></button>

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { WK_CATS, won } from '@/lib/catalog';
-import { refreshPublic, ymText, type GatheringRow, type ProductRow, type WorkRow } from '@/lib/data';
+import { dotDate, refreshPublic, ymText, type GatheringRow, type ProductRow, type WorkRow } from '@/lib/data';
 import { errText, supabase } from '@/lib/supabase';
 import { useAuth } from '../Auth';
 import { useToast } from '../Providers';
@@ -34,7 +34,7 @@ export default function Admin() {
   return (
     <Shell right={<><span className="ad-who">{user.email}</span><button type="button" className="link" onClick={async () => { leaving.current = true; router.replace('/'); await signOut(); }}>로그아웃</button></>}>
       <div className="cats ad-tabs" role="tablist" aria-label="관리 항목">
-        {TABS.map(([k, n]) => <button key={k} type="button" role="tab" aria-selected={tab === k} onClick={() => setTab(k)}>{n}</button>)}
+        {TABS.map(([k, n]) => <button key={k} type="button" role="tab" aria-selected={tab === k} onClick={() => k !== tab && okToLeave() && setTab(k)}>{n}</button>)}
       </div>
       <div role="tabpanel" aria-label={TABS.find(t => t[0] === tab)![1]}>
         {tab === 'orders' && <Orders />}
@@ -96,6 +96,11 @@ function textToSizes(t: string) {
   return out.length ? out : null;
 }
 
+// 편집 중인데 저장하지 않은 내용이 있는지. 탭을 바꾸거나 닫거나 창을 떠날 때 묻는다
+const edits = { dirty: false };
+const LOSE = '저장하지 않은 내용이 있어요. 버리고 넘어갈까요?';
+const okToLeave = () => !edits.dirty || confirm(LOSE);
+
 function Editor({ fields, value, isNew, onSave, onCancel, onDelete, title }: {
   fields: Field[]; value: Rec; isNew: boolean; title: string;
   onSave: (v: Rec) => Promise<void>; onCancel: () => void; onDelete?: () => Promise<void>;
@@ -104,6 +109,13 @@ function Editor({ fields, value, isNew, onSave, onCancel, onDelete, title }: {
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState('');
   const set = (k: string, x: unknown) => setV(cur => ({ ...cur, [k]: x }));
+  // 처음 값에서 하나라도 고쳤으면 '저장 안 함' 상태
+  useEffect(() => { edits.dirty = v !== value; }, [v, value]);
+  useEffect(() => {
+    const warn = (e: BeforeUnloadEvent) => { if (edits.dirty) e.preventDefault(); };
+    addEventListener('beforeunload', warn);
+    return () => { removeEventListener('beforeunload', warn); edits.dirty = false; };
+  }, []);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault(); setBusy(true); setErr('');
@@ -120,7 +132,7 @@ function Editor({ fields, value, isNew, onSave, onCancel, onDelete, title }: {
   };
 
   return (
-    <form className="form ad-form" onSubmit={submit} aria-label={title}>
+    <form className="form ad-form" onSubmit={submit} aria-label={title} autoComplete="off">
       <h3>{title}</h3>
       <div className="ad-fields">
         {fields.filter(f => !f.show || f.show(v)).map(f => {
@@ -146,7 +158,7 @@ function Editor({ fields, value, isNew, onSave, onCancel, onDelete, title }: {
       <p className="form-msg err" role="alert">{err}</p>
       <div className="ad-actions">
         <button className="pill dark" type="submit" disabled={busy}>{busy ? '저장하는 중…' : '저장'}</button>
-        <button className="pill" type="button" onClick={onCancel}>닫기</button>
+        <button className="pill" type="button" onClick={() => okToLeave() && onCancel()}>닫기</button>
         {onDelete && !isNew && <button className="link danger" type="button" disabled={busy} onClick={async () => {
           if (!confirm('지울까요? 되돌릴 수 없어요.')) return;
           setBusy(true); try { await onDelete(); } catch (x) { setErr(errText(x)); } finally { setBusy(false); }
@@ -200,7 +212,7 @@ function Orders() {
                 <dl className="ad-cust">
                   <div><dt>주문한 분</dt><dd>{o.name}</dd></div>
                   <div><dt>연락처</dt><dd><a href={`tel:${o.phone}`}>{o.phone}</a></dd></div>
-                  <div><dt>받는 날</dt><dd>{o.receive_date ? o.receive_date.replaceAll('-', '.') : '상의'}</dd></div>
+                  <div><dt>받는 날</dt><dd>{o.receive_date ? dotDate(o.receive_date) : '상의'}</dd></div>
                   {o.memo && <div><dt>요청</dt><dd>{o.memo}</dd></div>}
                 </dl>
                 <ul>{o.items.map((it, i) => <li key={i}><b>{it.name}</b><span>{it.opt} · {it.qty}개</span><em>{won(it.unit * it.qty)}원</em></li>)}</ul>
@@ -208,7 +220,7 @@ function Orders() {
                   <span>상품 {won(o.items_total)} · 퀵 {won(o.quick_total)} · 택배 {won(o.ship)}</span>
                   <b>합계 {won(o.total)}원</b>
                 </div>
-                <form className="ad-note" onSubmit={e => { e.preventDefault(); update(o, { admin_note: String(new FormData(e.currentTarget).get('note') ?? '').trim() }); }}>
+                <form className="ad-note" autoComplete="off" onSubmit={e => { e.preventDefault(); update(o, { admin_note: String(new FormData(e.currentTarget).get('note') ?? '').trim() }); }}>
                   <label className="field"><span>고객에게 보이는 메모</span><input name="note" defaultValue={o.admin_note} maxLength={500} placeholder="예: 11월 20일 오전에 퀵으로 보내 드려요." /></label>
                   <button className="pill" type="submit">메모 저장</button>
                 </form>
@@ -241,7 +253,7 @@ function Crud<T extends { [k: string]: unknown }>({ table, idKey, order, fields,
   return (
     <section>
       <div className="ad-bar">
-        <button type="button" className="pill dark" onClick={() => setEdit({ v: { ...blank }, isNew: true })}>새로 만들기</button>
+        <button type="button" className="pill dark" onClick={() => okToLeave() && setEdit({ v: { ...blank }, isNew: true })}>새로 만들기</button>
         <button type="button" className="link" onClick={load}>새로 고침</button>
       </div>
       {edit && <Editor key={String(edit.v[idKey] ?? 'new')} fields={fields} value={edit.v} isNew={edit.isNew} title={edit.isNew ? title(null) : title(edit.v as T)}
@@ -254,7 +266,7 @@ function Crud<T extends { [k: string]: unknown }>({ table, idKey, order, fields,
               <thead><tr>{head.map(h => <th key={h} scope="col">{h}</th>)}<th scope="col"><span className="sr-only">고치기</span></th></tr></thead>
               <tbody>{rows.map(r => (
                 <tr key={String(r[idKey])}>{row(r).map((c, i) => <td key={i}>{c}</td>)}
-                  <td><button type="button" className="link" onClick={() => { setEdit({ v: { ...r }, isNew: false }); scrollTo({ top: 0, behavior: 'smooth' }); }}>고치기</button></td></tr>
+                  <td><button type="button" className="link" onClick={() => { if (!okToLeave()) return; setEdit({ v: { ...r }, isNew: false }); scrollTo({ top: 0, behavior: 'smooth' }); }}>고치기</button></td></tr>
               ))}</tbody>
             </table>
           </div>
@@ -305,7 +317,7 @@ function Gatherings() {
       blank={{ kind: '꽃 모임', title: '', date: '', time_text: '토요일 오후 2시–4시', place: '설담화 작업실 (서울)', capacity: 10, seats_left: 10, fee: 55000, fee_note: '', description: '', status: '모집 예정', note: '', visible: true }}
       title={r => r ? `모임 고치기 · ${r.title}` : '새 모임'}
       head={['날짜', '모임', '종류', '상태', '자리']}
-      row={r => [r.date.replaceAll('-', '.'), <b key="t">{r.title}</b>, r.kind, r.status + yes(!r.visible, ' · 숨김'), `${r.seats_left}/${r.capacity}`]}
+      row={r => [dotDate(r.date), <b key="t">{r.title}</b>, r.kind, r.status + yes(!r.visible, ' · 숨김'), `${r.seats_left}/${r.capacity}`]}
       fields={[
         { name: 'title', label: '모임 이름', type: 'text', required: true },
         { name: 'kind', label: '종류', type: 'select', options: KINDS, required: true },

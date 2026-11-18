@@ -97,7 +97,7 @@ export default function LoginForm() {
       <form className="form" onSubmit={submit} aria-label={title} key={mode}>
         {mode === 'find' && <p className="form-lead">가입한 이메일을 적어 주시면 비밀번호를 다시 정하는 링크를 보내 드려요.</p>}
         {mode === 'up' && <label className="field"><span>이름</span><input name="name" autoComplete="name" required maxLength={40} /></label>}
-        {mode !== 'reset' && <label className="field"><span>이메일</span><input name="email" type="email" autoComplete="email" required /></label>}
+        {mode !== 'reset' && <label className="field"><span>이메일</span><input name="email" type="email" autoComplete="email" spellCheck={false} autoCapitalize="none" inputMode="email" required /></label>}
         {mode !== 'find' && (
           <label className="field"><span>{mode === 'reset' ? '새 비밀번호' : '비밀번호'}</span>
             <input name="password" type="password" required minLength={mode === 'in' ? 1 : 8} autoComplete={mode === 'in' ? 'current-password' : 'new-password'} />

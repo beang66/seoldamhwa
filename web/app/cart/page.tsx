@@ -9,7 +9,7 @@ const Thumb = ({ l }: { l: CartLine }) => l.kind === 'bojagi'
   : <span className="th" style={{ backgroundImage: `var(--img-${l.img ?? 'ikebana-' + l.key})` }} aria-hidden="true" />;
 
 export default function CartPage() {
-  const { lines, setQty, remove } = useCart();
+  const { lines, setQty, remove, restore } = useCart();
   const toast = useToast();
   const t = cartTotals(lines);
   return (
@@ -33,7 +33,7 @@ export default function CartPage() {
                       <button type="button" aria-label="수량 줄이기" onClick={() => setQty(i, -1)}>−</button><output aria-live="polite">{l.qty}</output><button type="button" aria-label="수량 늘리기" onClick={() => setQty(i, 1)}>+</button>
                     </div>
                     <b className="line">{won(l.unit * l.qty)}원</b>
-                    <button type="button" className="rm" aria-label={`${l.name} 빼기`} onClick={() => { const g = remove(i); if (g) toast(`장바구니에서 뺐어요 · ${g.name}`); }}>×</button>
+                    <button type="button" className="rm" aria-label={`${l.name} 빼기`} onClick={() => { const g = remove(i); if (g) toast(`장바구니에서 뺐어요 · ${g.name}`, { label: '되돌리기', run: () => restore(i, g) }); }}>×</button>
                   </li>
                 ))}
               </ul>
