@@ -3,7 +3,7 @@ name: 설담화 說談話
 description: 꽃으로 건네는 말, 다시 쓰는 보자기에 싸서
 colors:
   indigo-point: "#2F56A8"
-  hanji: "#F1EEE8"
+  hanji: "#F4F3EF"
   white-sheet: "#FBFAF7"
   stone: "#E3DFD7"
   works-greige: "#DCD8CF"

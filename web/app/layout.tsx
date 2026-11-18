@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 // 모바일 브라우저 상단바를 한지 바탕색에 맞춘다
-export const viewport: Viewport = { themeColor: '#F1EEE8', viewportFit: 'cover' };
+export const viewport: Viewport = { themeColor: '#F4F3EF', viewportFit: 'cover' };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
