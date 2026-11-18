@@ -904,8 +904,8 @@ h1,h2,h3{text-wrap:balance}
 .ft-brand{display:flex;align-items:flex-end;gap:14px}
 .ft-vase{width:64px;height:64px;flex:none;color:var(--ink);fill:currentColor;margin-bottom:-4px}
 @media (max-width:720px){.ft-brand{justify-content:center}.ft-vase{width:54px;height:54px}}
-/* 헤더 카테고리 메뉴와 아이콘: 2px 크게, 굵게 */
-.hd nav a{font-size:14px;font-weight:600}
+/* 헤더 카테고리 메뉴와 아이콘: 2px 크게 */
+.hd nav a{font-size:14px}
 .hd .ico svg{width:23px;height:23px;stroke-width:1.7}
 .menu-btn{font-size:14px}
 /* 푸터 로고와 풀꽃 그림: 세로 가운데 맞춤 */
