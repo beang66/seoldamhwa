@@ -59,7 +59,7 @@ export default function LoginForm() {
     });
     if (mode === 'up') return run(async () => {
       if (pw.length < 8) throw new Error('Password should be at least 8');
-      if (pw !== f.get('password2')) throw new Error('비밀번호 두 칸이 서로 달라요.');
+      if (pw !== f.get('password2')) throw new Error('비밀번호가 일치하지 않습니다.');
       if (!f.get('agree')) throw new Error('개인정보 수집에 동의해 주세요.');
       const { data, error } = await supabase!.auth.signUp({
         email, password: pw,
@@ -77,7 +77,7 @@ export default function LoginForm() {
     });
     return run(async () => {
       if (pw.length < 8) throw new Error('Password should be at least 8');
-      if (pw !== f.get('password2')) throw new Error('비밀번호 두 칸이 서로 달라요.');
+      if (pw !== f.get('password2')) throw new Error('비밀번호가 일치하지 않습니다.');
       const { error } = await supabase!.auth.updateUser({ password: pw });
       if (error) throw error;
       setMode('in');
