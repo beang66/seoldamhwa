@@ -8,6 +8,8 @@ import { ARR, ITEMS, OTHER_PRICES, SHOP, WORKS, won, type Size, type WorkCat } f
 export type ProductRow = {
   key: string; cat: 'arrange' | 'gift' | 'bojagi' | 'sub'; name: string; meta: string; price: number;
   sizes: Size[] | null; vessel_off: number; img: string; has_detail: boolean; sold_out: boolean; visible: boolean; sort: number;
+  // 관리자가 쓰는 상세 페이지 내용 (DB에 열이 없던 예전 행은 비어 있을 수 있다)
+  photos?: string[]; body?: string; info?: { label: string; value: string }[];
 };
 export type WorkRow = { id: number; ym: string; cat: WorkCat; title: string; where_text: string; what: string; pic: string; body: string; visible: boolean };
 export type GatheringRow = {

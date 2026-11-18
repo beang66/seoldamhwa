@@ -2,8 +2,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { WK_CATS, won } from '@/lib/catalog';
-import { dotDate, refreshPublic, ymText, type GatheringRow, type ProductRow, type WorkRow } from '@/lib/data';
+import { ARR, ITEMS, WK_CATS, won } from '@/lib/catalog';
+import { dotDate, picBg, refreshPublic, ymText, type GatheringRow, type ProductRow, type WorkRow } from '@/lib/data';
 import { errText, supabase } from '@/lib/supabase';
 import { useAuth } from '../Auth';
 import { useToast } from '../Providers';
@@ -81,7 +81,8 @@ function useRows<T>(table: string, order: [string, boolean][]) {
 // ===== 공통: 칸 정의로 그리는 편집 폼 =====
 type Field = {
   name: string; label: string; hint?: string; required?: boolean; wide?: boolean;
-  type: 'text' | 'number' | 'textarea' | 'select' | 'check' | 'date' | 'month' | 'sizes' | 'pic';
+  type: 'text' | 'number' | 'textarea' | 'select' | 'check' | 'date' | 'month' | 'sizes' | 'pic' | 'pics' | 'rows';
+  bucket?: string; rows?: number;
   options?: [string, string][]; readOnlyWhenEdit?: boolean; show?: (v: Rec) => boolean;
 };
 type Rec = Record<string, unknown>;
@@ -94,6 +95,16 @@ function textToSizes(t: string) {
     return { label: m[1].trim(), price: Number(m[2].replace(/,/g, '')) };
   });
   return out.length ? out : null;
+}
+
+// 상세 정보 표: 한 줄에 '항목 = 내용'
+const rowsToText = (v: unknown) => Array.isArray(v) ? (v as { label: string; value: string }[]).map(x => `${x.label} = ${x.value}`).join('\n') : '';
+function textToRows(t: string) {
+  return t.split('\n').map(l => l.trim()).filter(Boolean).map(l => {
+    const i = l.indexOf('=');
+    if (i < 1) throw new Error(`상세 정보 줄을 '항목 = 내용' 꼴로 적어 주세요: ${l}`);
+    return { label: l.slice(0, i).trim(), value: l.slice(i + 1).trim() };
+  });
 }
 
 // 편집 중인데 저장하지 않은 내용이 있는지. 탭을 바꾸거나 닫거나 창을 떠날 때 묻는다
@@ -125,6 +136,8 @@ function Editor({ fields, value, isNew, onSave, onCancel, onDelete, title }: {
         if (f.type === 'number') out[f.name] = Number(v[f.name] ?? 0);
         if (f.type === 'sizes') out[f.name] = textToSizes(String(v[f.name + '__text'] ?? sizesToText(v[f.name])));
         if (f.type === 'month') out[f.name] = String(v[f.name] ?? '').slice(0, 7) + '-01';
+        if (f.type === 'rows') out[f.name] = textToRows(String(v[f.name + '__text'] ?? rowsToText(v[f.name])));
+        if (f.type === 'pics') out[f.name] = Array.isArray(v[f.name]) ? v[f.name] : [];
         delete out[f.name + '__text'];
       }
       await onSave(out);
@@ -138,16 +151,18 @@ function Editor({ fields, value, isNew, onSave, onCancel, onDelete, title }: {
         {fields.filter(f => !f.show || f.show(v)).map(f => {
           const val = v[f.name];
           const ro = !isNew && f.readOnlyWhenEdit;
-          const cls = 'field' + (f.wide || f.type === 'textarea' || f.type === 'sizes' || f.type === 'pic' ? ' wide' : '');
+          const cls = 'field' + (f.wide || f.type === 'textarea' || f.type === 'sizes' || f.type === 'rows' || f.type === 'pic' ? ' wide' : '');
           if (f.type === 'check') return (
             <label key={f.name} className="check"><input type="checkbox" checked={!!val} onChange={e => set(f.name, e.target.checked)} /><span>{f.label}</span></label>
           );
-          if (f.type === 'pic') return <PicField key={f.name} label={f.label} value={String(val ?? '')} onChange={x => set(f.name, x)} />;
+          if (f.type === 'pic') return <PicField key={f.name} label={f.label} hint={f.hint} bucket={f.bucket} presets={f.options} value={String(val ?? '')} onChange={x => set(f.name, x)} />;
+          if (f.type === 'pics') return <PicsField key={f.name} label={f.label} hint={f.hint} bucket={f.bucket ?? 'products'} value={Array.isArray(val) ? val as string[] : []} onChange={x => set(f.name, x)} />;
           return (
             <label key={f.name} className={cls}><span>{f.label}{f.required && <i aria-hidden="true"> *</i>}</span>
-              {f.type === 'textarea' ? <textarea rows={4} value={String(val ?? '')} required={f.required} onChange={e => set(f.name, e.target.value)} />
+              {f.type === 'textarea' ? <textarea rows={f.rows ?? 4} value={String(val ?? '')} required={f.required} onChange={e => set(f.name, e.target.value)} />
                 : f.type === 'select' ? <select value={String(val ?? '')} required={f.required} disabled={ro} onChange={e => set(f.name, e.target.value)}>{f.options!.map(([k, n]) => <option key={k} value={k}>{n}</option>)}</select>
                 : f.type === 'sizes' ? <textarea rows={3} value={String(v[f.name + '__text'] ?? sizesToText(val))} onChange={e => set(f.name + '__text', e.target.value)} placeholder={'소 45 cm = 38000\n중 70 cm = 46000'} />
+                : f.type === 'rows' ? <textarea rows={4} value={String(v[f.name + '__text'] ?? rowsToText(val))} onChange={e => set(f.name + '__text', e.target.value)} placeholder={'크기 = 높이 약 60cm · 폭 약 40cm\n구성 = 낙엽송, 연잎, 수반\n기간 = 5–7일'} />
                 : <input type={f.type === 'month' ? 'month' : f.type} value={f.type === 'month' ? String(val ?? '').slice(0, 7) : String(val ?? '')} required={f.required} readOnly={ro}
                     min={f.type === 'number' ? 0 : undefined} step={f.type === 'number' ? 1 : undefined} onChange={e => set(f.name, e.target.value)} />}
               {f.hint && <small>{f.hint}</small>}
@@ -288,25 +303,31 @@ const yes = (b: unknown, on: string, off = '') => b ? on : off;
 // ===== 제품 =====
 const CATS: [string, string][] = [['arrange', '꽃꽂이'], ['gift', '선물'], ['bojagi', '보자기'], ['sub', '정기 구독']];
 const CAT_NAME = Object.fromEntries(CATS);
+// 코드로 만든 기본 상세 페이지가 있는 제품 주소
+const STATIC_KEYS = new Set([...Object.keys(ARR), ...Object.keys(ITEMS)]);
 const IMAGES: [string, string][] = [['', '사진 없음 (보자기는 선화)'], ['ikebana-larch', '낙엽송 꽃꽂이'], ['ikebana-bamboo', '대나무 꽃꽂이'], ['ikebana-daffodil', '수선 꽃꽂이'], ['ikebana-nasturtium', '한련 꽃꽂이'], ['bojagi', '보자기 선물'], ['dried-box', '말린 꽃 상자'], ['field', '들꽃']];
 function Products() {
   return (
     <Crud<ProductRow & Rec>
       table="products" idKey="key" order={[['sort', true]]} afterSave={refreshPublic}
-      blank={{ key: '', cat: 'gift', name: '', meta: '', price: 0, sizes: null, vessel_off: 0, img: '', has_detail: false, sold_out: false, visible: true, sort: 100 }}
+      blank={{ key: '', cat: 'gift', name: '', meta: '', price: 0, sizes: null, vessel_off: 0, img: '', photos: [], body: '', info: [], has_detail: false, sold_out: false, visible: true, sort: 100 }}
       title={r => r ? `제품 고치기 · ${r.name}` : '새 제품'}
       canDelete={r => !r.has_detail}
       head={['이름', '분류', '가격', '상태', '순서']}
       row={r => [<b key="n">{r.name}</b>, CAT_NAME[r.cat], won(r.price) + '원', [yes(r.sold_out, '품절'), yes(!r.visible, '숨김')].filter(Boolean).join(' · ') || '판매 중', r.sort]}
       fields={[
-        { name: 'key', label: '주소 이름', type: 'text', required: true, readOnlyWhenEdit: true, hint: '영문 소문자·숫자·- (예: winter-box). 만든 뒤에는 못 바꿔요.' },
+        { name: 'key', label: '주소 이름', type: 'text', required: true, readOnlyWhenEdit: true, hint: '영문 소문자·숫자·- (예: winter-box). 만든 뒤에는 못 바꿔요. item은 쓸 수 없어요.' },
         { name: 'cat', label: '분류', type: 'select', options: CATS, required: true },
         { name: 'name', label: '이름', type: 'text', required: true },
         { name: 'meta', label: '한 줄 설명', type: 'text', hint: '목록 카드에 이름 아래로 보여요. 예: 꽃꽂이 · 중품' },
         { name: 'price', label: '가격 (원)', type: 'number', required: true, hint: '보자기는 가장 작은 크기 가격' },
         { name: 'vessel_off', label: '화기 뺄 때 빼는 금액 (원)', type: 'number', show: v => v.cat === 'arrange' },
         { name: 'sizes', label: '크기별 가격', type: 'sizes', show: v => v.cat === 'bojagi', hint: "한 줄에 하나씩 '크기 = 가격'" },
-        { name: 'img', label: '사진', type: 'select', options: IMAGES },
+        { name: 'img', label: '대표 사진', type: 'pic', bucket: 'products', options: IMAGES, hint: '목록 카드와 상세 페이지 첫 장에 보여요. 정사각형으로 잘려 보여요.' },
+        { name: 'photos', label: '상세 사진', type: 'pics', bucket: 'products', hint: '상세 페이지에서 대표 사진 다음에 보여요. 최대 12장.' },
+        { name: 'body', label: '상세 설명', type: 'textarea', rows: 8, hint: '빈 줄로 문단을 나눠요.' },
+        { name: 'info', label: '상세 정보', type: 'rows', hint: "한 줄에 하나씩 '항목 = 내용'. 상세 페이지 가격 아래 표로 보여요." },
+        { name: 'has_detail', label: '기본 상세 페이지 사용 (끄면 위 사진·설명으로 만든 상세 페이지가 보여요)', type: 'check', show: v => STATIC_KEYS.has(String(v.key)) },
         { name: 'sort', label: '순서', type: 'number', hint: '작을수록 앞에 보여요' },
         { name: 'sold_out', label: '품절', type: 'check' },
         { name: 'visible', label: '사이트에 보이기', type: 'check' },
@@ -370,32 +391,76 @@ function Works() {
 
 // 사진: 선화, 기본 사진, 또는 새로 올리기
 const PICS: [string, string][] = [['ill', '선화'], ...IMAGES.slice(1)];
-function PicField({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
+// 사진 한 장 올리기. 저장소(bucket)에 올리고 공개 주소를 돌려준다
+async function uploadPic(bucket: string, file: File): Promise<string> {
+  if (file.size > 5 * 1024 * 1024) throw new Error('사진은 5MB 이하로 올려 주세요.');
+  const ext = (file.name.split('.').pop() ?? 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+  const { error } = await supabase!.storage.from(bucket).upload(path, file, { contentType: file.type, upsert: false });
+  if (error) throw error;
+  return supabase!.storage.from(bucket).getPublicUrl(path).data.publicUrl;
+}
+
+function PicField({ label, hint, value, onChange, bucket = 'works', presets = PICS }: { label: string; hint?: string; value: string; onChange: (v: string) => void; bucket?: string; presets?: [string, string][] }) {
   const toast = useToast();
   const [busy, setBusy] = useState(false);
   const uploaded = /^https:\/\//.test(value);
   const upload = async (file: File | undefined) => {
     if (!file) return;
-    if (file.size > 5 * 1024 * 1024) { toast('사진은 5MB 이하로 올려 주세요.'); return; }
     setBusy(true);
-    const ext = (file.name.split('.').pop() ?? 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '');
-    const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-    const { error } = await supabase!.storage.from('works').upload(path, file, { contentType: file.type, upsert: false });
-    setBusy(false);
-    if (error) { toast(errText(error)); return; }
-    onChange(supabase!.storage.from('works').getPublicUrl(path).data.publicUrl);
+    try { onChange(await uploadPic(bucket, file)); } catch (x) { toast(errText(x)); } finally { setBusy(false); }
   };
   return (
     <div className="field wide pic-field">
       <span>{label}</span>
       <div className="pic-row">
         <select aria-label="사진 고르기" value={uploaded ? 'upload' : value} onChange={e => e.target.value !== 'upload' && onChange(e.target.value)}>
-          {PICS.map(([k, n]) => <option key={k} value={k}>{n}</option>)}
+          {presets.map(([k, n]) => <option key={k} value={k}>{n}</option>)}
           {uploaded && <option value="upload">올린 사진</option>}
         </select>
         <label className="pill"><input type="file" accept="image/jpeg,image/png,image/webp" className="sr-only" disabled={busy} onChange={e => upload(e.target.files?.[0])} />{busy ? '올리는 중…' : '사진 올리기'}</label>
       </div>
-      {uploaded && <span className="pic-prev" style={{ backgroundImage: `url("${value}")` }} role="img" aria-label="올린 사진 미리 보기" />}
+      {value && value !== 'ill' && <span className="pic-prev" style={{ backgroundImage: picBg(value) }} role="img" aria-label="사진 미리 보기" />}
+      {hint && <small>{hint}</small>}
+    </div>
+  );
+}
+
+// 여러 장: 올리기, 빼기, 앞으로 옮기기
+function PicsField({ label, hint, value, onChange, bucket }: { label: string; hint?: string; value: string[]; onChange: (v: string[]) => void; bucket: string }) {
+  const toast = useToast();
+  const [busy, setBusy] = useState(false);
+  const upload = async (files: FileList | null) => {
+    if (!files?.length) return;
+    const room = 12 - value.length;
+    if (room <= 0) { toast('상세 사진은 12장까지 올릴 수 있어요.'); return; }
+    setBusy(true);
+    const added: string[] = [];
+    try { for (const f of Array.from(files).slice(0, room)) added.push(await uploadPic(bucket, f)); }
+    catch (x) { toast(errText(x)); }
+    finally { setBusy(false); if (added.length) onChange([...value, ...added]); }
+  };
+  const move = (i: number) => { const n = [...value]; [n[i - 1], n[i]] = [n[i], n[i - 1]]; onChange(n); };
+  return (
+    <div className="field wide pic-field">
+      <span>{label}</span>
+      {value.length > 0 && (
+        <ul className="pics-list">
+          {value.map((u, i) => (
+            <li key={u + i}>
+              <span className="pic-prev" style={{ backgroundImage: picBg(u) }} role="img" aria-label={`상세 사진 ${i + 1}`} />
+              <div>
+                {i > 0 && <button type="button" className="link" onClick={() => move(i)}>앞으로</button>}
+                <button type="button" className="link danger" onClick={() => onChange(value.filter((_, k) => k !== i))}>빼기</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+      <div className="pic-row">
+        <label className="pill"><input type="file" multiple accept="image/jpeg,image/png,image/webp" className="sr-only" disabled={busy} onChange={e => { upload(e.target.files); e.target.value = ''; }} />{busy ? '올리는 중…' : '사진 올리기'}</label>
+      </div>
+      {hint && <small>{hint}</small>}
     </div>
   );
 }

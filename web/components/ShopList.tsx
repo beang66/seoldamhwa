@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { SHOP_CATS, type ShopCat } from '@/lib/catalog';
-import { productPrice, useProducts, type ProductRow } from '@/lib/data';
+import { picBg, productPrice, useProducts, type ProductRow } from '@/lib/data';
 
 const ILL_LABEL: Record<string, string> = { 'ill-wrap': '감싸개 그림', 'ill-knot': '가방 끈을 단 매듭 보자기 그림' };
 
@@ -16,13 +16,12 @@ function Card({ p, hidden }: { p: ProductRow; hidden: boolean }) {
     <>
       {ill
         ? <div className="frame ill"><svg viewBox="0 0 300 330" aria-label={ILL_LABEL[ill]}><use href={`#${ill}`} /></svg></div>
-        : <div className="frame">{p.img ? <span style={{ backgroundImage: `var(--img-${p.img})` }} /> : <span className="blank" />}</div>}
+        : <div className="frame">{p.img ? <span style={{ backgroundImage: picBg(p.img) }} /> : <span className="blank" />}</div>}
       <h3>{p.name}</h3><p>{p.meta}<b>{p.sold_out ? <span className="so">품절 · </span> : null}{productPrice(p)}</b></p>
     </>
   );
-  return p.has_detail
-    ? <Link className="prod" href={`/shop/${p.key}`} hidden={hidden}>{inner}</Link>
-    : <a className="prod" href="#" data-soon="" hidden={hidden}>{inner}</a>;
+  // 코드로 만든 기본 상세 페이지가 있으면 그쪽, 아니면 관리자가 등록한 내용으로 그리는 상세 페이지
+  return <Link className="prod" href={p.has_detail ? `/shop/${p.key}` : `/shop/item?k=${p.key}`} hidden={hidden}>{inner}</Link>;
 }
 
 export default function ShopList({ initial }: { initial: ShopCat }) {

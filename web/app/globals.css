@@ -1058,3 +1058,15 @@ h1,h2,h3{text-wrap:balance}
 .hs{margin-top:81px;height:calc(100svh - 81px)}
 @media (max-width:720px){.hs{margin-top:75px;height:calc(100svh - 75px)}}
 .ad-table td:last-child .link+.link{margin-left:14px}
+/* 관리자가 등록한 제품 상세 */
+.thumbs button .photo{position:absolute;inset:0;background:center/cover no-repeat}
+.gal .main .photo.blank{background:var(--stone)}
+.pd-body{grid-column:1/-1;max-width:720px;margin-top:40px;padding-top:40px;border-top:1px solid var(--hair)}
+.pd-body p{font-size:15px;line-height:2;color:var(--graphite);white-space:pre-line}
+.pd-body p+p{margin-top:20px}
+.pd-missing{display:block;text-align:center;padding-top:200px}
+.pd-missing p{margin-bottom:20px;color:var(--graphite)}
+.pics-list{list-style:none;display:flex;flex-wrap:wrap;gap:14px;margin:4px 0 10px}
+.pics-list li{display:flex;flex-direction:column;gap:6px}
+.pics-list .pic-prev{width:120px;margin:0}
+.pics-list li div{display:flex;gap:10px;font-size:12px}
