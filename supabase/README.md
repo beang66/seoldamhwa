@@ -14,6 +14,8 @@
 | `seed.sql` | 지금 사이트의 제품·works·모임 내용 (관리자 이메일은 넣지 않음) |
 | `functions/notify-new-order/` | 새 주문을 관리자에게 메일로 알리는 Edge Function (메일 서비스 키를 넣어야 켜짐) |
 
+개발용 프로젝트(qpixniiuyyrhafzjzcwk)에는 위 마이그레이션이 모두 적용되어 있다. 단 `20261118000300`은 SQL 편집기에서 직접 실행해서 Supabase의 마이그레이션 기록에는 없다. `supabase db push`를 쓸 때는 먼저 `supabase migration repair --status applied 20261118000300`으로 기록을 맞춘다.
+
 데이터 구조 그림은 [`docs/erd.md`](../docs/erd.md)에 있다.
 
 ## 관리자
