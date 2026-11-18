@@ -21,6 +21,7 @@ export function errText(e: unknown): string {
   if (/Password should be at least/i.test(m)) return '비밀번호는 8자 이상으로 정해 주세요.';
   if (/rate limit/i.test(m)) return '잠시 뒤에 다시 시도해 주세요.';
   if (/row-level security|permission denied/i.test(m)) return '권한이 없어요. 관리자 계정으로 로그인했는지 확인해 주세요.';
+  if (/Could not find the function|schema cache/i.test(m)) return '아직 준비 중인 기능이에요. 잠시 뒤에 다시 시도해 주세요.';
   if (/Failed to fetch|NetworkError/i.test(m)) return '연결이 원활하지 않아요. 잠시 뒤에 다시 시도해 주세요.';
   return m || '문제가 생겼어요. 잠시 뒤에 다시 시도해 주세요.';
 }

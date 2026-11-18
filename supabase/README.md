@@ -9,7 +9,11 @@
 |---|---|
 | `migrations/20261118000000_init.sql` | 테이블(관리자·프로필·제품·주문·모임·works), RLS 정책, 주문 함수 `place_order`, 취소 함수 `cancel_my_order`, works 사진 저장소 |
 | `migrations/20261118000100_tighten_function_grants.sql` | 함수 실행 권한 좁히기 |
+| `migrations/20261118000200_account_deletion.sql` | 회원 탈퇴 `delete_my_account`(주문은 계정과 분리해 5년 보관), 보관 기간 지난 주문 정리 `purge_expired_orders` |
 | `seed.sql` | 지금 사이트의 제품·works·모임 내용과 관리자 이메일 |
+| `functions/notify-new-order/` | 새 주문을 관리자에게 메일로 알리는 Edge Function (메일 서비스 키를 넣어야 켜짐) |
+
+데이터 구조 그림은 [`docs/erd.md`](../docs/erd.md)에 있다.
 
 ## 관리자
 
@@ -28,8 +32,26 @@ delete from public.admins where email = 'old-admin@example.com';
 4. GitHub 저장소 Settings → Secrets and variables → Actions → Variables에 `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`를 넣는다. 값이 없으면 개발용 프로젝트로 빌드된다.
 5. 기존 회원·주문까지 옮겨야 하면 `supabase db dump`로 데이터를 내보내 새 프로젝트에 넣거나, Supabase의 프로젝트 이전(Transfer project) 기능으로 프로젝트를 통째로 클라이언트 조직에 넘긴다.
 
+## 새 주문 메일 알림 켜기
+
+1. [Resend](https://resend.com) 같은 메일 서비스에 가입하고, 보내는 도메인을 인증한 뒤 API 키를 받는다.
+2. 비밀값을 넣는다: `supabase secrets set RESEND_API_KEY=... MAIL_FROM="설담화 <order@도메인>" WEBHOOK_SECRET=<임의의 긴 문자열>`
+3. 함수를 배포한다: `supabase functions deploy notify-new-order --no-verify-jwt`
+4. 대시보드 Database → Webhooks에서 `public.orders`의 INSERT를 이 함수 주소로 보내고, 헤더 `x-webhook-secret`에 2번의 값을 넣는다.
+
+같은 메일 서비스를 Authentication → SMTP Settings에 넣으면 가입 확인·비밀번호 재설정 메일도 일반 손님에게 간다.
+
+## 보관 기간 지난 주문 정리
+
+`purge_expired_orders()`는 탈퇴한 회원의 주문 중 보관 기간이 끝난 것의 이름·연락처·요청을 지운다. Database → Cron(pg_cron)에서 하루 한 번 실행하도록 건다.
+
+```sql
+select cron.schedule('purge-expired-orders', '0 4 * * *', $$select public.purge_expired_orders()$$);
+```
+
 ## 알아둘 점
 
 - 주문 금액은 `place_order`가 `products`의 가격으로 다시 계산한다. 꽃꽂이 포장·퀵 금액은 함수 안의 상수와 `web/lib/catalog.ts`의 `A_WRAP`, `A_DELIV`가 같아야 한다.
+- 사업자 정보는 `web/lib/business.ts` 한 곳에서 채운다. 푸터와 약관·개인정보처리방침·환불 정책이 이 값을 쓴다.
 - 결제는 아직 없다. 주문은 '접수'로 들어오고, 관리자가 연락해 입금·받는 날을 정한다.
 - 선물·정기 구독처럼 상세 페이지가 없는 제품은 아직 온라인 주문을 받지 않는다.

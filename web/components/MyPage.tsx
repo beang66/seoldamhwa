@@ -61,6 +61,17 @@ export default function MyPage() {
     toast(error ? errText(error) : '주문을 취소했어요.'); load();
   };
   const out = async () => { leaving.current = true; router.replace('/'); await signOut(); };
+  // 탈퇴: 계정은 바로 지우고, 주문 기록은 계정과 분리해 법정 기간만 보관한다(DB 함수 delete_my_account)
+  const leave = async () => {
+    const typed = prompt('탈퇴하면 계정과 회원 정보가 바로 지워지고 되돌릴 수 없어요.\n주문 기록은 법에 따라 정해진 기간 동안만 보관한 뒤 지워요.\n\n계속하려면 "탈퇴"라고 적어 주세요.');
+    if (typed?.trim() !== '탈퇴') return;
+    setBusy(true);
+    const { error } = await supabase!.rpc('delete_my_account');
+    setBusy(false);
+    if (error) { toast(errText(error)); return; }
+    leaving.current = true; router.replace('/'); await signOut();
+    toast('탈퇴했어요. 그동안 고마웠어요.');
+  };
 
   return (
     <div className="my">
@@ -103,6 +114,7 @@ export default function MyPage() {
         )}
         {isAdmin && <Link className="pill dark wide" href="/admin">관리자 페이지</Link>}
         <button type="button" className="link" onClick={out}>로그아웃</button>
+        <button type="button" className="link quiet" onClick={leave} disabled={busy}>회원 탈퇴</button>
       </aside>
     </div>
   );

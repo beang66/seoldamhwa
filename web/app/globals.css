@@ -745,6 +745,8 @@ img{display:block;max-width:100%}
 .link{background:none;border:none;font:inherit;font-size:13px;letter-spacing:.06em;color:var(--graphite);text-decoration:underline;text-underline-offset:4px;text-decoration-color:#b9b6af;cursor:pointer;min-height:44px;padding:0 4px}
 .link:hover{color:var(--ink);text-decoration-color:var(--ink)}
 .link.danger{color:#8a3a2e}
+.link.quiet{font-size:12px;color:var(--mist);align-self:center}
+.check a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 .so{color:var(--graphite);font-weight:400}
 .prod .frame .blank{background:var(--stone)}
 .hd .ico .on-dot{position:absolute;right:9px;bottom:9px;width:5px;height:5px;border-radius:50%;background:var(--ink)}
@@ -838,3 +840,19 @@ img{display:block;max-width:100%}
   .order>ul li{grid-template-columns:1fr auto}
   .order>ul li span{grid-column:1/-1;grid-row:2}
 }
+
+/* 사업자 정보 · 약관 */
+.ft-biz{grid-column:1/-1;font-size:12px;line-height:1.9;color:var(--mist);letter-spacing:.02em}
+.ft ul b{font-weight:600;color:var(--ink)}
+.legal{max-width:760px;margin:0 auto;padding-bottom:120px;font-size:14px;line-height:1.95;color:var(--graphite)}
+.legal section{padding:28px 0;border-top:1px solid var(--hair)}
+.legal h2{font-family:var(--serif-ko);font-weight:400;font-size:18px;color:var(--ink);margin-bottom:12px}
+.legal ol{padding-left:1.4em;display:flex;flex-direction:column;gap:6px}
+.legal a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.legal-draft{background:var(--sheet);border-radius:8px;padding:14px 18px;margin-bottom:28px;font-size:13px}
+.legal-date{border-top:1px solid var(--hair);padding-top:20px;font-size:13px}
+.legal-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:10px}
+.legal-table th{text-align:left;font-weight:500;color:var(--ink);padding:8px 12px 8px 0;border-bottom:1px solid var(--ink)}
+.legal-table td{padding:10px 12px 10px 0;border-bottom:1px solid var(--hair);vertical-align:top}
+.blank-mark{background:#efe6c8;color:var(--ink);padding:1px 6px;border-radius:4px}
+@media (max-width:720px){.legal-table{font-size:12px}}

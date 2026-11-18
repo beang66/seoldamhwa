@@ -105,7 +105,7 @@ export default function LoginForm() {
         {(mode === 'up' || mode === 'reset') && <label className="field"><span>비밀번호 확인</span><input name="password2" type="password" required autoComplete="new-password" /></label>}
         {mode === 'up' && (
           <label className="check"><input type="checkbox" name="agree" required />
-            <span>주문과 모임 안내를 위해 이름, 이메일, 연락처를 모으는 데 동의해요. 탈퇴하면 바로 지워요.</span></label>
+            <span><Link href="/terms" target="_blank">이용약관</Link>에 동의하고, 주문과 모임 안내를 위해 이름, 이메일, 연락처를 모으는 데 동의해요(<Link href="/privacy" target="_blank">개인정보처리방침</Link>). 탈퇴하면 계정 정보는 바로 지우고, 주문 기록은 법에서 정한 기간만 보관해요.</span></label>
         )}
         <p className={'form-msg' + (msg && !msg.ok ? ' err' : '')} role={msg && !msg.ok ? 'alert' : 'status'}>{msg?.text}</p>
         <button className="pill dark wide" type="submit" disabled={busy}>{busy ? '잠시만요…' : { in: '로그인', up: '가입하기', find: '메일 보내기', reset: '비밀번호 바꾸기' }[mode]}</button>
