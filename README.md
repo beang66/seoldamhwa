@@ -53,7 +53,7 @@
 | --- | --- |
 | ![관리자 제품](docs/screenshots/admin-products.png) | ![관리자 제품 등록](docs/screenshots/admin-product-edit.png) |
 
-> 관리자 화면 캡처는 예시 데이터로 찍었습니다.
+> 캡처는 2026-11-18 기준 화면이고, 시안 사진이 들어간 상태입니다. 관리자 화면은 예시 데이터로 찍었습니다.
 > 사진(`web/public/img/`)은 시안용입니다. `bojagi.jpg`는 다른 사람의 사진(워터마크 있음)이라 공개 전에 반드시 직접 찍은 사진으로 바꿔야 합니다.
 
 ### Features
