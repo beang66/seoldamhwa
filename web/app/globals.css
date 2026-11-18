@@ -12,7 +12,7 @@
   --serif-en:var(--font-serif-en),serif;
   --sans:var(--font-sans),sans-serif;
   --hand:var(--serif-ko);  /* 손글씨 서체는 쓰지 않는다. 손맛은 연필 선화가 맡는다 */
-  --gutter:40px;
+  --gutter:max(40px,calc((100vw - 1200px) / 2));  /* 넓은 화면에서도 본문 폭은 1200px, 나머지는 좌우 여백 */
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:88px}
@@ -1051,3 +1051,5 @@ h1,h2,h3{text-wrap:balance}
 .ft-cols{grid-template-columns:repeat(3,minmax(0,1fr)) auto;max-width:none}
 .ft .ft-cols .ft-links{grid-column:4;min-width:120px}
 @media (max-width:720px){.ft-cols{grid-template-columns:1fr 1fr}.ft .ft-cols .ft-links{grid-column:auto}}
+/* 좌우 여백은 --gutter 하나로 맞춘다 (예전 개별 최대 폭은 풀어 이중으로 좁아지지 않게) */
+.bj .wrap,.ar .wrap,.pg,.pd,#works-view .page-hd,#community-view .page-hd,#cart-view .page-hd{max-width:none}
