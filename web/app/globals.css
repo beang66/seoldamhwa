@@ -1021,3 +1021,30 @@ h1,h2,h3{text-wrap:balance}
 .ft .ft-links{margin-top:-7px}
 @media (max-width:960px){.ft-cols{grid-template-columns:1fr auto}}
 @media (max-width:720px){.ft-cols{grid-template-columns:1fr}.ft .ft-cols address{text-align:left}}
+/* ===== 푸터 최종: 참고 레이아웃처럼 작고 단정하게 ===== */
+.ft-info{padding:80px 0 calc(32px + env(safe-area-inset-bottom))}
+.ft-say{gap:16px;margin-bottom:56px}
+.ft-say .word{font-size:34px;line-height:1.1}
+.ft-say .word small{font-size:11px;margin-top:10px}
+.ft-say .ft-vase{width:48px;height:48px}
+.ft-cols{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-bottom:64px;max-width:1080px}
+.ft-cols h2{font-family:var(--geo);font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--ink);margin-bottom:12px}
+.ft-cols p{font-size:13px;line-height:1.8;color:var(--graphite)}
+.ft .ft-links{margin-top:-7px}
+.ft-bottom{align-items:flex-start;flex-wrap:nowrap;gap:40px}
+.ft .ft-bottom ul{flex:none}
+.ft-bottom a{min-height:28px}
+.ft-info .ft-bottom .ft-biz{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:2px 16px;margin:0;padding:0;border:none;max-width:760px;font-size:11px;line-height:1.8;color:var(--mist)}
+.ft-info .ft-bottom .ft-biz div{display:flex;gap:5px}
+.ft-info .ft-bottom .ft-biz dt,.ft-info .ft-bottom .ft-biz dd{color:var(--mist)}
+@media (max-width:960px){
+  .ft-bottom{flex-direction:column;gap:12px}
+  .ft-info .ft-bottom .ft-biz{justify-content:flex-start}
+}
+@media (max-width:720px){
+  .ft-info{padding-top:56px}
+  .ft-say{margin-bottom:40px}
+  .ft-say .word{font-size:30px}
+  .ft-cols{grid-template-columns:1fr 1fr;gap:28px 20px;margin-bottom:40px}
+  .ft-info .ft-bottom .ft-biz{max-width:none}
+}
