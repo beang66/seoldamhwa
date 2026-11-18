@@ -1048,3 +1048,6 @@ h1,h2,h3{text-wrap:balance}
   .ft-cols{grid-template-columns:1fr 1fr;gap:28px 20px;margin-bottom:40px}
   .ft-info .ft-bottom .ft-biz{max-width:none}
 }
+.ft-cols{grid-template-columns:repeat(3,minmax(0,1fr)) auto;max-width:none}
+.ft .ft-cols .ft-links{grid-column:4;min-width:120px}
+@media (max-width:720px){.ft-cols{grid-template-columns:1fr 1fr}.ft .ft-cols .ft-links{grid-column:auto}}
