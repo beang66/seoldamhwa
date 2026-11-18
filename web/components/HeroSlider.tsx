@@ -19,17 +19,21 @@ export default function HeroSlider() {
   const [held, setHeld] = useState(false);
   const [live, setLive] = useState('');
   const [run, setRun] = useState(0); // 진행 막대를 처음부터 다시 그리기 위한 값
+  // 넘어가는 방향: fwd = 다음 장이 오른쪽에서 들어오고 지금 장이 왼쪽으로 밀려남, back = 반대
+  const [prev, setPrev] = useState<number | null>(null);
+  const [dir, setDir] = useState<'fwd' | 'back' | null>(null);
 
   useEffect(() => { if (matchMedia('(prefers-reduced-motion: reduce)').matches) setPlaying(false); }, []);
-  const show = useCallback((i: number, byHand: boolean) => {
+  const show = useCallback((i: number, byHand: boolean, d: 'fwd' | 'back') => {
     const n = (i + SLIDES.length) % SLIDES.length;
-    setCur(n); setManual(byHand); setRun(r => r + 1);
+    if (n === cur) return;
+    setPrev(cur); setDir(d); setCur(n); setManual(byHand); setRun(r => r + 1);
     if (byHand) setLive(`${n + 1} / ${SLIDES.length} · ${SLIDES[n].title}`);
-  }, []);
+  }, [cur]);
   const active = playing && !held;
   useEffect(() => {
     if (!active) return;
-    const t = setTimeout(() => show(cur + 1, false), DELAY);
+    const t = setTimeout(() => show(cur + 1, false, 'fwd'), DELAY);
     return () => clearTimeout(t);
   }, [active, cur, run, show]);
   useEffect(() => {
@@ -42,10 +46,10 @@ export default function HeroSlider() {
       style={{ '--hs-delay': DELAY + 'ms' } as React.CSSProperties}
       onMouseEnter={() => setHeld(true)} onMouseLeave={() => setHeld(false)}
       onFocus={() => setHeld(true)} onBlur={e => { if (!box.current?.contains(e.relatedTarget as Node)) setHeld(false); }}
-      onKeyDown={e => { if (e.key === 'ArrowLeft') show(cur - 1, true); else if (e.key === 'ArrowRight') show(cur + 1, true); }}>
+      onKeyDown={e => { if (e.key === 'ArrowLeft') show(cur - 1, true, 'back'); else if (e.key === 'ArrowRight') show(cur + 1, true, 'fwd'); }}>
       <h1 className="sr-only">설담화 · 꽃으로 건네는 말</h1>
       {SLIDES.map((s, k) => (
-        <div key={s.img} className={'hs-slide' + (k === cur ? ' on' : '')} role="group" aria-roledescription="slide" aria-label={`${k + 1} / ${SLIDES.length}`}
+        <div key={s.img} className={'hs-slide' + (k === cur ? ' on' : k === prev ? ' leave' : '') + (dir && (k === cur || k === prev) ? ' ' + dir : '')} role="group" aria-roledescription="slide" aria-label={`${k + 1} / ${SLIDES.length}`}
           aria-hidden={k === cur ? undefined : true} inert={k !== cur}>
           <div className="bg" style={{ backgroundImage: `var(--img-${s.img})`, backgroundPosition: s.pos }} role="img" aria-label={`${s.title} 사진`} />
           <div className="hs-copy"><span className="eyebrow">{s.eyebrow}</span><h2>{s.title}</h2><p>{s.text}</p>
@@ -54,15 +58,16 @@ export default function HeroSlider() {
       ))}
       <div className="hs-ui">
         <div className="hs-dots" role="group" aria-label="슬라이드 선택">
-          {SLIDES.map((_, k) => <button key={k === cur ? `on-${run}` : k} type="button" aria-label={`${k + 1}번째 장 보기`} aria-current={k === cur ? 'true' : undefined} onClick={() => show(k, true)} />)}
+          {SLIDES.map((_, k) => <button key={k === cur ? `on-${run}` : k} type="button" aria-label={`${k + 1}번째 장 보기`} aria-current={k === cur ? 'true' : undefined} onClick={() => show(k, true, k > cur ? 'fwd' : 'back')} />)}
         </div>
         <span className="hs-count" aria-hidden="true"><b>{String(cur + 1).padStart(2, '0')}</b> / 05</span>
-        <button type="button" className="hs-btn" aria-label="이전 장" onClick={() => show(cur - 1, true)}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg></button>
         <button type="button" className="hs-btn" aria-label={playing ? '자동 넘김 멈추기' : '자동 넘김 시작'} onClick={() => { setPlaying(p => !p); setRun(r => r + 1); }}>
           <svg viewBox="0 0 24 24" aria-hidden="true">{playing ? <path d="M9 6v12M15 6v12" /> : <path d="M8 5l11 7-11 7z" />}</svg>
         </button>
-        <button type="button" className="hs-btn" aria-label="다음 장" onClick={() => show(cur + 1, true)}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg></button>
       </div>
+      {/* 좌우 가장자리의 테두리 없는 화살표 */}
+      <button type="button" className="hs-arrow prev" aria-label="이전 장" onClick={() => show(cur - 1, true, 'back')}><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M20 5L9 16l11 11" /></svg></button>
+      <button type="button" className="hs-arrow next" aria-label="다음 장" onClick={() => show(cur + 1, true, 'fwd')}><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M12 5l11 11-11 11" /></svg></button>
       <p className="sr-only" aria-live="polite">{live}</p>
     </section>
   );

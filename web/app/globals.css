@@ -48,12 +48,19 @@ img{display:block;max-width:100%}
 
 /* ---------- 1. 히어로: 큰 이미지 슬라이더 ---------- */
 .hs{position:relative;height:100svh;min-height:560px;max-height:1000px;overflow:hidden;background:var(--stone);color:var(--sheet)}
-.hs-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 1.2s ease,visibility 0s linear 1.2s}
-.hs-slide.on{opacity:1;visibility:visible;transition:opacity 1.2s ease,visibility 0s}
+.hs-slide{position:absolute;inset:0;visibility:hidden}
+.hs-slide.on,.hs-slide.leave{visibility:visible}
+/* 다음 장은 오른쪽에서 들어오고 지금 장은 왼쪽으로 밀려난다. 이전 장으로 갈 때는 반대 방향 */
+.hs-slide.on.fwd{animation:hs-in-r .95s cubic-bezier(.65,0,.35,1) both}
+.hs-slide.leave.fwd{animation:hs-out-l .95s cubic-bezier(.65,0,.35,1) both}
+.hs-slide.on.back{animation:hs-in-l .95s cubic-bezier(.65,0,.35,1) both}
+.hs-slide.leave.back{animation:hs-out-r .95s cubic-bezier(.65,0,.35,1) both}
+@keyframes hs-in-r{from{transform:translateX(100%)}to{transform:none}}
+@keyframes hs-out-l{from{transform:none}to{transform:translateX(-100%)}}
+@keyframes hs-in-l{from{transform:translateX(-100%)}to{transform:none}}
+@keyframes hs-out-r{from{transform:none}to{transform:translateX(100%)}}
 .hs-slide .bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.06);transition:transform 7s cubic-bezier(.2,.7,.2,1)}
 .hs-slide.on .bg{transform:scale(1)}
-.hs.manual .hs-slide{transition:opacity .6s ease,visibility 0s linear .6s}
-.hs.manual .hs-slide.on{transition:opacity .6s ease,visibility 0s}
 /* 사진 위 글자가 읽히도록 위아래만 옅게 가라앉힌다 */
 .hs-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,19,.32) 0%,rgba(20,20,19,0) 26%,rgba(20,20,19,0) 46%,rgba(20,20,19,.58) 100%),radial-gradient(120% 70% at 0% 100%,rgba(20,20,19,.42) 0%,rgba(20,20,19,0) 60%)}
 .hs-copy{position:absolute;z-index:2;left:var(--gutter);right:var(--gutter);bottom:112px;max-width:640px;text-shadow:0 1px 14px rgba(20,20,19,.28)}
@@ -77,6 +84,14 @@ img{display:block;max-width:100%}
 .hs-btn{display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(251,250,247,.6);border-radius:50%;background:none;color:var(--sheet);cursor:pointer;transition:background-color .25s,color .25s}
 .hs-btn:hover,.hs-btn:focus-visible{background:var(--sheet);color:var(--ink)}
 .hs-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.hs-arrow{position:absolute;z-index:3;top:50%;width:56px;height:88px;margin-top:-44px;display:grid;place-items:center;padding:0;border:none;background:none;color:var(--sheet);cursor:pointer;opacity:.78;transition:opacity .25s ease,transform .25s ease}
+.hs-arrow.prev{left:calc(var(--gutter) - 18px)}
+.hs-arrow.next{right:calc(var(--gutter) - 18px)}
+.hs-arrow svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 6px rgba(20,20,19,.35))}
+.hs-arrow:hover{opacity:1}
+.hs-arrow.prev:hover{transform:translateX(-3px)}
+.hs-arrow.next:hover{transform:translateX(3px)}
+.hs-arrow:focus-visible{opacity:1;outline:1px solid var(--sheet);outline-offset:-6px;border-radius:6px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .nowrap{white-space:nowrap}
 /* 홈 맨 위에서는 헤더 글자를 사진 위에서 읽히게 밝게 */
@@ -649,6 +664,9 @@ img{display:block;max-width:100%}
   html{scroll-behavior:auto}
   .js .rv{opacity:1;transform:none;transition:none}
   .hs-slide,.hs-slide .bg{transition:none}
+  .hs-slide.on,.hs-slide.leave{animation:none!important}
+  .hs-slide.leave{visibility:hidden}
+  .hs-arrow,.hs-arrow:hover{transition:none;transform:none}
   .hs-slide .bg,.hs-slide.on .bg{transform:none}
   .prod .frame .ph,.toast,.skip{transition:none}
   .prod:hover .frame .ph,.prod:focus-visible .frame .ph{transform:none}
@@ -662,7 +680,6 @@ img{display:block;max-width:100%}
 .btn:active,.pill:active,.hs-btn:active,.hs-cta:active,.qty button:active,.cats button:active{transform:scale(.97)}
 .sizes label:active span{transform:scale(.98)}
 @media (prefers-reduced-motion:reduce){
-  .hs.manual .hs-slide,.hs.manual .hs-slide.on{transition:none}
   .btn,.pill,.hs-btn,.hs-cta,.cats button,.qty button,.sizes span{transition-property:background-color,color,border-color}
   .btn:active,.pill:active,.hs-btn:active,.hs-cta:active,.qty button:active,.cats button:active,.sizes label:active span{transform:none}
   .hd.open nav{transition:none}
@@ -692,6 +709,10 @@ img{display:block;max-width:100%}
   .hs-ui{bottom:28px;gap:10px}
   .hs-count{display:none}
   .hs-dots{max-width:none}
+  .hs-arrow{width:44px;height:72px;margin-top:-36px}
+  .hs-arrow.prev{left:2px}
+  .hs-arrow.next{right:2px}
+  .hs-arrow svg{width:24px;height:24px}
   .sec,.bojagi,.works,.community{padding-top:84px;padding-bottom:84px}
   .sec-hd{flex-wrap:wrap;gap:14px}
   .sec-hd a{white-space:nowrap}
