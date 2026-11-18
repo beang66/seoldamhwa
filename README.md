@@ -45,7 +45,16 @@
 ![꽃꽂이 상세](docs/screenshots/detail-arrangement.jpeg)
 </details>
 
-> 화면의 회색 면은 사진 자리입니다. 시안에 쓴 참고 사진은 다른 사람의 사진이라 저장소와 캡처에서 뺐습니다.
+| 로그인 | 관리자 · 주문 |
+| --- | --- |
+| ![로그인](docs/screenshots/login.png) | ![관리자 주문](docs/screenshots/admin-orders.png) |
+
+| 관리자 · 제품 목록 | 관리자 · 제품 사진·상세 등록 |
+| --- | --- |
+| ![관리자 제품](docs/screenshots/admin-products.png) | ![관리자 제품 등록](docs/screenshots/admin-product-edit.png) |
+
+> 관리자 화면 캡처는 예시 데이터로 찍었습니다.
+> 사진(`web/public/img/`)은 시안용입니다. `bojagi.jpg`는 다른 사람의 사진(워터마크 있음)이라 공개 전에 반드시 직접 찍은 사진으로 바꿔야 합니다.
 
 ### Features
 
