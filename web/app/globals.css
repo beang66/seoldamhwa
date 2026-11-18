@@ -935,3 +935,7 @@ h1,h2,h3{text-wrap:balance}
 .card.info{background:none;border:1px solid var(--hair)}
 .card.tall{background:none;border:1px solid var(--hair)}
 .prod .frame,.wk-pic,.cm-pic,.others i,.cart-list .th{border-radius:0;box-shadow:none}
+/* 입동의 꽃: 풀꽃 그림을 제목 글자 바로 옆에 붙인다 (라벨 폭과 상관없이) */
+.sec-hd h2.with-ill{display:flex;align-items:flex-end;gap:14px}
+.sec-hd h2.with-ill .sec-ill{width:58px;height:58px;margin-bottom:-2px}
+@media (max-width:720px){.sec-hd h2.with-ill .sec-ill{width:46px;height:46px}}
