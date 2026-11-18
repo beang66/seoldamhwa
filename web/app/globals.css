@@ -953,7 +953,7 @@ h1,h2,h3{text-wrap:balance}
 @media (max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:860px){.grid{grid-template-columns:1fr 1fr;gap:36px 14px}}
 @media (max-width:720px){
-  .shop-bar{top:var(--hd-m,72px);margin-top:32px}
+  .shop-bar{top:75px;margin-top:32px}
   .shop-bar .cats{flex-wrap:nowrap;overflow-x:auto;gap:20px}
   .sort select{font-size:12px}
 }
@@ -970,7 +970,7 @@ h1,h2,h3{text-wrap:balance}
 .hd .brand{justify-self:start}
 .hd nav{justify-self:end}
 .hd nav ul{gap:38px}
-.hd nav a{font-family:var(--geo);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.hd nav a{font-family:var(--geo);font-size:13px;font-weight:500;letter-spacing:.06em;color:var(--ink)}
 .hd nav a[aria-current]::after{left:0;right:0;bottom:6px;width:auto;height:1px;border-radius:0;transform:none}
 .hd .util{gap:2px}
 .hd .ico .cnt{font-family:var(--geo);font-size:10px;font-weight:600;min-width:16px;height:16px;line-height:16px;right:4px;top:6px;padding:0 4px}
@@ -1012,3 +1012,12 @@ h1,h2,h3{text-wrap:balance}
 .ft .ft-links{justify-content:flex-start;gap:2px}
 .ft .ft-bottom ul{justify-content:flex-start;gap:18px;flex-wrap:wrap}
 .ft .ft-links{margin-top:-7px}
+/* 푸터 문구는 예전 그대로: 로고를 큰 머리로, 주소 한 열 + 인스타그램 */
+.ft-say{align-items:center}
+.ft-say .word{font-size:clamp(36px,3.6vw,48px);line-height:1.1}
+.ft-say .word small{font-size:12px;margin-top:12px}
+.ft-cols{grid-template-columns:1fr auto}
+.ft .ft-cols address{text-align:left;font-size:13px;line-height:1.9;color:var(--graphite)}
+.ft .ft-links{margin-top:-7px}
+@media (max-width:960px){.ft-cols{grid-template-columns:1fr auto}}
+@media (max-width:720px){.ft-cols{grid-template-columns:1fr}.ft .ft-cols address{text-align:left}}
