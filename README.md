@@ -1,14 +1,15 @@
 # 🌸 설담화 說談話
 
-> **꽃으로 건네는 말** — 절기마다 고른 꽃 한 줄기를 다시 쓰는 보자기에 싸서 건네는 1인 꽃 스튜디오의 브랜드 웹사이트
+> **"말로 다 못 한 마음을 꽃으로 전합니다."**
 
-손님은 꽃꽂이와 보자기를 고르고 옵션·받는 날을 정해 주문하고, 대표는 관리자 페이지에서 주문·상품·사진·모임·작업 기록을 직접 관리합니다.
+한국 예술의 미학 검소하되 누추하지 않은, 화려하되 사치하지 않음을 현대적으로 재해석한 프리미엄 플로럴 스튜디오 설담화(說談花)의 풀스택 웹 플랫폼입니다.
+고객을 위한 온라인 쇼핑몰과 1인 브랜드 대표를 위한 직관적인 관리자 센터로 구성되어 있습니다.
 
 <div align="center">
 
 [![배포 사이트](https://img.shields.io/badge/배포_사이트-beang66.github.io%2Fseoldamhwa-2F56A8?style=for-the-badge&logo=githubpages&logoColor=white)](https://beang66.github.io/seoldamhwa/)
-[![디자인 시스템](https://img.shields.io/badge/디자인_시스템-DESIGN.md-141413?style=for-the-badge&logo=markdown&logoColor=white)](DESIGN.md)
-[![데이터 구조](https://img.shields.io/badge/데이터_구조-ERD-4F4C48?style=for-the-badge&logo=postgresql&logoColor=white)](docs/erd.md)
+[![발표 장표](https://img.shields.io/badge/발표_장표-18장-141413?style=for-the-badge&logo=googleslides&logoColor=white)](#slides)
+[![데이터 구조](https://img.shields.io/badge/데이터_구조-ERD-4F4C48?style=for-the-badge&logo=postgresql&logoColor=white)](#erd)
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=000)
@@ -22,7 +23,7 @@
 
 </div>
 
-**작업 기간** 2026.10.29 – 2026.11.18 · **역할** 브랜드 기획·BI/CI·디자인·검수 안정빈 / 구현 Claude Code
+**🗓️ 작업 기간** 2026.10.29 – 2026.11.18 · **👤 역할** 브랜드 기획·BI/CI·디자인·검수 안정빈 / 구현 Claude Code
 
 ### 🏆 핵심 성과
 
@@ -30,7 +31,7 @@
 | :---: | :---: | :---: | :---: |
 | **14종** (주소 19개) | **9개** | **6개** | **4개** |
 
-| 🎨 브랜드 → 화면 | 🛒 주문 | 🔐 데이터 보호 | 🛠️ 관리자 |
+| 🎨 브랜드 → 화면 | 🛒 쇼핑몰 | 🔐 데이터 보호 | 🛠️ 관리자 센터 |
 | :---: | :---: | :---: | :---: |
 | **C안을 디자인 규칙으로** | **옵션별 금액 바로 계산** | **서버 없이도 금액·권한 보호** | **코드 없이 운영** |
 | 인터뷰 기준 → A·B·C 시안<br>한국화의 여백·필선·낙관<br>쪽빛은 한 화면에 한 점 | 화기·포장·받는 방법 옵션<br>장바구니·되돌리기<br>받는 날은 내일부터 | DB 함수가 금액 재계산<br>RLS로 읽기·쓰기 제한<br>탈퇴 시 주문 분리 보관 | 주문 상태·메모<br>상품·사진·상세 등록<br>모임·works 관리 |
@@ -39,28 +40,71 @@
 
 ## 📑 목차
 
-1. [🗂️ 개요](#overview)
+1. [📋 서비스 기획서](#plan)
 2. [🎯 기획 배경](#background)
-3. [🎨 브랜드 컨셉과 디자인 시스템](#brand)
-4. [🛠️ 기술 스택과 배포 구조](#stack)
-5. [✨ 주요 기능](#features)
-6. [⚙️ 주문 처리 흐름과 가격 규칙](#order)
+3. [🖌️ 브랜드 컨셉과 디자인 시스템](#brand)
+4. [🏗️ 시스템 아키텍처와 핵심 플로우](#architecture)
+5. [✨ 주요 화면](#features)
+6. [🧩 기능별 핵심 특징과 구현 상세](#details)
 7. [💡 기술적 의사결정](#decisions)
-8. [📂 프로젝트 구조와 데이터 모델](#structure)
+8. [📂 주요 폴더 구조와 데이터 모델](#structure)
 9. [🚀 실행 방법](#run)
 10. [✅ 검증 결과](#verify)
-11. [📈 회고와 향후 계획](#retro)
-12. [📄 라이선스](#license)
+11. [📈 회고](#retro)
+12. [🗺️ 로드맵 — 데이터 리포트 · SEO · 판매 전략](#roadmap)
+13. [🎞️ 발표 장표](#slides)
+14. [📄 라이선스](#license)
 
 ---
 
-<a id="overview"></a>
-## 🗂️ 1. 개요
+<a id="plan"></a>
+## 📋 1. 서비스 기획서
+
+### 🏷️ 브랜드명
+
+| 글자 | 뜻 |
+| :---: | --- |
+| **說** 설 | 대표 이름의 '설'이자 '말씀·이야기 설' — 이야기를 전하는 브랜드 |
+| **談話** 담화 | 주고받는 이야기. 편지·손글씨처럼 마음을 건네는 말 |
+| **담다 · 닮다** | 대표의 초기 메모 — 당신을 닮다, 꽃을 담다, 이야기를 담다 |
+
+### 💬 슬로건
+
+> **말로 다 못 한 마음을 꽃으로 전합니다.**
+> 사이트 첫 화면의 한 줄: *꽃으로 건네는 말*
+
+### 🧭 핵심 철학
+
+> **儉而不陋 華而不侈** — 검소하되 누추하지 않고, 화려하되 사치하지 않게
+
+| 미션 | 핵심 가치 |
+| --- | --- |
+| 한 번 쓰고 버려지는 선물의 순간을, 다시 쓰이는 이야기로 되살린다 | **♻️ 순환** 포장을 버리지 않고 다음 쓰임으로 · **🏮 헤리티지** 한국적 소재와 미감을 올드하지 않게, 위트 있게 · **🎁 맞춤** 받는 사람의 이야기를 담은 꽃 |
+
+### 💡 핵심 컨셉
+
+| 컨셉 | 서비스에서 |
+| --- | --- |
+| **절기의 꽃 한 줄기** | 계절이 바뀌면 메인 첫 장과 '이번 절기의 꽃'이 바뀜 (입동 · 立冬) |
+| **다시 쓰는 보자기** | 꽃꽂이를 보자기로 싸는 옵션, 보자기 단품 판매 — 포장이 두 번째 선물이 됨 |
+| **한 폭의 한국화처럼** | 꽃 한 줄기와 넓은 여백, 먹 한 계열의 글자, 쪽빛 한 점 |
+| **혼자서도 운영** | 1인 대표가 코드 없이 상품·사진·모임·작업 기록을 바꾸는 관리자 센터 |
+
+### 🎨 시각적 정체성
+
+| 요소 | 규칙 |
+| --- | --- |
+| 색 | ![](https://img.shields.io/badge/바탕-%23F4F3EF-F4F3EF?style=flat-square) ![](https://img.shields.io/badge/아이보리-%23F4EFE4-F4EFE4?style=flat-square) ![](https://img.shields.io/badge/먹-%23141413-141413?style=flat-square) ![](https://img.shields.io/badge/쪽빛-%232F56A8-2F56A8?style=flat-square) — 쪽빛은 한 화면에 한 점만 |
+| 글꼴 | 제목 Noto Serif KR · 본문 Noto Sans KR · 영문 EB Garamond · 목록의 이름·가격 Montserrat |
+| 로고 방향 | 손글씨 형식의 한글 '설담화' (C안) |
+| 그래픽 | 가는 선의 손그림(꽃병·보자기), 한지 결, 음각·양각 |
+| 사진 | 어두운 벽 앞 작은 화기에 꽂은 꽃 한 줄기 |
+| 레이아웃 | 본문 폭 1200px, 양옆 여백, 섹션마다 같은 바탕색 |
+
+### 📌 프로젝트 정보
 
 | 항목 | 내용 |
 | --- | --- |
-| 목표 | 꽃과 '다시 쓰는 보자기'를 함께 고르고 주문하는 경험을 브랜드의 미감 그대로 웹에 옮긴다 |
-| 원칙 | 검소하되 누추하지 않고, 화려하되 사치하지 않게(儉而不陋 華而不侈) · 쪽빛은 한 화면에 한 점만 · 금액은 서버가 계산 |
 | 대상 | 꽃 선물을 고르는 손님, 혼자 운영하는 대표 |
 | 기간 | 2026.10.29 대표 인터뷰 – 2026.11.18 |
 | 역할 | 브랜드 기획·BI/CI·디자인 판단·클라이언트 협의·검수: 안정빈 / 구현: Claude Code / 브랜드 방향 결정: 설담화 대표 |
@@ -77,7 +121,7 @@
 | 정적 사이트에는 서버가 없다 | 브라우저가 계산한 금액은 손님이 바꿀 수 있음 | 주문 금액을 DB 함수가 다시 계산하고, 권한은 DB 정책(RLS)이 정함 |
 
 <a id="brand"></a>
-## 🎨 3. 브랜드 컨셉과 디자인 시스템
+## 🖌️ 3. 브랜드 컨셉과 디자인 시스템
 
 ```mermaid
 flowchart LR
@@ -101,7 +145,7 @@ flowchart LR
     B --> C --> D & E & F --> G --> H
 ```
 
-### 컨셉 모티브
+### 🌾 컨셉 모티브
 
 | 모티브 | 가져온 것 |
 | --- | --- |
@@ -110,7 +154,7 @@ flowchart LR
 | 보자기 장면 | 보자기 매듭·백자 화병·양각 한지 카드·복주머니 → 아이보리 × 쪽빛 조합 |
 | 쪽빛 밤 회화 | 한 화면을 쪽빛으로 채우고 흰 달 한 점 → '쪽빛 한 점'의 절제 |
 
-### 한국화에서 빌려온 규칙
+### 🖼️ 한국화에서 빌려온 규칙
 
 | 한국화 | 뜻 | 설담화에서 |
 | --- | --- | --- |
@@ -120,7 +164,7 @@ flowchart LR
 | 한지와 안료 | 종이 결에 스며든 색 | 바탕 `#F4F3EF`, 아이보리 `#F4EFE4` |
 | 낙관 落款 | 그림을 마무리하는 도장 하나 | 쪽빛 `#2F56A8`은 버튼의 점·현재 메뉴·선택 상태에만 |
 
-### 브랜드 메시지 → 디자인 토큰 → 화면
+### 🔗 브랜드 메시지 → 디자인 토큰 → 화면
 
 | 브랜드의 말 | 디자인 규칙 | 화면 |
 | --- | --- | --- |
@@ -131,8 +175,10 @@ flowchart LR
 
 색·글꼴·간격·컴포넌트 전체 규칙은 [`DESIGN.md`](DESIGN.md)에 있습니다.
 
-<a id="stack"></a>
-## 🛠️ 4. 기술 스택과 배포 구조
+<a id="architecture"></a>
+## 🏗️ 4. 시스템 아키텍처와 핵심 플로우
+
+### 🧱 기술 스택과 시스템 구조
 
 | 계층 | 기술 | 이 프로젝트에서 맡은 일 |
 | --- | --- | --- |
@@ -173,18 +219,173 @@ flowchart TB
 | `delete_my_account` | 탈퇴. 계정은 지우고 주문은 계정과 분리해 5년 보관 |
 | `is_admin` | 등록된 이메일 중 메일 인증을 마친 계정만 관리자로 판단 |
 
+<a id="erd"></a>
+### 🗄️ ERD
+
+```mermaid
+erDiagram
+    AUTH_USERS ||--|| PROFILES : "가입 때 자동 생성"
+    AUTH_USERS |o--o{ ORDERS : "주문 (탈퇴 시 연결만 끊김)"
+    ADMINS |o..o| AUTH_USERS : "이메일 + 메일 인증 = 관리자"
+    ORDERS }o..o{ PRODUCTS : "items[].key"
+
+    AUTH_USERS {
+        uuid id PK
+        text email
+    }
+    PROFILES {
+        uuid id PK,FK "auth.users"
+        text name "이름"
+        text phone "연락처"
+        timestamptz created_at
+    }
+    ADMINS {
+        text email PK "소문자"
+    }
+    PRODUCTS {
+        text key PK "주소 이름"
+        text cat "arrange·gift·bojagi·sub"
+        text name
+        int price "기본가"
+        jsonb sizes "보자기 크기별 가격"
+        int vessel_off "화기 제외 차감"
+        text img
+        jsonb photos "상세 사진 최대 12"
+        text body "상세 설명"
+        jsonb info "상세 정보 표"
+        bool sold_out
+        bool visible
+        int sort
+    }
+    ORDERS {
+        bigint id PK
+        uuid user_id FK "null 허용"
+        text status "접수·확인·준비 중·완료·취소"
+        text name
+        text phone
+        date receive_date "받는 날"
+        jsonb items "상품 줄"
+        int items_total
+        int quick_total
+        int ship
+        int total "서버 계산"
+        text admin_note
+    }
+    GATHERINGS {
+        bigint id PK
+        text kind "꽃 모임·매듭 수업·찻자리"
+        date date
+        text place
+        int capacity
+        int seats_left
+        int fee
+        text status "모집 중·예정·마감"
+    }
+    WORKS {
+        bigint id PK
+        date ym "연월"
+        text cat "space·project·sub·meet"
+        text title
+        text pic
+        text body
+    }
+```
+
+### 🔄 핵심 비즈니스 플로우
+
+```mermaid
+flowchart LR
+    subgraph Customer["🛒 손님"]
+        A["절기 상품 보기"] --> B["옵션 고르기<br>화기·포장·받는 방법"]
+        B --> C["장바구니<br>localStorage"]
+        C --> D["로그인"]
+        D --> E["받는 분·받는 날 입력"]
+    end
+    subgraph Server["🔐 Supabase"]
+        F{"place_order<br>서버 금액 = 화면 합계?"}
+        G[("orders · 접수")]
+    end
+    subgraph Owner["🛠️ 대표"]
+        H["새 주문 메일"]
+        I["상태 변경<br>확인 → 준비 중 → 완료"]
+        J["상품·사진·모임·works 등록"]
+    end
+    E --> F
+    F -->|같음| G
+    F -->|다름| C
+    G -.-> H --> I
+    J -->|products · works · gatherings| A
+```
+
+```mermaid
+stateDiagram-v2
+    state "준비 중" as prep
+    [*] --> 접수 : place_order
+    접수 --> 확인 : 대표
+    확인 --> prep : 대표
+    prep --> 완료 : 대표
+    접수 --> 취소 : 손님 cancel_my_order
+    확인 --> 취소 : 대표
+    prep --> 취소 : 대표
+    완료 --> [*]
+    취소 --> [*]
+```
+
+### ⚙️ 주문 처리 시퀀스와 가격 규칙
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor C as 손님
+    participant UI as 상세·장바구니
+    participant DB as Supabase Postgres
+    participant M as notify-new-order
+    actor O as 대표
+
+    C->>UI: 옵션 고르기 · 장바구니 담기
+    UI->>UI: localStorage에 저장, 합계 표시
+    UI->>DB: quote_order (지금 가격으로 재계산)
+    DB-->>UI: 줄별 금액 · 합계
+    C->>UI: 로그인 후 받는 분·연락처·받는 날 입력
+    UI->>DB: place_order (화면 합계와 함께)
+    alt 서버 합계와 같음
+        DB-->>UI: 주문 번호
+        DB-)M: 새 주문 알림 (메일 키가 있을 때)
+        O->>DB: 관리자 화면에서 상태 변경 · 메모
+    else 가격이 바뀜
+        DB-->>UI: 거절 · 지금 가격으로 다시 보여 줌
+    end
+```
+
+| 규칙 | 값 | 적용 |
+| --- | --- | --- |
+| 꽃꽂이 기본가 | 화기 포함 (예: 낙엽송과 연잎 68,000원) | 화기를 빼면 상품별 금액만큼 차감 (예: −18,000원) |
+| 포장 | 감싸개 기본 포함 · 매듭 보자기 +18,000원 | 꽃꽂이 옵션 |
+| 받는 방법 | 작업실 픽업 무료 · 서울 당일 퀵 +15,000원 | 꽃꽂이는 택배로 보내지 않음 |
+| 보자기 택배비 | 3,000원, 50,000원 이상 무료 | 보자기 단품 |
+| 받는 날 | 내일부터 선택 | 모든 주문 |
+| 취소 | '접수' 단계에서만 손님이 직접 취소 | 마이페이지 |
+
 <a id="features"></a>
-## ✨ 5. 주요 기능
+## ✨ 5. 주요 화면
 
 ### 🏠 메인
 
 <p align="center">
-  <img src="docs/screenshots/home.png" alt="메인 데스크톱" width="68%">
-  <img src="docs/screenshots/mobile.png" alt="메인 모바일" width="22%">
+  <img src="docs/screenshots/home-full.jpg" alt="메인 페이지 전체 화면 — 섹션 번호 1–7" width="62%">
+  &nbsp;
+  <img src="docs/screenshots/mobile.png" alt="메인 모바일" width="24%">
 </p>
 
-- 헤더 아래 사진 슬라이더. 6초마다 넘어가고, 위치 바를 누르면 그 장으로 이동
-- 이번 절기의 꽃 → 다시 쓰는 보자기 → works → 커뮤니티로 이어지는 한 줄 흐름
+| 번호 | 섹션 | 내용 |
+| :---: | --- | --- |
+| 1 | 헤더 | 로고 왼쪽, 메뉴·장바구니·내 정보 오른쪽. 히어로와 겹치지 않게 분리 |
+| 2 | 히어로 | 절기 라벨(입동 · 立冬), "꽃으로 건네는 말", 쪽빛 점 버튼. 6초마다 넘어가고 위치 바를 누르면 그 장으로 이동 |
+| 3 | 입동의 꽃 | 이번 절기 제품 4개를 정사각 사진으로, 제목 옆 손그림 꽃병, 모든 제품 보기 |
+| 4 | 다시 쓰는 보자기 | 보자기 사진과 세로쓰기 문장 — 브랜드의 출발점인 '다시 쓰는 포장' |
+| 5 | 계절마다 남긴 꽃 | works 대표 사진과 연월별 작업 기록 목록 |
+| 6 | 꽃을 사이에 두고 나누는 이야기 | 꽃 모임 일정·장소·남은 자리 카드 |
+| 7 | 푸터 | 로고와 손그림 꽃병 한 점, 연락처, 약관, 사업자 정보 |
 
 ### 🌿 제품 목록 · 상세
 
@@ -251,41 +452,22 @@ flowchart TB
 | `/terms` · `/privacy` · `/refund` | 이용약관 · 개인정보처리방침 · 취소·환불 |
 </details>
 
-<a id="order"></a>
-## ⚙️ 6. 주문 처리 흐름과 가격 규칙
+<a id="details"></a>
+## 🧩 6. 기능별 핵심 특징과 구현 상세
 
-```mermaid
-sequenceDiagram
-    autonumber
-    actor C as 손님
-    participant UI as 상세·장바구니
-    participant DB as Supabase Postgres
-    participant M as notify-new-order
-    actor O as 대표
-
-    C->>UI: 옵션 고르기 · 장바구니 담기
-    UI->>UI: localStorage에 저장, 합계 표시
-    UI->>DB: quote_order (지금 가격으로 재계산)
-    DB-->>UI: 줄별 금액 · 합계
-    C->>UI: 로그인 후 받는 분·연락처·받는 날 입력
-    UI->>DB: place_order (화면 합계와 함께)
-    alt 서버 합계와 같음
-        DB-->>UI: 주문 번호
-        DB-)M: 새 주문 알림 (메일 키가 있을 때)
-        O->>DB: 관리자 화면에서 상태 변경 · 메모
-    else 가격이 바뀜
-        DB-->>UI: 거절 · 지금 가격으로 다시 보여 줌
-    end
-```
-
-| 규칙 | 값 | 적용 |
+| 기능 | 핵심 특징 | 구현 상세 |
 | --- | --- | --- |
-| 꽃꽂이 기본가 | 화기 포함 (예: 낙엽송과 연잎 68,000원) | 화기를 빼면 상품별 금액만큼 차감 (예: −18,000원) |
-| 포장 | 감싸개 기본 포함 · 매듭 보자기 +18,000원 | 꽃꽂이 옵션 |
-| 받는 방법 | 작업실 픽업 무료 · 서울 당일 퀵 +15,000원 | 꽃꽂이는 택배로 보내지 않음 |
-| 보자기 택배비 | 3,000원, 50,000원 이상 무료 | 보자기 단품 |
-| 받는 날 | 내일부터 선택 | 모든 주문 |
-| 취소 | '접수' 단계에서만 손님이 직접 취소 | 마이페이지 |
+| 🎞️ 히어로 슬라이더 | 6초마다 넘어감, 위치 바를 누르면 그 장으로 이동 | `HeroSlider.tsx` · 위치 바는 44px 터치 영역과 'N번째 장으로 이동' 안내, 첫 장 사진 미리 불러오기 |
+| 🌿 제품 목록 | 분류·가격순 정렬, 고른 분류가 주소에 남음 | `ShopList.tsx` · `?cat=` 주소, 크기별 가격 중 최저가로 정렬 |
+| 🧮 옵션별 금액 | 화기·포장·받는 방법을 고르면 금액이 바로 바뀜 | `ArrangeDetail.tsx` `BojagiDetail.tsx` `PriceTag.tsx` · 옵션 값은 `lib/catalog.ts` |
+| 🆕 등록 상품 상세 | 빌드 없이 새 상품 페이지가 생김 | `shop/item/page.tsx` + `ProductDetail.tsx` · `?k=` 주소, `useSearchParams`를 Suspense로 감쌈 |
+| 🧺 장바구니 | 새로고침해도 남고, 뺀 상품을 되돌릴 수 있음 | `Providers.tsx` · `localStorage` 키 `seoldamhwa-cart`, 불러오기 전에는 저장하지 않음, 5초 되돌리기 알림 |
+| 🔐 주문 | 화면 합계와 서버 합계가 같을 때만 접수 | `OrderForm.tsx` → `quote_order` · `place_order(p_expected_total)` · RLS |
+| 👤 회원 | 가입·로그인·비밀번호 찾기, 주문 취소·탈퇴 | `LoginForm.tsx` `Auth.tsx` `MyPage.tsx` · `cancel_my_order` · `delete_my_account` |
+| 🛠️ 관리자 센터 | 주문·제품·모임·works 4개 탭, 사진 업로드, 저장 안 한 변경 확인 | `admin/Admin.tsx` · Storage `products` `works` 버킷(관리자만 쓰기), `is_admin` |
+| 📷 works | 분류별 작업 기록, 분류가 주소에 남음 | `WorksArchive.tsx` · `?cat=` |
+| ✉️ 새 주문 알림 | 주문이 들어오면 대표에게 메일 | Edge Function `notify-new-order` · 메일 서비스 키를 넣으면 켜짐 |
+| 📱 반응형 | 데스크톱·모바일 같은 여백과 색 | 본문 폭 `max(40px, (100vw − 1200px)/2)` 여백, 스크롤바 폭 보정, 모바일 안전 영역 |
 
 <a id="decisions"></a>
 ## 💡 7. 기술적 의사결정
@@ -301,26 +483,44 @@ sequenceDiagram
 | 메인 이미지 | 손그림 선화를 사진으로, 배경은 한 가지 색으로 | 선화와 섹션별 배경색 유지 | 선화·세로쓰기·한자·배경색이 겹쳐 화면이 산만해 보임 | 안정빈, 2026-11-18 |
 
 <a id="structure"></a>
-## 📂 8. 프로젝트 구조와 데이터 모델
+## 📂 8. 주요 폴더 구조와 데이터 모델
 
 ```text
 seoldamhwa/
-├─ web/                     # Next.js 앱
-│  ├─ app/                  # 페이지 (전체 주소 19개)
-│  ├─ components/           # 헤더·히어로·상세·장바구니·주문·로그인·마이페이지
-│  │  └─ admin/Admin.tsx    # 관리자 4개 탭 (주문·제품·모임·works)
+├─ web/                          # Next.js 앱
+│  ├─ app/                       # 주소 = 폴더
+│  │  ├─ page.tsx                # 메인
+│  │  ├─ shop/                   # 제품 목록 · [slug] 고정 상세 · item 등록 상품 상세
+│  │  ├─ about/ works/ community/
+│  │  ├─ cart/ login/ mypage/    # 장바구니 · 로그인 · 마이페이지
+│  │  ├─ admin/                  # 관리자 센터
+│  │  └─ terms/ privacy/ refund/ # 약관
+│  ├─ components/
+│  │  ├─ Header · Footer · HeroSlider
+│  │  ├─ ShopList · ArrangeDetail · BojagiDetail · ProductDetail · PriceTag
+│  │  ├─ Providers               # 장바구니 · 알림(되돌리기)
+│  │  ├─ OrderForm · LoginForm · Auth · MyPage
+│  │  ├─ WorksArchive · Gatherings
+│  │  ├─ admin/Admin.tsx         # 관리자 4개 탭
+│  │  └─ static/                 # 메인 섹션 · 브랜드 소개 · 손그림(Vase · Symbols)
 │  ├─ lib/
-│  │  ├─ catalog.ts         # 기본 상품·옵션·가격 데이터
-│  │  ├─ data.ts            # DB 읽기, DB가 없으면 기본 데이터로 표시
-│  │  ├─ supabase.ts        # 공개 키 클라이언트
-│  │  └─ business.ts        # 사업자 정보
-│  └─ public/img/           # 사진 7장
-├─ supabase/                # 마이그레이션 5개 · 시드 · Edge Function · 설정 안내
-├─ docs/                    # erd.md · screenshots/
-├─ mockups/                 # 첫 HTML 시안
-├─ PRODUCT.md               # 사용자와 브랜드 원칙
-└─ DESIGN.md                # 색·글꼴·간격·컴포넌트 규칙
+│  │  ├─ catalog.ts              # 기본 상품·옵션·가격
+│  │  ├─ data.ts                 # DB 읽기, DB가 없으면 기본 데이터
+│  │  ├─ supabase.ts             # 공개 키 클라이언트
+│  │  └─ business.ts             # 사업자 정보
+│  └─ public/img/                # 사진
+├─ supabase/
+│  ├─ migrations/                # 테이블 · RLS · 함수 (5개)
+│  ├─ functions/notify-new-order/
+│  └─ seed.sql
+├─ docs/
+│  ├─ erd.md · screenshots/ · slides/
+│  └─ seoldamhwa_brand_process.html   # 발표 장표
+├─ PRODUCT.md                    # 사용자와 브랜드 원칙
+└─ DESIGN.md                     # 색·글꼴·간격·컴포넌트 규칙
 ```
+
+### 🧾 데이터 모델
 
 | 테이블 | 내용 |
 | --- | --- |
@@ -360,7 +560,7 @@ export type ProductRow = {
 <a id="run"></a>
 ## 🚀 9. 실행 방법
 
-### 방법 1. 내 컴퓨터에서 실행
+### 💻 방법 1. 내 컴퓨터에서 실행
 
 Node.js 20 이상이 필요합니다.
 
@@ -377,7 +577,7 @@ npm run dev        # http://localhost:3000
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | 로그인·주문을 쓸 때 | 공개(publishable) 키. `web/.env.development`·`.env.production`에 있음 | 위와 같음 |
 | `NEXT_PUBLIC_BASE_PATH` | 하위 경로에 배포할 때 | 예: `/seoldamhwa` | 도메인 루트(`/`) 기준으로 빌드 |
 
-### 방법 2. GitHub Pages로 배포
+### ☁️ 방법 2. GitHub Pages로 배포
 
 1. `npm run build` — 정적 파일이 `web/out/`에 만들어짐
 2. `main`에 푸시하면 `.github/workflows/pages.yml`이 같은 빌드를 돌려 GitHub Pages에 올림
@@ -399,7 +599,7 @@ npm run dev        # http://localhost:3000
 | 확인하지 않은 범위 | — | 실제 관리자 계정의 사진 업로드, 결제, 실제 메일 발송, GitHub Actions 배포 |
 
 <a id="retro"></a>
-## 📈 11. 회고와 향후 계획
+## 📈 11. 회고
 
 | Keep | Problem | Try |
 | --- | --- | --- |
@@ -407,13 +607,63 @@ npm run dev        # http://localhost:3000
 | 서버 없는 정적 사이트에서도 금액 재계산과 RLS로 주문 데이터를 지킴 | 글꼴 전체 교체를 비교 없이 적용했다가 되돌림 | 대표가 플랫폼·결제 방식·상품·가격을 정하면 결제를 붙이거나 플랫폼으로 옮김 |
 | 클라이언트가 정할 일을 기능 정의서 18개 항목으로 따로 모음 | 개발용 DB 하나에 시험 주문이 섞임, 린트 오류 3건 | 직접 촬영한 사진으로 교체, 운영용 DB 분리, 도메인·메일 서비스, 유출 비밀번호 차단 켜기, 린트 정리 |
 
+<a id="roadmap"></a>
+## 🗺️ 12. 로드맵 — 데이터 리포트 · SEO · 판매 전략
+
+```mermaid
+flowchart LR
+    A["📥 1. 데이터 모으기"] --> B["📊 2. 고객 리포트"]
+    A --> C["🔎 3. SEO 최적화"]
+    B --> D["🎯 4. 데이터 기반 판매 전략"]
+    C --> D
+```
+
+| 단계 | 할 일 | 필요한 데이터·작업 | 완료 기준 |
+| --- | --- | --- | --- |
+| 📥 1. 데이터 모으기 | 주문·모임 신청·상품 조회·장바구니 담기를 기록 | 운영용 DB 분리, 이벤트 테이블, 수집 동의와 개인정보처리방침 갱신 | 한 달치 이벤트가 쌓이고 관리자에서 조회됨 |
+| 📊 2. 고객 리포트 | 관리자 센터에 리포트 탭 | 월별 매출, 인기 상품, 절기별 주문, 재구매율, 받는 날·퀵 비율, 보자기 옵션 선택률 | 대표가 월말에 리포트 한 장으로 다음 절기 상품을 정함 |
+| 🔎 3. SEO 최적화 | 검색과 공유에서 잘 보이게 | 상품별 제목·설명 메타, OG 이미지, 상품·매장 구조화 데이터(JSON-LD), `sitemap.xml`·`robots.txt`, 등록 상품 상세를 `?k=`에서 경로형 주소로, 사진 용량·대체 텍스트 | 주요 상품이 브랜드명·상품명 검색에 노출, 공유 미리보기 정상 |
+| 🎯 4. 데이터 기반 판매 전략 | 리포트로 상품·가격·구독을 조정 | 절기별 판매로 다음 절기 기획, 재구매 손님에게 절기 알림·구독 제안, 보자기 옵션 선택률로 패키징 확장 판단, 가격대별 전환 비교 | 기획·가격 결정마다 근거 데이터가 남음 |
+
+<a id="slides"></a>
+## 🎞️ 13. 발표 장표
+
+브랜드 컨셉이 비주얼과 화면으로 이어진 과정을 18장으로 정리했습니다. 원본 HTML은 [`docs/seoldamhwa_brand_process.html`](docs/seoldamhwa_brand_process.html)을 내려받아 브라우저로 열면 방향키·목차(T)·발표자 노트(P)로 볼 수 있습니다.
+
+<details open>
+<summary><b>📂 장표 펼쳐보기 (18장)</b></summary>
+<br>
+
+<p align="center">
+  <img src="docs/slides/01.jpg" alt="장표 01" width="95%"><br><br>
+  <img src="docs/slides/02.jpg" alt="장표 02" width="95%"><br><br>
+  <img src="docs/slides/03.jpg" alt="장표 03" width="95%"><br><br>
+  <img src="docs/slides/04.jpg" alt="장표 04" width="95%"><br><br>
+  <img src="docs/slides/05.jpg" alt="장표 05" width="95%"><br><br>
+  <img src="docs/slides/06.jpg" alt="장표 06" width="95%"><br><br>
+  <img src="docs/slides/07.jpg" alt="장표 07" width="95%"><br><br>
+  <img src="docs/slides/08.jpg" alt="장표 08" width="95%"><br><br>
+  <img src="docs/slides/09.jpg" alt="장표 09" width="95%"><br><br>
+  <img src="docs/slides/10.jpg" alt="장표 10" width="95%"><br><br>
+  <img src="docs/slides/11.jpg" alt="장표 11" width="95%"><br><br>
+  <img src="docs/slides/12.jpg" alt="장표 12" width="95%"><br><br>
+  <img src="docs/slides/13.jpg" alt="장표 13" width="95%"><br><br>
+  <img src="docs/slides/14.jpg" alt="장표 14" width="95%"><br><br>
+  <img src="docs/slides/15.jpg" alt="장표 15" width="95%"><br><br>
+  <img src="docs/slides/16.jpg" alt="장표 16" width="95%"><br><br>
+  <img src="docs/slides/17.jpg" alt="장표 17" width="95%"><br><br>
+  <img src="docs/slides/18.jpg" alt="장표 18" width="95%"><br><br>
+</p>
+
+</details>
+
 <a id="license"></a>
-## 📄 12. 라이선스
+## 📄 14. 라이선스
 
 설담화(說談話) 클라이언트 프로젝트입니다. 오픈소스 라이선스를 두지 않았으며, 브랜드명·로고·사진의 사용은 설담화의 허락이 필요합니다.
 
 <div align="center">
 <br>
-<strong>🌸 설담화 說談話</strong> · 꽃으로 건네는 말<br>
+<strong>🌸 설담화 說談話</strong> · 말로 다 못 한 마음을 꽃으로 전합니다<br>
 기획·디자인 안정빈
 </div>
