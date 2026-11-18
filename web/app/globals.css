@@ -1057,3 +1057,4 @@ h1,h2,h3{text-wrap:balance}
 .hd{background-color:var(--paper);border-bottom-color:var(--hair)}
 .hs{margin-top:81px;height:calc(100svh - 81px)}
 @media (max-width:720px){.hs{margin-top:75px;height:calc(100svh - 75px)}}
+.ad-table td:last-child .link+.link{margin-left:14px}

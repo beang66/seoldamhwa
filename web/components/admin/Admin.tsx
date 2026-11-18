@@ -160,9 +160,9 @@ function Editor({ fields, value, isNew, onSave, onCancel, onDelete, title }: {
         <button className="pill dark" type="submit" disabled={busy}>{busy ? '저장하는 중…' : '저장'}</button>
         <button className="pill" type="button" onClick={() => okToLeave() && onCancel()}>닫기</button>
         {onDelete && !isNew && <button className="link danger" type="button" disabled={busy} onClick={async () => {
-          if (!confirm('지울까요? 되돌릴 수 없어요.')) return;
+          if (!confirm('삭제할까요? 삭제한 내용은 되돌릴 수 없습니다.')) return;
           setBusy(true); try { await onDelete(); } catch (x) { setErr(errText(x)); } finally { setBusy(false); }
-        }}>지우기</button>}
+        }}>삭제</button>}
       </div>
     </form>
   );
@@ -248,7 +248,14 @@ function Crud<T extends { [k: string]: unknown }>({ table, idKey, order, fields,
     if (edit!.isNew) { if (idKey === 'id') delete body.id; await must(supabase!.from(table).insert(body)); done('추가했어요.'); }
     else { delete body[idKey]; delete body.created_at; delete body.updated_at; await must(supabase!.from(table).update(body).eq(idKey, id)); done('저장했어요.'); }
   };
-  const del = async () => { await must(supabase!.from(table).delete().eq(idKey, edit!.v[idKey])); done('지웠어요.'); };
+  const del = async () => { await must(supabase!.from(table).delete().eq(idKey, edit!.v[idKey])); done('삭제했어요.'); };
+  // 목록 줄에서 바로 삭제
+  const delRow = async (r: T) => {
+    if (canDelete && !canDelete(r)) { toast('상세 페이지가 있는 기본 항목은 삭제할 수 없어요. 숨기려면 고치기에서 표시를 끄세요.'); return; }
+    if (!confirm('삭제할까요? 삭제한 내용은 되돌릴 수 없습니다.')) return;
+    try { await must(supabase!.from(table).delete().eq(idKey, r[idKey])); if (edit && edit.v[idKey] === r[idKey]) setEdit(null); toast('삭제했어요.'); load(); afterSave?.(); }
+    catch (x) { toast(errText(x)); }
+  };
 
   return (
     <section>
@@ -263,10 +270,11 @@ function Crud<T extends { [k: string]: unknown }>({ table, idKey, order, fields,
         : (
           <div className="ad-table-wrap">
             <table className="ad-table">
-              <thead><tr>{head.map(h => <th key={h} scope="col">{h}</th>)}<th scope="col"><span className="sr-only">고치기</span></th></tr></thead>
+              <thead><tr>{head.map(h => <th key={h} scope="col">{h}</th>)}<th scope="col"><span className="sr-only">고치기·삭제</span></th></tr></thead>
               <tbody>{rows.map(r => (
                 <tr key={String(r[idKey])}>{row(r).map((c, i) => <td key={i}>{c}</td>)}
-                  <td><button type="button" className="link" onClick={() => { if (!okToLeave()) return; setEdit({ v: { ...r }, isNew: false }); scrollTo({ top: 0, behavior: 'smooth' }); }}>고치기</button></td></tr>
+                  <td><button type="button" className="link" onClick={() => { if (!okToLeave()) return; setEdit({ v: { ...r }, isNew: false }); scrollTo({ top: 0, behavior: 'smooth' }); }}>고치기</button>
+                    <button type="button" className="link danger" onClick={() => delRow(r)}>삭제</button></td></tr>
               ))}</tbody>
             </table>
           </div>
