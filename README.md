@@ -7,7 +7,7 @@
 
 <div align="center">
 
-[![배포 사이트](https://img.shields.io/badge/배포_사이트-beang66.github.io%2Fseoldamhwa-2F56A8?style=for-the-badge&logo=githubpages&logoColor=white)](https://beang66.github.io/seoldamhwa/)
+[![배포 사이트](https://img.shields.io/badge/배포_사이트-seoldamhwa.vercel.app-2F56A8?style=for-the-badge&logo=vercel&logoColor=white)](https://seoldamhwa.vercel.app/)
 [![발표 장표](https://img.shields.io/badge/발표_장표-18장-141413?style=for-the-badge&logo=googleslides&logoColor=white)](#slides)
 [![데이터 구조](https://img.shields.io/badge/데이터_구조-ERD-4F4C48?style=for-the-badge&logo=postgresql&logoColor=white)](#erd)
 
