@@ -923,7 +923,8 @@ h1,h2,h3{text-wrap:balance}
 }
 /* ----- 메인 정리 1차: 선화를 사진으로, 배경 한 가지, 그림자·둥근 모서리 없음 ----- */
 #season,.bojagi,.works,.community{background:var(--paper)}
-.works,.community{border-top:1px solid var(--hair)}
+/* 섹션 사이 선도 본문 폭(좌우 여백 안)에 맞춘다 */
+.works,.community{background:linear-gradient(var(--hair),var(--hair)) no-repeat var(--gutter) 0/calc(100% - 2 * var(--gutter)) 1px,var(--paper)}
 .ph{background:center/cover no-repeat #E4E1DA}
 .bojagi .draw .ph{aspect-ratio:4/5;width:100%;max-width:520px;margin:0 auto}
 .poster{background:none;box-shadow:none;padding:0;aspect-ratio:auto;justify-content:flex-start;gap:28px}
