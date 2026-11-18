@@ -5,6 +5,7 @@ export default function HomeWorks() {
   return (
     <>
 <section className="works paper" id="home-works">
+    <div className="sec-hd rv"><div><span className="eyebrow">WORKS · 작업</span><h2>계절마다 남긴 꽃</h2></div><Link href="/works">전체 아카이브</Link></div>
     <div className="poster rv">
       <div>
         <div className="ph" role="img" aria-label="한련 꽃꽂이 사진" style={{ backgroundImage: 'var(--img-ikebana-nasturtium)' }} />
@@ -13,7 +14,6 @@ export default function HomeWorks() {
       <p className="cap"><em>Through the Seasons</em>Seoldamhwa works<span>2026 — Seoul</span></p>
     </div>
     <div>
-      <div className="sec-hd rv"><div><span className="eyebrow">WORKS · 작업</span><h2>계절마다 남긴 꽃</h2></div><Link href="/works">전체 아카이브</Link></div>
       <HomeWorksList />
     </div>
   </section>

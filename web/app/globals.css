@@ -1071,3 +1071,6 @@ h1,h2,h3{text-wrap:balance}
 .pics-list li{display:flex;flex-direction:column;gap:6px}
 .pics-list .pic-prev{width:120px;margin:0}
 .pics-list li div{display:flex;gap:10px;font-size:12px}
+/* works 머리 줄도 다른 섹션처럼 본문 전체 폭 */
+.works>.sec-hd{grid-column:1/-1;margin-bottom:0}
+.works{row-gap:40px}
