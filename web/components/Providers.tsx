@@ -30,12 +30,13 @@ export const useToast = () => useContext(Toast);
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
-  const loaded = useRef(false);
+  // 저장된 장바구니를 다 읽은 뒤에만 다시 저장한다 (읽기 전에 빈 목록으로 덮어쓰지 않게)
+  const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     try { setLines(JSON.parse(localStorage.getItem(CART_KEY) || '[]')); } catch { /* 저장소가 막힌 곳 */ }
-    loaded.current = true;
+    setLoaded(true);
   }, []);
-  useEffect(() => { if (loaded.current) try { localStorage.setItem(CART_KEY, JSON.stringify(lines)); } catch { } }, [lines]);
+  useEffect(() => { if (loaded) try { localStorage.setItem(CART_KEY, JSON.stringify(lines)); } catch { } }, [lines, loaded]);
 
   const add = useCallback((l: CartLine) => setLines(cur => {
     const same = cur.find(x => x.id === l.id);
