@@ -1053,3 +1053,7 @@ h1,h2,h3{text-wrap:balance}
 @media (max-width:720px){.ft-cols{grid-template-columns:1fr 1fr}.ft .ft-cols .ft-links{grid-column:auto}}
 /* 좌우 여백은 --gutter 하나로 맞춘다 (예전 개별 최대 폭은 풀어 이중으로 좁아지지 않게) */
 .bj .wrap,.ar .wrap,.pg,.pd,#works-view .page-hd,#community-view .page-hd,#cart-view .page-hd{max-width:none}
+/* 헤더는 늘 한지색 바탕 + 아래 선, 히어로는 헤더 아래에서 시작한다 */
+.hd{background-color:var(--paper);border-bottom-color:var(--hair)}
+.hs{margin-top:81px;height:calc(100svh - 81px)}
+@media (max-width:720px){.hs{margin-top:75px;height:calc(100svh - 75px)}}

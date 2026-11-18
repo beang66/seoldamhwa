@@ -40,7 +40,7 @@ export default function Header() {
 
   const view = path === '/' ? 'home' : path.split('/')[1];
   return (
-    <header className={'hd' + (solid ? ' solid' : '') + (open ? ' open' : '') + (view === 'home' ? ' on-hero' : '')}>
+    <header className={'hd' + (solid ? ' solid' : '') + (open ? ' open' : '')}>
       <Link className="brand" href="/" aria-label="설담화 메인페이지" translate="no"><svg aria-hidden="true"><use href="#blossom" /></svg>설담화</Link>
       <nav aria-label="주 메뉴" id="gnb">
         <ul>
