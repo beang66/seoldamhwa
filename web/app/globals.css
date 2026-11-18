@@ -47,7 +47,7 @@ img{display:block;max-width:100%}
 .menu-btn{display:none;min-width:44px;min-height:44px;margin-left:-8px;padding:0 8px;background:none;border:none;font:inherit;font-weight:600;letter-spacing:.12em;color:var(--ink);cursor:pointer;text-align:left}
 
 /* ---------- 1. 히어로: 큰 이미지 슬라이더 ---------- */
-.hs{position:relative;height:100svh;min-height:560px;max-height:1000px;overflow:hidden;background:var(--stone);color:var(--sheet)}
+.hs{position:relative;height:100svh;min-height:560px;max-height:1000px;overflow:hidden;overflow:clip;background:var(--stone);color:var(--sheet)}
 .hs-slide{position:absolute;inset:0;visibility:hidden}
 .hs-slide.on,.hs-slide.leave{visibility:visible}
 /* 다음 장은 오른쪽에서 들어오고 지금 장은 왼쪽으로 밀려난다. 이전 장으로 갈 때는 반대 방향 */
