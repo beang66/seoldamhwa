@@ -4,7 +4,7 @@
 >
 > **현재 상태:** 회원가입·로그인, 주문 접수(금액은 서버가 다시 계산), 마이페이지, 관리자 페이지가 동작하는 시안 단계입니다. **결제는 연결되어 있지 않고**, 상품·가격·사진·사업자 정보는 아직 확정 전입니다. 마지막 확인 2026-11-18.  
 > **역할:** 안정빈 — 브랜드 기획·BI/CI·디자인 판단·클라이언트 협의·검수 / 구현은 Claude Code(AI)를 사용  
-> **화면:** [beang66.github.io/seoldamhwa](https://beang66.github.io/seoldamhwa/) (`main` 브랜치 기준) · **설계 문서:** [`PRODUCT.md`](PRODUCT.md) · [`DESIGN.md`](DESIGN.md) · [`docs/erd.md`](docs/erd.md)
+> **화면:** [beang66.github.io/seoldamhwa](https://beang66.github.io/seoldamhwa/) · **설계 문서:** [`PRODUCT.md`](PRODUCT.md) · [`DESIGN.md`](DESIGN.md) · [`docs/erd.md`](docs/erd.md)
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=000)
@@ -75,9 +75,6 @@
 | --- | --- |
 | ![관리자 제품](docs/screenshots/admin-products.png) | ![관리자 제품 등록](docs/screenshots/admin-product-edit.png) |
 
-> 캡처는 2026-11-18 기준 화면이고, 시안 사진이 들어간 상태입니다. 관리자 화면은 예시 데이터로 찍었습니다.  
-> 사진(`web/public/img/`)은 시안용입니다. `bojagi.jpg`는 다른 사람의 사진(워터마크 있음)이라 공개 전에 반드시 직접 찍은 사진으로 바꿔야 합니다.
-
 ### 주소
 
 | 주소 | 화면 |
@@ -137,8 +134,6 @@ seoldamhwa/
 
 ## 6. 핵심 의사결정
 
-결정한 사람과 근거는 클라이언트 노션 포털의 '확정된 결정사항', 'BI/CI 시안과 피드백', '웹사이트 기능 정의서'에 기록되어 있습니다(비공개).
-
 | 결정 | 고려한 대안 | 이유·제약 | 결정 |
 | --- | --- | --- | --- |
 | 브랜드 방향은 **C안**(아이보리 바탕·블루 포인트·손글씨 한글 로고·미니멀 손그림·음각/양각) | A안(선과 여백의 갤러리풍), B안(먹색·쪽빛 대비) | A는 고객층이 좁고 차가울 수 있고, B는 차갑고 각진 느낌이 확인됨. C가 따뜻하면서 차분함 | 대표, 2026-11-06 회의. **방향 승인**이며 최종 로고·적용물 승인은 아님 |
@@ -172,9 +167,7 @@ npm run dev        # http://localhost:3000
 
 DB 만들기, 마이그레이션 순서, 관리자 등록, 클라이언트 계정으로 옮기기, 메일 알림 켜기는 [`supabase/README.md`](supabase/README.md)에 있습니다.
 
-## 8. 검증 결과
-
-모두 2026-11-18, 브랜치 `fix/ui-review` 기준입니다.
+## 8. 검증 결과 (2026-11-18)
 
 | 확인 | 방법·범위 | 결과 | 한계 |
 | --- | --- | --- | --- |
@@ -199,7 +192,6 @@ DB 만들기, 마이그레이션 순서, 관리자 등록, 클라이언트 계�
 
 - **운영 범위:** 지금 사이트는 시안입니다. 실제 판매·결제·배송을 하지 않으며, 개발용 DB 1개를 씁니다. 시험 주문이 같은 DB에 섞이므로 열기 전에 운영용 DB를 따로 만들어야 합니다.
 - **개인정보:** 회원 이메일·이름·연락처와 주문 정보는 Supabase(서울 리전)에 저장됩니다. 읽기·쓰기는 RLS 정책으로 막고, 관리자는 등록된 이메일 중 메일 인증을 마친 계정만입니다. 공개 저장소라 관리자 이메일은 파일에 적지 않습니다.
-- **사진:** `web/public/img/`의 사진 7장은 시안용입니다. `bojagi.jpg`는 다른 사람의 사진(워터마크 있음)이라 **공개 전에 반드시 교체**해야 합니다. 클라이언트가 직접 촬영할 수 있게 사진 촬영 가이드를 전달했습니다.
 - **브랜드 자료:** '설담화' 이름·로고·문구·사업 계획은 클라이언트의 것입니다. 이 저장소가 공개되어 있어도 재사용 권리가 생기지 않습니다. 상표 확인은 아직입니다.
 - **글꼴:** Noto Serif KR, Noto Sans KR, EB Garamond, Montserrat — 모두 SIL Open Font License.
 
@@ -210,7 +202,3 @@ DB 만들기, 마이그레이션 순서, 관리자 등록, 클라이언트 계�
 3. **열기 전 운영 준비:** 운영용 DB를 클라이언트 계정에 만들기, 도메인, 메일 서비스 연결, 유출 비밀번호 차단 켜기, 린트 오류 3건 정리.
 
 **상세 문서:** [`PRODUCT.md`](PRODUCT.md) · [`DESIGN.md`](DESIGN.md) · [`docs/erd.md`](docs/erd.md) · [`supabase/README.md`](supabase/README.md)
-
----
-
-> README 작성 기준: [Vault README 가이드](https://github.com/beang66/Vault/blob/main/wiki/concepts/GitHub%20README%20%EA%B0%80%EC%9D%B4%EB%93%9C%20%E2%80%94%20%EC%A0%9C%ED%92%88%C2%B7%EC%9D%98%EC%82%AC%EA%B2%B0%EC%A0%95%C2%B7%EA%B2%80%EC%A6%9D.md)
