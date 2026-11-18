@@ -2,25 +2,34 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { SHOP, SHOP_CATS, priceText, type ShopCat, type ShopCard } from '@/lib/catalog';
+import { SHOP_CATS, type ShopCat } from '@/lib/catalog';
+import { picBg, productPrice, useProducts, type ProductRow } from '@/lib/data';
 
-function Card({ p, hidden }: { p: ShopCard; hidden: boolean }) {
+const ILL_LABEL: Record<string, string> = { 'ill-wrap': '감싸개 그림', 'ill-knot': '가방 끈을 단 매듭 보자기 그림' };
+
+const minPrice = (p: ProductRow) => p.cat === 'bojagi' && p.sizes?.length ? Math.min(...p.sizes.map(s => s.price)) : p.price;
+
+function Card({ p, hidden }: { p: ProductRow; hidden: boolean }) {
+  // 사진이 없는 보자기는 선화로 보여 준다
+  const ill = !p.img && p.cat === 'bojagi' ? (p.key === 'knot' ? 'ill-knot' : 'ill-wrap') : null;
   const inner = (
     <>
-      {p.ill
-        ? <div className="frame ill"><svg viewBox="0 0 300 330" aria-label={p.illLabel}><use href={`#${p.ill}`} /></svg></div>
-        : <div className="frame"><span style={{ backgroundImage: `var(--img-${p.img})` }} /></div>}
-      <h3>{p.name}</h3><p>{p.meta}<b>{priceText(p.price)}</b></p>
+      {ill
+        ? <div className="frame ill"><svg viewBox="0 0 300 330" aria-label={ILL_LABEL[ill]}><use href={`#${ill}`} /></svg></div>
+        : <div className="frame">{p.img ? <span style={{ backgroundImage: picBg(p.img) }} /> : <span className="blank" />}</div>}
+      <h3>{p.name}</h3><p>{p.meta}<b>{p.sold_out ? <span className="so">품절 · </span> : null}{productPrice(p)}</b></p>
     </>
   );
-  return p.href
-    ? <Link className="prod" href={p.href} hidden={hidden}>{inner}</Link>
-    : <a className="prod" href="#" data-soon="" hidden={hidden}>{inner}</a>;
+  // 코드로 만든 기본 상세 페이지가 있으면 그쪽, 아니면 관리자가 등록한 내용으로 그리는 상세 페이지
+  return <Link className="prod" href={p.has_detail ? `/shop/${p.key}` : `/shop/item?k=${p.key}`} hidden={hidden}>{inner}</Link>;
 }
 
 export default function ShopList({ initial }: { initial: ShopCat }) {
   const [cat, setCat] = useState<ShopCat>(initial);
-  const pick = (c: ShopCat) => { setCat(c); history.replaceState(null, '', c === 'all' ? '/shop' : `/shop?cat=${c}`); };
+  const list = useProducts();
+  const [sort, setSort] = useState<'base' | 'low' | 'high'>('base');
+  const shown = sort === 'base' ? list : [...list].sort((a, b) => (sort === 'low' ? 1 : -1) * (minPrice(a) - minPrice(b)));
+  const pick = (c: ShopCat) => { setCat(c); history.replaceState(null, '', (process.env.NEXT_PUBLIC_BASE_PATH ?? '') + (c === 'all' ? '/shop/' : `/shop/?cat=${c}`)); };
   return (
     <>
       <div className="page-hd">
@@ -28,15 +37,24 @@ export default function ShopList({ initial }: { initial: ShopCat }) {
         <h1>제품</h1>
         <p>계절마다 고른 꽃과, 꽃을 감싸 건네는 보자기를 함께 소개합니다.</p>
       </div>
-      <div className="cats" role="group" aria-label="제품 카테고리">
-        {SHOP_CATS.map(([k, n]) => (
-          <button key={k} type="button" aria-pressed={cat === k} onClick={() => pick(k)}>
-            {n}<small>{k === 'all' ? SHOP.length : SHOP.filter(p => p.cat === k).length}</small>
-          </button>
-        ))}
+      <div className="shop-bar">
+        <div className="cats" role="group" aria-label="제품 카테고리">
+          {SHOP_CATS.map(([k, n]) => (
+            <button key={k} type="button" aria-pressed={cat === k} onClick={() => pick(k)}>
+              {n}<small>{k === 'all' ? list.length : list.filter(p => p.cat === k).length}</small>
+            </button>
+          ))}
+        </div>
+        <label className="sort"><span className="sr-only">정렬</span>
+          <select value={sort} onChange={e => setSort(e.target.value as typeof sort)}>
+            <option value="base">기본 순서</option>
+            <option value="low">낮은 가격순</option>
+            <option value="high">높은 가격순</option>
+          </select>
+        </label>
       </div>
       <div className="grid">
-        {SHOP.map(p => <Card key={p.name} p={p} hidden={!(cat === 'all' || p.cat === cat)} />)}
+        {shown.map(p => <Card key={p.key} p={p} hidden={!(cat === 'all' || p.cat === cat)} />)}
       </div>
     </>
   );

@@ -1,14 +1,9 @@
-'use client';
-import { usePathname } from 'next/navigation';
-import StatementBlock from './static/StatementBlock';
 import FooterInfo from './static/FooterInfo';
 
-// 브랜드 소개 페이지는 맨 위에 같은 문장이 있으니 푸터에서는 뺀다
+// 큰 문장 블록은 브랜드 소개 페이지 맨 위에만 둔다. 푸터에는 로고 옆 풀꽃 그림만 남긴다
 export default function Footer() {
-  const path = usePathname();
   return (
-    <footer className="ft paper" id="statement">
-      {path !== '/about' && <StatementBlock />}
+    <footer className="ft paper">
       <FooterInfo />
     </footer>
   );

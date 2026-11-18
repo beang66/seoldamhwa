@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ITEMS, won, type BojagiKey, type GalleryKind } from '@/lib/catalog';
 import { useCart, useToast } from './Providers';
+import { useProduct } from '@/lib/data';
 
 const Ill = ({ id }: { id: string }) => <svg viewBox="0 0 300 330" aria-hidden="true"><use href={`#${id}`} /></svg>;
 
@@ -21,9 +22,14 @@ function Pic({ kind }: { kind: GalleryKind }) {
 }
 
 export default function BojagiDetail({ k }: { k: BojagiKey }) {
-  const cur = ITEMS[k];
-  const other = ITEMS[cur.other];
-  const [size, setSize] = useState(0);
+  const base = ITEMS[k];
+  const other = ITEMS[base.other];
+  // 이름·크기별 가격·품절은 DB 값을 쓴다(없으면 코드 안의 값)
+  const row = useProduct(k);
+  const cur = { ...base, name: row?.name ?? base.name, sizes: row?.sizes?.length ? row.sizes : base.sizes };
+  const soldOut = !!row?.sold_out;
+  const [pick, setSize] = useState(0);
+  const size = Math.min(pick, cur.sizes.length - 1);
   const [qty, setQty] = useState(1);
   const [main, setMain] = useState(0);
   const [note, setNote] = useState('');
@@ -31,7 +37,7 @@ export default function BojagiDetail({ k }: { k: BojagiKey }) {
 
   const act = (buy: boolean) => {
     const s = cur.sizes[size];
-    add({ id: k + '|' + s.label, key: k, kind: 'bojagi', name: cur.name, opt: s.label, unit: s.price, qty, quick: 0 });
+    add({ id: k + '|' + s.label, key: k, kind: 'bojagi', name: cur.name, opt: s.label, unit: s.price, qty, quick: 0, sel: { size: s.label } });
     if (buy) router.push('/cart'); else { setNote('장바구니에 담았어요.'); toast('장바구니에 담았어요 · ' + cur.name); }
   };
 
@@ -57,10 +63,10 @@ export default function BojagiDetail({ k }: { k: BojagiKey }) {
           </div>
           <div className="buy">
             <div className="qty"><button type="button" aria-label="수량 줄이기" onClick={() => setQty(q => Math.max(1, q - 1))}>−</button><output aria-live="polite">{qty}</output><button type="button" aria-label="수량 늘리기" onClick={() => setQty(q => Math.min(20, q + 1))}>+</button></div>
-            <button type="button" className="btn p" onClick={() => act(false)}>장바구니 담기</button>
-            <button type="button" className="btn s" onClick={() => act(true)}>바로 구매</button>
+            <button type="button" className="btn p" disabled={soldOut} onClick={() => act(false)}>{soldOut ? '품절' : '장바구니 담기'}</button>
+            <button type="button" className="btn s" disabled={soldOut} onClick={() => act(true)}>바로 구매</button>
           </div>
-          <p className="note" role="status">{note}</p>
+          <p className="note" role="status">{soldOut ? '지금은 품절이에요. 다시 만들면 알려 드릴게요.' : note}</p>
         </div>
         <dl className="spec">{cur.spec.map(([a, b]) => <div key={a}><dt>{a}</dt><dd>{b}</dd></div>)}</dl>
         <Link className="other" href={`/shop/${cur.other}`}><i><Ill id={cur.other === 'wrap' ? 'ill-wrap' : 'ill-knot'} /></i><span><small>함께 쓰면 좋은 보자기</small><b>{other.name}</b></span></Link>

@@ -2,13 +2,14 @@
 import Link from 'next/link';
 import { won } from '@/lib/catalog';
 import { cartTotals, useCart, useToast, type CartLine } from '@/components/Providers';
+import OrderForm from '@/components/OrderForm';
 
 const Thumb = ({ l }: { l: CartLine }) => l.kind === 'bojagi'
   ? <span className="th ill"><svg viewBox="0 0 300 330" aria-hidden="true"><use href={`#ill-${l.key === 'knot' ? 'knot' : 'wrap'}`} /></svg></span>
   : <span className="th" style={{ backgroundImage: `var(--img-${l.img ?? 'ikebana-' + l.key})` }} aria-hidden="true" />;
 
 export default function CartPage() {
-  const { lines, setQty, remove } = useCart();
+  const { lines, setQty, remove, restore } = useCart();
   const toast = useToast();
   const t = cartTotals(lines);
   return (
@@ -32,7 +33,7 @@ export default function CartPage() {
                       <button type="button" aria-label="수량 줄이기" onClick={() => setQty(i, -1)}>−</button><output aria-live="polite">{l.qty}</output><button type="button" aria-label="수량 늘리기" onClick={() => setQty(i, 1)}>+</button>
                     </div>
                     <b className="line">{won(l.unit * l.qty)}원</b>
-                    <button type="button" className="rm" aria-label={`${l.name} 빼기`} onClick={() => { const g = remove(i); if (g) toast(`장바구니에서 뺐어요 · ${g.name}`); }}>×</button>
+                    <button type="button" className="rm" aria-label={`${l.name} 빼기`} onClick={() => { const g = remove(i); if (g) toast(`장바구니에서 뺐어요 · ${g.name}`, { label: '되돌리기', run: () => restore(i, g) }); }}>×</button>
                   </li>
                 ))}
               </ul>
@@ -47,8 +48,8 @@ export default function CartPage() {
                 <div className="total"><dt><i className="pt" aria-hidden="true" />합계</dt><dd>{won(t.total)}원</dd></div>
               </dl>
               <p className="cart-rule">보자기 택배비는 3,000원이고, 보자기 상품이 5만 원 이상이면 무료예요. 꽃꽂이는 택배로 보내지 않아요.</p>
-              {/* shortcut: 결제는 아직 없다. 토스페이먼츠를 붙일 때 서버에서 금액을 다시 계산한다. */}
-              <button type="button" className="pill dark wide" onClick={() => toast('결제는 준비 중이에요.')}>주문하기</button>
+              {/* 결제는 아직 없다. 주문을 접수하고, 금액은 DB 함수가 다시 계산한다 */}
+              <OrderForm />
               <Link className="pill wide" href="/shop">계속 둘러보기</Link>
             </aside>
           </div>

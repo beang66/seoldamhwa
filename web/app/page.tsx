@@ -1,10 +1,14 @@
 import Link from 'next/link';
+import { preload } from 'react-dom';
 import HeroSlider from '@/components/HeroSlider';
 import SeasonHead from '@/components/static/SeasonHead';
 import HomeBojagi from '@/components/static/HomeBojagi';
 import HomeWorks from '@/components/static/HomeWorks';
 import HomeCommunity from '@/components/static/HomeCommunity';
-import { priceText } from '@/lib/catalog';
+import PriceTag from '@/components/PriceTag';
+
+// 첫 화면 첫 장 사진은 CSS 배경이라 늦게 발견된다. 먼저 받아 둔다
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
 const SEASON = [
   { href: '/shop/larch', img: 'ikebana-larch', alt: '굽 높은 회색 수반에 S자로 선 낙엽송 가지와 연잎 한 장', name: '낙엽송과 연잎', meta: '꽃꽂이 · 중품', price: 'larch' },
@@ -14,6 +18,7 @@ const SEASON = [
 ];
 
 export default function Home() {
+  preload(`${BASE}/img/ikebana-larch.jpg`, { as: 'image', fetchPriority: 'high' });
   return (
     <>
       <HeroSlider />
@@ -23,7 +28,7 @@ export default function Home() {
           {SEASON.map(p => (
             <Link key={p.href} className="prod rv" href={p.href}>
               <div className="frame"><span className="ph" role="img" aria-label={p.alt} style={{ backgroundImage: `var(--img-${p.img})` }} /></div>
-              <h3>{p.name}</h3><p>{p.meta}<b>{priceText(p.price)}</b></p>
+              <h3>{p.name}</h3><p>{p.meta}<PriceTag k={p.price} /></p>
             </Link>
           ))}
         </div>

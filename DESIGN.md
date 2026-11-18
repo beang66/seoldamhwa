@@ -3,13 +3,13 @@ name: 설담화 說談話
 description: 꽃으로 건네는 말, 다시 쓰는 보자기에 싸서
 colors:
   indigo-point: "#2F56A8"
-  hanji: "#F1EEE8"
+  hanji: "#F4F3EF"
   white-sheet: "#FBFAF7"
   stone: "#E3DFD7"
   works-greige: "#DCD8CF"
   hairline: "#D9D5CD"
-  mist: "#A9A59E"
-  pencil: "#6E6B66"
+  mist: "#66625C"
+  pencil: "#4F4C48"
   ink: "#141413"
   cotton-ivory: "#F4EFE4"
   raw-cotton: "#EFE8DA"
@@ -55,10 +55,6 @@ typography:
     fontSize: "14px"
     fontWeight: 400
     fontFeature: "tnum"
-  hand:
-    fontFamily: "Nanum Pen Script, cursive"
-    fontSize: "30px"
-    fontWeight: 400
 rounded:
   hair: "2px"
   sm: "6px"
@@ -149,7 +145,7 @@ components:
 먹과 따뜻한 미색을 기본으로 하고, 쪽빛 한 점으로만 강조한다.
 
 ### Primary
-- **쪽빛 (Indigo Point)**: 쪽물 들인 보자기의 테두리에서 온 색. 한 화면에 한 점만 쓴다. 지금 쓰는 자리는 히어로 첫 장의 버튼 앞 점, 보자기 섹션의 세로선 점과 선화 윗단 한 줄, works 필터의 현재 표시 점, 커뮤니티 모집 상태 점, 장바구니 합계 앞 점, 보자기 상품의 테두리와 매듭이다.
+- **쪽빛 (Indigo Point)**: 쪽물 들인 보자기의 테두리에서 온 색. 한 화면에 한 점만 쓴다. 지금 쓰는 자리는 히어로 첫 장의 버튼 앞 점, 보자기 섹션의 선화 윗단 한 줄(세로선 점은 먹), works 필터의 현재 표시 점, 커뮤니티 모집 상태 점, 장바구니 합계 앞 점, 보자기 상품의 테두리와 매듭이다.
 
 ### Neutral
 - **한지 (Hanji)**: 기본 페이지 바탕.
@@ -157,8 +153,8 @@ components:
 - **돌 (Stone)**: 커뮤니티처럼 한 단계 가라앉힌 섹션 바탕. 검은 바탕 대신 쓴다.
 - **회색 미색 (Works Greige)**: works 섹션 바탕. 따뜻한 회색이라 위아래 미색과 어울린다.
 - **가는 선 (Hairline)**: 구분선, 테두리, 비활성 윤곽.
-- **안개 글자 (Mist)**: 라벨, 영문 보조 글, 부가 정보.
-- **연필 (Pencil)**: 본문 보조 글, 메뉴 기본 상태.
+- **안개 글자 (Mist)**: 라벨, 영문 보조 글, 부가 정보. 12px 글자도 읽히도록 한지 위 5.2:1, 돌 위 4.6:1을 지킨다.
+- **연필 (Pencil)**: 본문 보조 글, 메뉴 기본 상태. 안개 글자보다 한 단계 진하다(한지 위 7.9:1).
 - **먹 (Ink)**: 제목, 본문, 진한 버튼, 아이콘.
 
 ### 보자기 천 계열 (보자기 이야기 영역 전용)
@@ -179,22 +175,24 @@ components:
 **Display Font:** Noto Serif KR (with serif)
 **Body Font:** Noto Sans KR (with sans-serif)
 **Latin & Numeral Font:** EB Garamond (with serif)
-**Hand Font:** Nanum Pen Script. 확정된 손글씨 로고가 나오기 전까지 쓰는 임시 서체다.
+**Hand Font:** 쓰지 않는다. 손맛은 연필 선화가 맡고, 손글씨 자리(로고 라벨, 카드 제목, 메모)는 바탕체로 쓴다.
 
 **Character:** 가는 바탕체 제목이 시처럼 놓이고, 가벼운 고딕 본문이 조용히 받친다. 영문 브랜드명과 가격, 날짜는 클래식 세리프가 맡아 한글과 결을 달리한다.
 
 ### Hierarchy
-- **Wordmark**: 영문 `seoldamhwa`, 푸터 이름. 소문자로 쓴다.
+- **Wordmark**: 영문 `seoldamhwa`, 푸터 이름. 소문자로 쓴다. 큰 문장 블록(화병 + SEOLDAMHWA)은 메인 끝과 브랜드 소개 맨 위에만 둔다.
 - **Display**: 화면 제목. 제품, 장바구니, 각 페이지의 h1.
 - **Headline**: 섹션 제목. 화면 안 섹션은 24px까지 줄여 쓴다.
 - **Title**: 카드의 상품명, 목록 항목, 카드 제목. 15–17px.
 - **Body**: 설명과 안내. 한 줄은 대략 40자 안쪽으로 두고, 짧은 문단으로 끊는다.
 - **Label**: `PRODUCTS · 제품`처럼 영문 대문자와 한글을 가운뎃점으로 잇는 섹션 라벨. 안개 글자색이다.
 - **Numeral**: 가격, 날짜, 번호. 자릿수를 맞추는 숫자(tabular)를 쓰고, 가격 뒤에는 '원'을 붙인다.
-- **Hand**: 손글씨 로고 '설담화', 천 라벨, 다시 쓰는 법 카드의 손글씨.
+- **Hand**: 손글씨 서체 없이 바탕체로 쓴다. 천 라벨, 다시 쓰는 법 카드 제목, 메모 문구.
 
 ### Named Rules
-**The 12px Floor Rule.** 어떤 글자도 12px(9pt)보다 작게 쓰지 않는다. 배지, 캡션, 도면 속 글자도 마찬가지다.
+**The 12px Floor Rule.** 어떤 글자도 12px(9pt)보다 작게 쓰지 않는다. 배지, 캡션, 도면 속 글자도 마찬가지다. 화면에 맞춰 줄어드는 SVG 도면 글자는 13으로 둔다.
+
+**The Keep-All Rule.** 한글은 단어 중간에서 줄을 바꾸지 않는다(`word-break: keep-all`).
 
 **The Bilingual Label Rule.** 섹션 라벨은 `영문 대문자 · 한글`로 쓰고, 0.26–0.3em 정도로 넓게 띄운다. 한글만 쓰는 라벨에도 넓은 자간을 유지한다.
 
@@ -269,6 +267,7 @@ components:
 - **Header:** 화면 위에 고정. 왼쪽에 제품 / 브랜드 소개 / works / 커뮤니티, 가운데에 매화 표식 + 한글 로고 '설담화', 오른쪽에 장바구니(숫자 배지)와 마이페이지 아이콘. 스크롤하면 반투명 한지 바탕과 가는 아래 선이 생긴다.
 - **States:** 메뉴는 연필색 12px에 자간 0.08em. 마우스를 올리면 먹색이 된다. 현재 화면은 먹색 글자 아래에 작은 먹 점을 찍는다.
 - **Mobile:** 720px 이하에서 메뉴가 '메뉴' 버튼으로 접히고, 열리면 헤더 아래로 세로 목록이 펼쳐진다.
+- **Touch Target:** 메뉴 버튼과 헤더 아이콘, 푸터 링크는 누르는 영역을 44×44px 이상으로 둔다.
 
 ### Section Header (Signature)
 위에 먹색 1px 선, 그 아래 `영문 · 한글` 라벨, 바탕체 제목, 오른쪽 끝에 세리프 이탤릭 영문 한 줄이나 텍스트 링크. 보자기·꽃꽂이 상세와 브랜드·커뮤니티 화면의 모든 섹션이 이 머리로 시작한다.
