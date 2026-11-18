@@ -750,6 +750,7 @@ img{display:block;max-width:100%}
 .check a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 .so{color:var(--graphite);font-weight:400}
 .prod .frame .blank{background:var(--stone)}
+.hd .ico .cnt.zero{display:none}
 .hd .ico .on-dot{position:absolute;right:9px;bottom:9px;width:5px;height:5px;border-radius:50%;background:var(--ink)}
 .hd.on-hero:not(.solid) .ico .on-dot{background:#fff}
 
