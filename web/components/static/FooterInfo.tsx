@@ -9,7 +9,7 @@ export default function FooterInfo() {
   return (
     <div className="ft-info">
       <div className="ft-say">
-        <div className="word" translate="no">seoldamhwa<small>說談話 · 설담화</small></div>
+        <div className="word" translate="no">seoldamhwa<small>說談花 · 설담화</small></div>
         <Vase className="ft-vase" />
       </div>
 

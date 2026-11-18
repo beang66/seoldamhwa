@@ -14,11 +14,11 @@ export default function AboutPage() {
 
   <div className="pg">
     <section className="pg-sec">
-      <div className="sh"><div><span>NAME · 이름</span><h2>說談話, 말로 다 못 한 마음을 꽃으로</h2></div><em>the name</em></div>
+      <div className="sh"><div><span>NAME · 이름</span><h2>說談花, 말로 다 못 한 마음을 꽃으로</h2></div><em>the name</em></div>
       <div className="ab-name">
         <div><b lang="zh-Hant">說</b><span>말씀 설</span><p><strong>마음을 풀어 말하다.</strong> 꽃을 고르는 일은 건넬 사람의 마음을 먼저 듣는 데서 시작합니다.</p></div>
-        <div><b lang="zh-Hant">談</b><span>말씀 담</span><p><strong>마주 앉아 나누다.</strong> 작업실에서, 모임에서 꽃을 사이에 두고 이야기를 나눕니다.</p></div>
-        <div><b lang="zh-Hant">話</b><span>말씀 화</span><p><strong>소리는 꽃(花), 뜻은 이야기.</strong> 말로 다 하지 못한 마음을 꽃 한 줄기로 건넵니다.<i className="pt" aria-hidden="true"></i></p></div>
+        <div><b lang="zh-Hant">談</b><span>이야기 담</span><p><strong>마주 앉아 나누다.</strong> 작업실에서, 모임에서 꽃을 사이에 두고 이야기를 나눕니다.</p></div>
+        <div><b lang="zh-Hant">花</b><span>꽃 화</span><p><strong>말을 꽃으로 건네다.</strong> 말로 다 하지 못한 마음을 꽃 한 줄기로 건넵니다.<i className="pt" aria-hidden="true"></i></p></div>
       </div>
     </section>
 
