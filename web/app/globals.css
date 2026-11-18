@@ -957,3 +957,10 @@ h1,h2,h3{text-wrap:balance}
   .shop-bar .cats{flex-wrap:nowrap;overflow-x:auto;gap:20px}
   .sort select{font-size:12px}
 }
+/* 제품 목록 글꼴: 영문·숫자는 Montserrat, 한글은 Noto Sans KR (명조는 제목에만 남긴다) */
+:root{--geo:var(--font-geo),var(--font-sans),sans-serif}
+.prod h3{font-family:var(--geo);font-weight:600;font-size:13px;letter-spacing:.01em}
+.prod p{font-family:var(--geo);font-size:12px;letter-spacing:.02em}
+.prod p b{font-family:var(--geo);font-weight:600;font-size:13px;letter-spacing:.01em}
+.shop-bar .cats button,.sort select{font-family:var(--geo);font-weight:500}
+.shop-bar .cats button small{font-family:var(--geo);font-size:11px}
