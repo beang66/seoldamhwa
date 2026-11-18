@@ -966,7 +966,7 @@ h1,h2,h3{text-wrap:balance}
 .shop-bar .cats button small{font-family:var(--geo);font-size:11px}
 
 /* ===== 헤더·푸터: 참고 레이아웃 (로고 왼쪽, 메뉴·아이콘 오른쪽 / 큰 인사말 + 4열 + 아래 줄) ===== */
-.hd{grid-template-columns:auto 1fr auto;column-gap:40px;padding-top:max(26px,env(safe-area-inset-top));padding-bottom:22px}
+.hd{grid-template-columns:auto 1fr auto;column-gap:40px}
 .hd .brand{justify-self:start}
 .hd nav{justify-self:end}
 .hd nav ul{gap:38px}
