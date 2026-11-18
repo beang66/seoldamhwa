@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ARR, A_DELIV, A_WRAP, won, type ArrKey, type Arrangement, type Choice } from '@/lib/catalog';
-import { useProduct } from '@/lib/data';
+import { useProduct, useProducts } from '@/lib/data';
 import { useCart, useToast } from './Providers';
 import ArrangeCare from './static/ArrangeCare';
 import ArrangeDelivery from './static/ArrangeDelivery';
@@ -43,6 +43,7 @@ export default function ArrangeDetail({ k }: { k: ArrKey }) {
   const row = useProduct(k);
   const c = { ...ARR[k], name: row?.name ?? ARR[k].name, base: row?.price ?? ARR[k].base, vesselOff: row?.vessel_off ?? ARR[k].vesselOff };
   const soldOut = !!row?.sold_out;
+  const live = new Map(useProducts().map(p => [p.key, p]));
   const [vessel, setVessel] = useState(0), [wrap, setWrap] = useState(0), [deliv, setDeliv] = useState(0);
   const [qty, setQty] = useState(1), [main, setMain] = useState(0), [note, setNote] = useState('');
   const { add } = useCart(); const toast = useToast(); const router = useRouter();
@@ -95,7 +96,7 @@ export default function ArrangeDetail({ k }: { k: ArrKey }) {
             {[['구성', c.chips.join(', ')], ['크기', `높이 약 ${c.h}cm · 폭 약 ${c.w}cm`], ['기간', c.life], ['포장', '감싸개 기본 포함']].map(([a, b]) => <div key={a}><dt>{a}</dt><dd>{b}</dd></div>)}
           </dl>
           <div className="others"><h2>함께 보면 좋은 꽃꽂이</h2><div>
-            {(Object.keys(ARR) as ArrKey[]).filter(x => x !== k).map(x => <Link key={x} href={`/shop/${x}`}><i style={{ backgroundImage: `var(--img-${ARR[x].img})` }} /><b>{ARR[x].name}</b>{won(ARR[x].base)}</Link>)}
+            {(Object.keys(ARR) as ArrKey[]).filter(x => x !== k && live.has(x)).map(x => <Link key={x} href={`/shop/${x}`}><i style={{ backgroundImage: `var(--img-${ARR[x].img})` }} /><b>{live.get(x)!.name}</b>{won(live.get(x)!.price)}</Link>)}
           </div></div>
         </div>
       </div>

@@ -10,14 +10,16 @@
 | `migrations/20261118000000_init.sql` | 테이블(관리자·프로필·제품·주문·모임·works), RLS 정책, 주문 함수 `place_order`, 취소 함수 `cancel_my_order`, works 사진 저장소 |
 | `migrations/20261118000100_tighten_function_grants.sql` | 함수 실행 권한 좁히기 |
 | `migrations/20261118000200_account_deletion.sql` | 회원 탈퇴 `delete_my_account`(주문은 계정과 분리해 5년 보관), 보관 기간 지난 주문 정리 `purge_expired_orders` |
-| `seed.sql` | 지금 사이트의 제품·works·모임 내용과 관리자 이메일 |
+| `migrations/20261118000300_review_fixes.sql` | 관리자는 메일 인증을 마친 계정만, 금액 계산을 `price_lines`로 모음, 주문 전 금액 보기 `quote_order`, 주문 때 받는 날·합계 확인 |
+| `seed.sql` | 지금 사이트의 제품·works·모임 내용 (관리자 이메일은 넣지 않음) |
 | `functions/notify-new-order/` | 새 주문을 관리자에게 메일로 알리는 Edge Function (메일 서비스 키를 넣어야 켜짐) |
 
 데이터 구조 그림은 [`docs/erd.md`](../docs/erd.md)에 있다.
 
 ## 관리자
 
-`public.admins`에 있는 이메일로 가입한 계정이 관리자다. 추가·삭제는 SQL 편집기에서 한다.
+`public.admins`에 있는 이메일로 가입하고 메일 인증을 마친 계정이 관리자다. 추가·삭제는 SQL 편집기에서 한다.
+공개 저장소이므로 실제 관리자 이메일은 저장소 파일에 적지 않는다.
 
 ```sql
 insert into public.admins (email) values ('new-admin@example.com');

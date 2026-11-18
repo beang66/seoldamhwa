@@ -87,7 +87,7 @@ erDiagram
   }
 ```
 
-DB 함수: `place_order`(가격을 DB에서 다시 계산해 주문 접수), `cancel_my_order`(접수 상태만 본인 취소), `delete_my_account`(탈퇴), `purge_expired_orders`(보관 기간 지난 주문 개인정보 지우기), `is_admin`.
+DB 함수: `price_lines`(주문 줄 금액 계산, 내부용), `quote_order`(주문 전 금액 보기), `place_order`(받는 날·합계를 확인하고 주문 접수), `cancel_my_order`(접수 상태만 본인 취소), `delete_my_account`(탈퇴), `purge_expired_orders`(보관 기간 지난 주문 개인정보 지우기), `is_admin`.
 사진 저장소: `works` 버킷(누구나 보기, 관리자만 올리기).
 
 현재 구조의 한계:

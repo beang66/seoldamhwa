@@ -9,10 +9,12 @@ type Mode = 'in' | 'up' | 'find' | 'reset';
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
 // 로그인한 뒤 돌아갈 곳. 같은 사이트 안의 경로만 받는다
+// ('/\evil.com'처럼 브라우저가 다른 사이트로 읽는 값도 막기 위해 실제로 주소를 풀어 출처를 비교한다)
 function nextPath(): string | null {
   if (typeof window === 'undefined') return null;
   const n = new URLSearchParams(location.search).get('next');
-  return n && n.startsWith('/') && !n.startsWith('//') ? n : null;
+  if (!n || !n.startsWith('/') || /[\\\s]/.test(n)) return null;
+  try { return new URL(n, location.origin).origin === location.origin ? n : null; } catch { return null; }
 }
 
 export default function LoginForm() {

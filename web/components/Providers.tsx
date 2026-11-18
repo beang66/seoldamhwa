@@ -11,7 +11,7 @@ export type CartLine = { id: string; key: string; kind: 'bojagi' | 'arr'; name: 
 const CART_KEY = 'seoldamhwa-cart';
 export const SHIP_FEE = 3000, SHIP_FREE_FROM = 50000; // 보자기 택배비 (예시 값)
 
-type CartCtx = { lines: CartLine[]; count: number; add: (l: CartLine) => void; setQty: (i: number, d: number) => void; remove: (i: number) => CartLine | undefined; clear: () => void };
+type CartCtx = { lines: CartLine[]; count: number; add: (l: CartLine) => void; setQty: (i: number, d: number) => void; remove: (i: number) => CartLine | undefined; clear: () => void; reprice: (p: { unit: number; quick: number }[]) => void };
 const Cart = createContext<CartCtx | null>(null);
 export const useCart = () => useContext(Cart)!;
 
@@ -43,8 +43,10 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const setQty = useCallback((i: number, d: number) => setLines(cur => cur.map((x, k) => k === i ? { ...x, qty: Math.min(20, Math.max(1, x.qty + d)) } : x)), []);
   const remove = useCallback((i: number) => { const gone = lines[i]; setLines(cur => cur.filter((_, k) => k !== i)); return gone; }, [lines]);
   const clear = useCallback(() => setLines([]), []);
+  // 서버가 계산한 지금 가격으로 장바구니의 단가와 퀵 금액을 맞춘다 (줄 순서는 같다)
+  const reprice = useCallback((p: { unit: number; quick: number }[]) => setLines(cur => cur.map((x, i) => p[i] ? { ...x, unit: p[i].unit, quick: p[i].quick } : x)), []);
   const count = lines.reduce((s, l) => s + l.qty, 0);
-  const cart = useMemo(() => ({ lines, count, add, setQty, remove, clear }), [lines, count, add, setQty, remove, clear]);
+  const cart = useMemo(() => ({ lines, count, add, setQty, remove, clear, reprice }), [lines, count, add, setQty, remove, clear, reprice]);
 
   const [msg, setMsg] = useState(''); const [on, setOn] = useState(false); const timer = useRef<number>(0);
   const show = useCallback((m: string) => { setMsg(m); setOn(true); clearTimeout(timer.current); timer.current = window.setTimeout(() => setOn(false), 2200); }, []);

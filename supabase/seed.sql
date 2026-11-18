@@ -30,5 +30,6 @@ insert into public.gatherings (kind, title, date, time_text, place, capacity, se
   ('보자기 매듭 수업', '쪽물 들이기', '2026-09-26', '토요일 오후 2시–4시', '설담화 작업실 (서울)', 8, 0, 45000, '', '', '마감', '무명 손수건을 쪽물에 세 번 담갔다 꺼내며, 같은 천도 담그는 횟수마다 빛이 달라지는 걸 보았어요.'),
   ('꽃 모임', '백로의 한 줄기', '2026-09-12', '토요일 오후 2시–4시', '설담화 작업실 (서울)', 10, 0, 55000, '', '', '마감', '이슬이 맺히기 시작하는 때라 물을 머금은 잎을 골랐어요. 차는 햇보리차를 냈습니다.');
 
--- 관리자 이메일 (소문자). 이 이메일로 가입한 계정이 관리자가 된다
-insert into public.admins (email) values ('beang66@gmail.com'), ('seolavely@gmail.com');
+-- 관리자 이메일 (소문자). 이 이메일로 가입하고 메일 인증을 마친 계정이 관리자가 된다.
+-- 공개 저장소이므로 실제 이메일은 여기 적지 말고, SQL 편집기에서 직접 넣는다.
+-- insert into public.admins (email) values ('owner@example.com');
