@@ -4,7 +4,7 @@
 
 꽃꽂이와 보자기를 고르고 옵션·받는 날을 정해 주문을 넣을 수 있고, 대표는 관리자 페이지에서 주문·상품·사진·모임·작업 기록을 직접 관리합니다.
 
-[배포 사이트](https://beang66.github.io/seoldamhwa/) · [제품 정의](PRODUCT.md) · [디자인 시스템](DESIGN.md) · [데이터 구조](docs/erd.md)
+[배포 사이트](https://seoldamhwa.vercel.app/) · [제품 정의](PRODUCT.md) · [디자인 시스템](DESIGN.md) · [데이터 구조](docs/erd.md)
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=000)
