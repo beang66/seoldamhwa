@@ -921,3 +921,17 @@ h1,h2,h3{text-wrap:balance}
   .ft-biz{grid-template-columns:1fr;justify-content:stretch;text-align:left;max-width:340px;margin-left:auto;margin-right:auto}
   .ft-vase{width:48px;height:48px}
 }
+/* ----- 메인 정리 1차: 선화를 사진으로, 배경 한 가지, 그림자·둥근 모서리 없음 ----- */
+#season,.bojagi,.works,.community{background:var(--paper)}
+.works,.community{border-top:1px solid var(--hair)}
+.ph{background:center/cover no-repeat #E4E1DA}
+.bojagi .draw .ph{aspect-ratio:4/5;width:100%;max-width:520px;margin:0 auto}
+.poster{background:none;box-shadow:none;padding:0;aspect-ratio:auto;justify-content:flex-start;gap:28px}
+.poster .ph{aspect-ratio:4/5;width:100%}
+.poster .hand{margin:0;font-size:24px}
+.card{box-shadow:none}
+.card.tall .body .ph{position:absolute;inset:0}
+.card.wide.ph{min-height:300px}
+.card.info{background:none;border:1px solid var(--hair)}
+.card.tall{background:none;border:1px solid var(--hair)}
+.prod .frame,.wk-pic,.cm-pic,.others i,.cart-list .th{border-radius:0;box-shadow:none}
