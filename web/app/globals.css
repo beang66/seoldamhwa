@@ -12,7 +12,7 @@
   --serif-en:var(--font-serif-en),serif;
   --sans:var(--font-sans),sans-serif;
   --hand:var(--serif-ko);  /* 손글씨 서체는 쓰지 않는다. 손맛은 연필 선화가 맡는다 */
-  --gutter:max(40px,calc((100vw - 1200px) / 2));  /* 넓은 화면에서도 본문 폭은 1200px, 나머지는 좌우 여백 */
+  --gutter:max(40px,calc((100vw - var(--sbw, 0px) - 1200px) / 2));  /* 넓은 화면에서도 본문 폭은 1200px, 나머지는 좌우 여백 */
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:88px}

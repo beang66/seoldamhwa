@@ -33,7 +33,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* 스크립트가 켜진 경우에만 나타나기 효과를 쓴다 */}
         <style dangerouslySetInnerHTML={{ __html: imageVars }} />
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        {/* 스크롤바 폭을 재서 좌우 여백이 양쪽 같게 한다 (--gutter 계산에 쓴다) */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js');addEventListener('DOMContentLoaded',function(){var d=document.documentElement;d.style.setProperty('--sbw',(innerWidth-d.clientWidth)+'px')})" }} />
       </head>
       <body>
         <Symbols />
