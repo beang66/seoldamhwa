@@ -68,7 +68,7 @@ export const useProduct = (key: string) => {
   const p = all.find(p => p.key === key) ?? STATIC_PRODUCTS.find(p => p.key === key);
   return p && updatePackagingCopy(p);
 };
-export const useWorks = () => works.use().data.filter(w => w.visible);
+export const useWorks = () => works.use().data.filter(w => w.visible && !(w.title === '보자기 워크숍 기록' && w.ym.startsWith('2026-08')));
 /** null이면 DB가 없어 코드 안의 모임 안내를 그대로 쓴다 */
 export const useGatherings = () => gatherings.use().data?.filter(g => g.visible) ?? null;
 export const refreshPublic = () => Promise.all([products.refresh(), works.refresh(), gatherings.refresh()]);
