@@ -11,11 +11,6 @@ export default function Symbols() {
       <circle cx="20" cy="20" r="2.4" fill="currentColor" />
     </symbol>
     
-    <symbol id="brand-pouch" viewBox="0 0 40 40">
-      <use href="#blossom" x="10" y="0" width="20" height="20" />
-      <path d="M15 23C13 21 11 18 11 16Q13 13 16 16Q18 13 20 16Q22 13 24 16Q27 13 29 16C29 18 27 21 25 23C30 26 34 30 33 34C32 40 8 40 7 34C6 30 10 26 15 23ZM15 23Q20 25 25 23M16 17L18 23M20 17V23M24 17L22 23" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </symbol>
-
     <pattern id="weave" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#EFE8DA" /><path d="M0 3h6M3 0v6" stroke="#E7E0D0" strokeWidth=".35" /></pattern>
     <pattern id="weave2" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#F7F2E7" /><path d="M0 3h6M3 0v6" stroke="#EEE8DB" strokeWidth=".35" /></pattern>
     <pattern id="linen" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#E2D8C4" /><path d="M0 3h6M3 0v6" stroke="#D8CDB6" strokeWidth=".35" /></pattern>
