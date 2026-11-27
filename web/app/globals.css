@@ -429,8 +429,10 @@ img{display:block;max-width:100%}
 
 /* 04 포장과 받는 법 */
 .deliv{display:grid;grid-template-columns:1fr 1.3fr;gap:48px;align-items:center}
-.deliv .pic{background:#EFE8DA;border-radius:6px;aspect-ratio:1/1;display:grid;place-items:center}
-.deliv .pic svg{width:62%;height:auto}
+.package-preview{aspect-ratio:3/2;background:var(--img-package-preview) center/cover;border-radius:6px}
+#package{scroll-margin-top:100px}
+.deliv figure{margin:0}
+.deliv figcaption{margin-top:8px;font-size:12px;color:var(--graphite)}
 .deliv table{width:100%;border-collapse:collapse;font-size:13px;line-height:1.75}
 .deliv th{text-align:left;font-weight:400;font-size:12px;letter-spacing:.08em;color:var(--mist);width:100px;vertical-align:top}
 .deliv th,.deliv td{padding:14px 0;border-bottom:1px solid var(--hair)}

@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { ARR, A_DELIV, A_WRAP, won, type ArrKey, type Arrangement, type Choice } from '@/lib/catalog';
+import { ARR, A_DELIV, PACKAGE_NAME, won, type ArrKey, type Arrangement, type Choice } from '@/lib/catalog';
 import { useProduct, useProducts } from '@/lib/data';
 import { useCart, useToast } from './Providers';
 import ArrangeCare from './static/ArrangeCare';
@@ -44,24 +44,24 @@ export default function ArrangeDetail({ k }: { k: ArrKey }) {
   const c = { ...ARR[k], name: row?.name ?? ARR[k].name, base: row?.price ?? ARR[k].base, vesselOff: row?.vessel_off ?? ARR[k].vesselOff };
   const soldOut = !!row?.sold_out;
   const live = new Map(useProducts().map(p => [p.key, p]));
-  const [vessel, setVessel] = useState(0), [wrap, setWrap] = useState(0), [deliv, setDeliv] = useState(0);
+  const [vessel, setVessel] = useState(0), [deliv, setDeliv] = useState(0);
   const [qty, setQty] = useState(1), [main, setMain] = useState(0), [note, setNote] = useState('');
   const { add } = useCart(); const toast = useToast(); const router = useRouter();
 
-  const unit = c.base - (vessel ? c.vesselOff : 0) + A_WRAP[wrap].add;
+  const unit = c.base - (vessel ? c.vesselOff : 0);
   const gallery: [string, React.ReactNode][] = [
     ['전체 모습', <Photo key="a" img={c.img} pos="center" size="cover" />],
     ['꽃 가까이', <Photo key="b" img={c.img} pos={c.focus.flower} size="240%" />],
     ['화기 가까이', <Photo key="c" img={c.img} pos={c.focus.vessel} size="240%" />],
-    ['감싸개 포장', <svg key="d" viewBox="0 0 300 330" aria-hidden="true"><use href="#ill-wrap" /></svg>],
+    ['설담화 패키지 시안', <span key="d" className="photo" style={{ backgroundImage: 'var(--img-package-preview)' }} />],
   ];
   const last = c.name.charCodeAt(c.name.length - 1);
   const josa = (last >= 0xAC00 && last <= 0xD7A3 && (last - 0xAC00) % 28) ? '을' : '를';
 
   const act = (buy: boolean) => {
     // 퀵은 장바구니에서 따로 한 줄로 보여준다
-    const opt = [vessel ? '꽃과 침봉만' : '화기 포함', A_WRAP[wrap].label].concat(deliv ? [] : [A_DELIV[0].label]).join(' · ');
-    add({ id: k + '|' + opt, key: k, kind: 'arr', name: c.name, opt, unit, qty, quick: A_DELIV[deliv].add, img: c.img, sel: { vessel: !!vessel, wrap, deliv } });
+    const opt = [vessel ? '꽃과 침봉만' : '화기 포함', PACKAGE_NAME].concat(deliv ? [] : [A_DELIV[0].label]).join(' · ');
+    add({ id: k + '|' + opt, key: k, kind: 'arr', name: c.name, opt, unit, qty, quick: A_DELIV[deliv].add, img: c.img, sel: { vessel: !!vessel, wrap: 0, deliv } });
     if (buy) router.push('/cart'); else { setNote('장바구니에 담았어요.'); toast('장바구니에 담았어요 · ' + c.name); }
   };
 
@@ -83,7 +83,7 @@ export default function ArrangeDetail({ k }: { k: ArrKey }) {
           <div className="chips">{c.chips.map(x => <span key={x}>{x}</span>)}</div>
           <div className="opt">
             <div className="opt-group"><h2>화기</h2><Radios name="a-vessel" label="화기 선택" list={[{ label: '화기 포함', note: '수반 · 침봉' }, { label: '꽃과 침봉만', note: '−' + won(c.vesselOff) }]} sel={vessel} set={setVessel} /></div>
-            <div className="opt-group"><h2>포장</h2><Radios name="a-wrap" label="포장 선택" list={A_WRAP} sel={wrap} set={setWrap} /></div>
+            <div className="opt-group"><h2>포장</h2><p>{PACKAGE_NAME}</p></div>
             <div className="opt-group"><h2>받는 방법</h2><Radios name="a-deliv" label="받는 방법 선택" list={A_DELIV} sel={deliv} set={setDeliv} /></div>
             <div className="buy">
               <div className="qty"><button type="button" aria-label="수량 줄이기" onClick={() => setQty(q => Math.max(1, q - 1))}>−</button><output aria-live="polite">{qty}</output><button type="button" aria-label="수량 늘리기" onClick={() => setQty(q => Math.min(20, q + 1))}>+</button></div>
@@ -93,7 +93,7 @@ export default function ArrangeDetail({ k }: { k: ArrKey }) {
             <p className="note" role="status">{soldOut ? '이번 절기의 꽃은 모두 나갔어요.' : note}</p>
           </div>
           <dl className="spec">
-            {[['구성', c.chips.join(', ')], ['크기', `높이 약 ${c.h}cm · 폭 약 ${c.w}cm`], ['기간', c.life], ['포장', '감싸개 기본 포함']].map(([a, b]) => <div key={a}><dt>{a}</dt><dd>{b}</dd></div>)}
+            {[['구성', c.chips.join(', ')], ['크기', `높이 약 ${c.h}cm · 폭 약 ${c.w}cm`], ['기간', c.life], ['포장', PACKAGE_NAME]].map(([a, b]) => <div key={a}><dt>{a}</dt><dd>{b}</dd></div>)}
           </dl>
           <div className="others"><h2>함께 보면 좋은 꽃꽂이</h2><div>
             {(Object.keys(ARR) as ArrKey[]).filter(x => x !== k && live.has(x)).map(x => <Link key={x} href={`/shop/${x}`}><i style={{ backgroundImage: `var(--img-${ARR[x].img})` }} /><b>{live.get(x)!.name}</b>{won(live.get(x)!.price)}</Link>)}
@@ -127,7 +127,7 @@ export default function ArrangeDetail({ k }: { k: ArrKey }) {
             <p className="care-note">이 꽃꽂이는 보통 <b>{c.life}</b> 동안 볼 수 있어요. 화기와 침봉은 계속 쓰실 수 있습니다.</p>
           </section>
           <section>
-            <div className="sh"><div><span>04 · WRAP &amp; DELIVERY</span><h3>포장과 받는 법</h3></div><em>wrapped in bojagi</em></div>
+            <div className="sh"><div><span>04 · WRAP &amp; DELIVERY</span><h3>포장과 받는 법</h3></div><em>Seoldamhwa package</em></div>
             <ArrangeDelivery />
           </section>
           <section>

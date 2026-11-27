@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 const SLIDES = [
-  { img: 'ikebana-larch', pos: 'center 35%', eyebrow: '입동 · 立冬', title: '꽃으로 건네는 말', text: '절기마다 고른 꽃 한 줄기를, 다시 쓰는 보자기에 싸서 건넵니다.', href: '/#season', cta: '이번 계절의 꽃', dot: true },
-  { img: 'bojagi', pos: 'center 45%', eyebrow: 'BOJAGI · 보자기', title: '포장도 두 번째 선물', text: '풀고 나면 스카프가 되고, 주머니가 되고, 다음 선물의 포장이 되는 천.', href: '/shop?cat=bojagi', cta: '보자기 보기' },
+  { img: 'ikebana-larch', pos: 'center 35%', eyebrow: '입동 · 立冬', title: '꽃으로 건네는 말', text: '절기마다 고른 꽃 한 줄기를, 복주머니 형태의 설담화 패키지에 담아 건넵니다.', href: '/#season', cta: '이번 계절의 꽃', dot: true },
+  { img: 'package-preview', pos: 'center 55%', eyebrow: 'PACKAGE · 패키지 시안', title: '포장도 두 번째 선물', text: '입구에 주름을 잡아 여미는 복주머니 형태의 설담화 패키지입니다.', href: '/about#package', cta: '패키지 보기' },
   { img: 'ikebana-bamboo', pos: 'center 30%', eyebrow: 'STUDIO · 설담화', title: '한 사람의 손으로', text: '상담부터 꽂기, 포장까지 한 사람이 맡는 1인 꽃 스튜디오입니다.', href: '/about', cta: '브랜드 소개' },
   { img: 'field', pos: 'center 60%', eyebrow: 'COMMUNITY · 꽃 모임', title: '꽃을 사이에 두고', text: '한 달에 한 번, 열 명 남짓 둘러앉아 꽃을 꽂고 차를 마십니다.', href: '/community', cta: '모임 둘러보기' },
   { img: 'ikebana-daffodil', pos: 'center 30%', eyebrow: 'WORKS · 작업', title: '계절마다 남긴 꽃', text: '공간과 모임과 구독에서 남긴 꽃의 기록.', href: '/works', cta: '작업 기록 보기' },

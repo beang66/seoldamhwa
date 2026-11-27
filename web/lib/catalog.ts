@@ -90,7 +90,8 @@ export const ARR: Record<ArrKey, Arrangement> = {
 };
 
 export type Choice = { label: string; note: string; add: number };
-export const A_WRAP: Choice[] = [{ label: '감싸개', note: '기본 포함', add: 0 }, { label: '매듭 보자기', note: '+18,000 · 화기째 싸기', add: 18000 }];
+export const PACKAGE_NAME = '복주머니 형태의 설담화 패키지';
+export const isLegacyPackaging = (key: string) => ['wrap', 'knot', 'baekja'].includes(key);
 export const A_DELIV: Choice[] = [{ label: '작업실 픽업', note: '무료', add: 0 }, { label: '서울 당일 퀵', note: '+15,000', add: 15000 }];
 
 export const OTHER_PRICES = { baekja: 96000, driedbox: 42000, 'season-sub': 89000 } as const;

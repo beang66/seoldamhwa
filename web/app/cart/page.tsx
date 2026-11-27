@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { won } from '@/lib/catalog';
+import { isLegacyPackaging, won } from '@/lib/catalog';
 import { cartTotals, useCart, useToast, type CartLine } from '@/components/Providers';
 import OrderForm from '@/components/OrderForm';
 
@@ -12,12 +12,13 @@ export default function CartPage() {
   const { lines, setQty, remove, restore } = useCart();
   const toast = useToast();
   const t = cartTotals(lines);
+  const outdated = lines.some(l => isLegacyPackaging(l.key) || (l.sel?.wrap ?? 0) > 0 || l.opt.includes('감싸개'));
   return (
     <div id="cart-view">
       <div className="page-hd">
         <span className="eyebrow">CART · 장바구니</span>
         <h1>장바구니</h1>
-        <p>담아 두신 꽃과 보자기입니다. 꽃꽂이는 받는 날 아침에 꽂아 보내드려요.</p>
+        <p>담아 두신 상품을 확인하세요.</p>
       </div>
       <div className="pg">
         {lines.length ? (
@@ -37,19 +38,18 @@ export default function CartPage() {
                   </li>
                 ))}
               </ul>
-              <p className="cart-note">모든 꽃은 감싸개에 싸서 건네고, 보자기는 다시 쓰는 천이라 따로 포장하지 않아요.</p>
+              <p className="cart-note">꽃은 복주머니 형태의 설담화 패키지에 담아 전합니다.</p>
             </section>
             <aside className="cart-sum" aria-labelledby="cart-sum-title">
               <h2 id="cart-sum-title">주문 금액</h2>
               <dl>
                 <div><dt>상품 금액</dt><dd>{won(t.items)}원</dd></div>
                 <div><dt>서울 당일 퀵</dt><dd>{t.quick ? won(t.quick) + '원' : '없음'}</dd></div>
-                <div><dt>보자기 택배</dt><dd>{lines.some(l => l.kind === 'bojagi') ? (t.ship ? won(t.ship) + '원' : '무료') : '없음'}</dd></div>
+                <div><dt>택배</dt><dd>{lines.some(l => l.kind === 'bojagi') ? (t.ship ? won(t.ship) + '원' : '무료') : '없음'}</dd></div>
                 <div className="total"><dt><i className="pt" aria-hidden="true" />합계</dt><dd>{won(t.total)}원</dd></div>
               </dl>
-              <p className="cart-rule">보자기 택배비는 3,000원이고, 보자기 상품이 5만 원 이상이면 무료예요. 꽃꽂이는 택배로 보내지 않아요.</p>
               {/* 결제는 아직 없다. 주문을 접수하고, 금액은 DB 함수가 다시 계산한다 */}
-              <OrderForm />
+              {outdated ? <p role="status">이전 포장 옵션이나 시안 상품이 담겨 있어요. 해당 상품을 빼고 다시 담아 주세요.</p> : <OrderForm />}
               <Link className="pill wide" href="/shop">계속 둘러보기</Link>
             </aside>
           </div>
@@ -57,7 +57,7 @@ export default function CartPage() {
           <div className="cart-empty">
             <svg viewBox="0 0 300 330" aria-hidden="true"><use href="#ill-wrap" /></svg>
             <h2>장바구니가 비어 있어요</h2>
-            <p>계절의 꽃이나 다시 쓰는 보자기를 담아 보세요.</p>
+            <p>계절의 꽃을 담아 보세요.</p>
             <Link className="pill dark" href="/shop">제품 보러 가기</Link>
           </div>
         )}

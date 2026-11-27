@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-import { A_DELIV, A_WRAP, SHOP_CATS, won, type Choice } from '@/lib/catalog';
+import { A_DELIV, PACKAGE_NAME, SHOP_CATS, isLegacyPackaging, won, type Choice } from '@/lib/catalog';
 import { picBg, useProduct } from '@/lib/data';
 import { useCart, useToast } from './Providers';
 
@@ -23,11 +23,11 @@ export function ProductFromQuery() {
 
 export default function ProductDetail({ k }: { k: string }) {
   const p = useProduct(k);
-  const [vessel, setVessel] = useState(0), [wrap, setWrap] = useState(0), [deliv, setDeliv] = useState(0), [size, setSize] = useState(0);
+  const [vessel, setVessel] = useState(0), [deliv, setDeliv] = useState(0), [size, setSize] = useState(0);
   const [qty, setQty] = useState(1), [main, setMain] = useState(0), [note, setNote] = useState('');
   const { add } = useCart(); const toast = useToast(); const router = useRouter();
 
-  if (!p || !p.visible) return (
+  if (!p || !p.visible || isLegacyPackaging(k)) return (
     <div className="pd pd-missing"><p>찾을 수 없는 제품이에요.</p><Link className="pill" href="/shop">제품 목록으로</Link></div>
   );
 
@@ -35,18 +35,18 @@ export default function ProductDetail({ k }: { k: string }) {
   const pics = [p.img, ...(p.photos ?? [])].filter(Boolean);
   const sizes = p.cat === 'bojagi' && p.sizes?.length ? p.sizes : null;
   const isArr = p.cat === 'arrange';
-  const unit = sizes ? sizes[size].price : p.price - (isArr && vessel ? p.vessel_off : 0) + (isArr ? A_WRAP[wrap].add : 0);
+  const unit = sizes ? sizes[size].price : p.price - (isArr && vessel ? p.vessel_off : 0);
   const quick = isArr ? A_DELIV[deliv].add : 0;
   const paras = (p.body ?? '').split(/\n\s*\n/).map(t => t.trim()).filter(Boolean);
 
   const act = (buy: boolean) => {
     const opt = sizes ? sizes[size].label
-      : isArr ? [vessel ? '꽃과 침봉만' : '화기 포함', A_WRAP[wrap].label].concat(deliv ? [] : [A_DELIV[0].label]).join(' · ')
+      : isArr ? [vessel ? '꽃과 침봉만' : '화기 포함', PACKAGE_NAME].concat(deliv ? [] : [A_DELIV[0].label]).join(' · ')
       : p.meta || catName;
     add({
       id: k + '|' + opt, key: k, kind: sizes ? 'bojagi' : 'arr', name: p.name, opt, unit, qty, quick,
       img: /^https:\/\//.test(p.img) ? undefined : p.img || undefined,
-      sel: sizes ? { size: sizes[size].label } : isArr ? { vessel: !!vessel, wrap, deliv } : {},
+      sel: sizes ? { size: sizes[size].label } : isArr ? { vessel: !!vessel, wrap: 0, deliv } : {},
     });
     if (buy) router.push('/cart'); else { setNote('장바구니에 담았어요.'); toast('장바구니에 담았어요 · ' + p.name); }
   };
@@ -72,7 +72,7 @@ export default function ProductDetail({ k }: { k: string }) {
         <div className="opt">
           {sizes && <div className="opt-group"><h2>크기</h2><Radios name="p-size" label="크기 선택" list={sizes.map(s => ({ label: s.label, note: won(s.price) + '원' }))} sel={size} set={setSize} /></div>}
           {isArr && p.vessel_off > 0 && <div className="opt-group"><h2>화기</h2><Radios name="p-vessel" label="화기 선택" list={[{ label: '화기 포함', note: '수반 · 침봉' }, { label: '꽃과 침봉만', note: '−' + won(p.vessel_off) }]} sel={vessel} set={setVessel} /></div>}
-          {isArr && <div className="opt-group"><h2>포장</h2><Radios name="p-wrap" label="포장 선택" list={A_WRAP} sel={wrap} set={setWrap} /></div>}
+          {isArr && <div className="opt-group"><h2>포장</h2><p>{PACKAGE_NAME} · <Link href="/about#package">패키지 시안 보기</Link></p></div>}
           {isArr && <div className="opt-group"><h2>받는 방법</h2><Radios name="p-deliv" label="받는 방법 선택" list={A_DELIV} sel={deliv} set={setDeliv} /></div>}
           <div className="buy">
             <div className="qty"><button type="button" aria-label="수량 줄이기" onClick={() => setQty(q => Math.max(1, q - 1))}>−</button><output aria-live="polite">{qty}</output><button type="button" aria-label="수량 늘리기" onClick={() => setQty(q => Math.min(20, q + 1))}>+</button></div>

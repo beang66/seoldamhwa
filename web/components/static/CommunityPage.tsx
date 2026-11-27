@@ -66,7 +66,6 @@ export default function CommunityPage() {
       <dl className="cm-guide">
         <div><dt>신청과 취소</dt><dd>신청 후 사흘 안에 참가비를 보내주시면 자리가 확정돼요. 모임 사흘 전까지는 전액 돌려드립니다.</dd></div>
         <div><dt>준비물</dt><dd>없어요. 꽃, 가위, 화기를 모두 준비해 둡니다. 앞치마는 작업실에 있어요.</dd></div>
-        <div><dt>보자기 가져오기</dt><dd>설담화 보자기를 가져오시면 꽂은 꽃을 그 천에 싸 드려요.</dd></div>
         <div><dt>문의</dt><dd>문의 메일 준비 중</dd></div>
       </dl>
     </section>

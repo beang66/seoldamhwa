@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { SHOP_CATS, type ShopCat } from '@/lib/catalog';
+import { SHOP_CATS, isLegacyPackaging, type ShopCat } from '@/lib/catalog';
 import { picBg, productPrice, useProducts, type ProductRow } from '@/lib/data';
 
 const ILL_LABEL: Record<string, string> = { 'ill-wrap': '감싸개 그림', 'ill-knot': '가방 끈을 단 매듭 보자기 그림' };
@@ -25,8 +25,9 @@ function Card({ p, hidden }: { p: ProductRow; hidden: boolean }) {
 }
 
 export default function ShopList({ initial }: { initial: ShopCat }) {
-  const [cat, setCat] = useState<ShopCat>(initial);
-  const list = useProducts();
+  const [selected, setCat] = useState<ShopCat>(initial);
+  const list = useProducts().filter(p => !isLegacyPackaging(p.key));
+  const cat = selected === 'bojagi' && !list.some(p => p.cat === selected) ? 'all' : selected;
   const [sort, setSort] = useState<'base' | 'low' | 'high'>('base');
   const shown = sort === 'base' ? list : [...list].sort((a, b) => (sort === 'low' ? 1 : -1) * (minPrice(a) - minPrice(b)));
   const pick = (c: ShopCat) => { setCat(c); history.replaceState(null, '', (process.env.NEXT_PUBLIC_BASE_PATH ?? '') + (c === 'all' ? '/shop/' : `/shop/?cat=${c}`)); };
@@ -35,11 +36,11 @@ export default function ShopList({ initial }: { initial: ShopCat }) {
       <div className="page-hd">
         <span className="eyebrow">PRODUCTS · 제품</span>
         <h1>제품</h1>
-        <p>계절마다 고른 꽃과, 꽃을 감싸 건네는 보자기를 함께 소개합니다.</p>
+        <p>계절마다 고른 꽃을 소개합니다. 꽃 포장은 <Link href="/about#package">설담화 패키지</Link>에서 확인하세요.</p>
       </div>
       <div className="shop-bar">
         <div className="cats" role="group" aria-label="제품 카테고리">
-          {SHOP_CATS.map(([k, n]) => (
+          {SHOP_CATS.filter(([k]) => k !== 'bojagi' || list.some(p => p.cat === k)).map(([k, n]) => (
             <button key={k} type="button" aria-pressed={cat === k} onClick={() => pick(k)}>
               {n}<small>{k === 'all' ? list.length : list.filter(p => p.cat === k).length}</small>
             </button>

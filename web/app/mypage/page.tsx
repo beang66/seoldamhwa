@@ -8,7 +8,7 @@ export default function Page() {
       <div className="page-hd">
         <span className="eyebrow">MY PAGE · 마이페이지</span>
         <h1>마이페이지</h1>
-        <p>주문하신 꽃과 보자기, 회원 정보를 확인하세요.</p>
+        <p>주문 내역과 회원 정보를 확인하세요.</p>
       </div>
       <div className="pg"><MyPage /></div>
     </div>

@@ -16,12 +16,12 @@ const serifEn = EB_Garamond({ weight: ['400', '500'], style: ['normal', 'italic'
 // 사진 경로는 CSS 안의 url()에 basePath가 붙지 않으므로 여기서 붙여 CSS 변수로 넘긴다
 // (GitHub Pages에서는 /seoldamhwa 아래에서 열린다)
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
-const IMAGES = ['bojagi', 'dried-box', 'field', 'ikebana-bamboo', 'ikebana-daffodil', 'ikebana-larch', 'ikebana-nasturtium'];
+const IMAGES = ['package-preview', 'bojagi', 'dried-box', 'field', 'ikebana-bamboo', 'ikebana-daffodil', 'ikebana-larch', 'ikebana-nasturtium'];
 const imageVars = `:root{${IMAGES.map(n => `--img-${n}:url(${BASE}/img/${n}.jpg)`).join(';')}}`;
 
 export const metadata: Metadata = {
   title: { default: '설담화 · 꽃으로 건네는 말', template: '설담화 · %s' },
-  description: '절기마다 고른 꽃 한 줄기를, 다시 쓰는 보자기에 싸서 건네는 1인 꽃 스튜디오.',
+  description: '절기마다 고른 꽃 한 줄기를, 복주머니 형태의 설담화 패키지에 담아 건네는 1인 꽃 스튜디오.',
 };
 
 // 모바일 브라우저 상단바를 한지 바탕색에 맞춘다
