@@ -429,7 +429,7 @@ img{display:block;max-width:100%}
 
 /* 04 포장과 받는 법 */
 .deliv{display:grid;grid-template-columns:1fr 1.3fr;gap:48px;align-items:center}
-.package-preview{aspect-ratio:3/2;background:var(--img-package-preview) center/cover;border-radius:6px}
+.ab-way .package-preview{display:inline-block;width:56px;height:56px;object-fit:contain}
 #package{scroll-margin-top:100px}
 .deliv figure{margin:0}
 .deliv figcaption{margin-top:8px;font-size:12px;color:var(--graphite)}

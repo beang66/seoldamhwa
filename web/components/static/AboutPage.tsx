@@ -45,7 +45,7 @@ export default function AboutPage() {
       <div className="ab-way">
         <div><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#blossom" /></svg><h3>절기마다 꽃 한 가지</h3><p>24절기에 맞춰 그때 가장 고운 꽃을 고르고, 그 계절의 이야기와 함께 보냅니다.</p></div>
         <div><svg viewBox="0 0 40 50" aria-hidden="true"><use href="#sprig" /></svg><h3>한 사람의 손</h3><p>설담화는 1인 꽃 스튜디오입니다. 상담부터 꽂기, 포장, 배송까지 한 사람이 맡습니다.</p></div>
-        <div id="package"><h3>설담화 패키지</h3><p>입구에 주름을 잡아 여미는 복주머니 형태의 패키지입니다.</p><div className="package-preview" role="img" aria-label="복주머니 형태 설담화 패키지 시안" /><p>설담화 패키지 시안</p></div>
+        <div id="package"><img className="package-preview" src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/img/seoldamhwa-package.svg`} alt="설담화 복주머니형 꽃다발 패키지 도식" width={56} height={56} /><h3>설담화 패키지</h3><p>입구에 주름을 잡아 여미는 복주머니 형태의 패키지입니다.</p></div>
       </div>
     </section>
 

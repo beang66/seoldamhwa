@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 330" role="img" aria-labelledby="title desc">
+  <title id="title">설담화 복주머니형 꽃다발 패키지</title>
+  <desc id="desc">꽃다발을 감싼 천과 주름진 복주머니 몸체, 여밈 끈과 작은 태그를 먹색 선과 쪽빛으로 표현한 도식.</desc>
+  <defs>
+    <pattern id="package-weave" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="#EFE8DA"/>
+      <path d="M0 3h6M3 0v6" stroke="#E7E0D0" stroke-width=".35"/>
+    </pattern>
+  </defs>
+  <g stroke="#2A2926" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 꽃다발 뒤쪽 포장 천 -->
+    <path d="M52 104 L40 53 Q93 68 150 60 Q211 58 260 82 L237 123 Q213 155 150 189 Q84 163 52 104Z" fill="url(#package-weave)"/>
+    <path d="M48 79 L31 99 Q64 150 150 191 Q226 155 269 111 L249 93" fill="#F7F2E7"/>
+    <!-- 기존 감싸개와 같은 원형 꽃 표현 -->
+    <g fill="#FBF8F1">
+      <circle cx="103" cy="80" r="17"/><circle cx="132" cy="58" r="19"/><circle cx="163" cy="63" r="17"/><circle cx="191" cy="86" r="18"/>
+      <circle cx="83" cy="104" r="12"/><circle cx="116" cy="109" r="15"/><circle cx="148" cy="96" r="19"/><circle cx="177" cy="116" r="14"/><circle cx="216" cy="105" r="12"/>
+    </g>
+    <g fill="none" stroke-width="1">
+      <path d="M95 80 Q103 69 111 80 Q103 90 95 80Z M124 58 Q132 47 140 58 Q132 68 124 58Z M155 63 Q163 54 171 63 Q163 73 155 63Z M183 86 Q191 76 199 86 Q191 96 183 86Z M140 96 Q148 85 156 96 Q148 106 140 96Z M110 109 Q116 101 122 109 Q116 117 110 109Z"/>
+      <path d="M68 85 Q55 70 67 64 Q79 73 68 85 M212 79 Q221 63 232 68 Q227 80 212 79 M101 58 Q86 47 89 36 Q102 39 101 58"/>
+    </g>
+    <!-- 앞쪽으로 겹치는 포장 천 -->
+    <path d="M35 111 Q85 116 115 145 L150 188 Q77 172 35 111Z" fill="url(#package-weave)"/>
+    <path d="M265 112 Q219 118 188 145 L150 188 Q218 173 265 112Z" fill="#F7F2E7"/>
+    <path d="M40 115 Q79 161 143 184 M260 116 Q220 161 157 184" fill="none" stroke="#2F56A8" stroke-width="3.2"/>
+    <!-- 복주머니 몸체 -->
+    <path d="M150 186 C114 195 95 208 80 232 C68 252 59 280 58 295 Q57 303 69 304 L232 304 Q243 303 242 295 C239 270 230 244 216 226 C199 205 181 194 150 186Z" fill="url(#package-weave)"/>
+    <path d="M150 190 Q119 215 109 253 Q103 275 101 303 M150 190 Q179 219 208 243 Q229 261 240 292" fill="none" opacity=".6"/>
+    <path d="M148 192 Q130 219 128 239 M153 192 Q169 216 184 230 M150 194 Q148 215 148 228" fill="none" opacity=".45"/>
+    <!-- 주름 잡힌 입구 -->
+    <path d="M150 189 C132 184 115 177 102 165 Q105 156 119 153 Q132 147 145 153 Q161 146 176 153 Q190 153 199 165 C186 178 169 184 150 189Z" fill="#F7F2E7"/>
+    <path d="M114 155 Q118 173 146 188 M132 151 Q133 174 148 188 M151 152 Q158 173 152 188 M173 153 Q170 174 154 188 M189 157 Q180 178 155 188" fill="none" stroke-width="1"/>
+    <!-- 여밈 끈과 매듭 -->
+    <g fill="none">
+      <path d="M149 189 C123 176 111 186 118 196 C125 204 139 196 149 190 M151 189 C177 176 190 186 182 196 C175 204 161 196 151 190" stroke="#2F56A8" stroke-width="2.6"/>
+      <path d="M146 192 Q132 216 130 246 M154 192 Q177 214 182 247"/>
+      <path d="M155 194 Q190 207 205 253" stroke="#2F56A8" stroke-width="1.4"/>
+    </g>
+    <ellipse cx="150" cy="190" rx="6" ry="5" fill="#F7F2E7"/>
+    <g fill="#F7F2E7"><circle cx="130" cy="249" r="4"/><circle cx="182" cy="250" r="4"/><circle cx="205" cy="256" r="4"/></g>
+    <!-- 작은 종이 태그 -->
+    <path d="M138 193 Q115 202 112 219" fill="none" stroke-width="1"/>
+    <g transform="translate(101 215) rotate(-11)">
+      <path d="M0 7 L13 0 L26 7 V46 H0Z" fill="#FBF8F1" stroke-width=".8"/>
+      <circle cx="13" cy="7" r="1.7" fill="#2A2926" stroke="none"/>
+      <g fill="none" stroke="#2F56A8" stroke-width=".85"><path d="M13 15 V27 M13 20 Q4 14 8 13 Q13 13 13 20 M13 20 Q22 14 18 13 Q13 13 13 20 M13 27 C5 28 4 36 7 38 Q13 41 19 38 C22 36 21 28 13 27Z"/></g>
+    </g>
+  </g>
+</svg>
