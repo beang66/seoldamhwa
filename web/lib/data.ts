@@ -58,10 +58,15 @@ const products = makeStore<ProductRow[]>(STATIC_PRODUCTS, () => supabase!.from('
 const works = makeStore<WorkRow[]>(STATIC_WORKS, () => supabase!.from('works').select('*').order('ym', { ascending: false }).order('id', { ascending: false }));
 const gatherings = makeStore<GatheringRow[] | null>(null, () => supabase!.from('gatherings').select('*').order('date'));
 
-export const useProducts = () => products.use().data.filter(p => p.visible);
+const updatePackagingCopy = (p: ProductRow) => p.key === 'driedbox' && p.meta.includes('감싸개 포함')
+  ? { ...p, meta: p.meta.replace('감싸개 포함', '설담화 패키지 구성 확인 중') }
+  : p;
+
+export const useProducts = () => products.use().data.filter(p => p.visible).map(updatePackagingCopy);
 export const useProduct = (key: string) => {
   const all = products.use().data;
-  return all.find(p => p.key === key) ?? STATIC_PRODUCTS.find(p => p.key === key);
+  const p = all.find(p => p.key === key) ?? STATIC_PRODUCTS.find(p => p.key === key);
+  return p && updatePackagingCopy(p);
 };
 export const useWorks = () => works.use().data.filter(w => w.visible);
 /** null이면 DB가 없어 코드 안의 모임 안내를 그대로 쓴다 */
